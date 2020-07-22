@@ -1,0 +1,16 @@
+---
+mandatory: True
+question: |
+
+  Deu certo!
+subquestion: |
+  Sua minuta está pronta, agora é só baixar em PDF ou DOCX.
+attachment:
+  name: Sua petição 
+  filename: minuta_juridica
+  docx template file: "denuncia_criminal.md"
+  valid formats:
+    - docx
+    - pdf
+buttons:
+  - Exit: exit

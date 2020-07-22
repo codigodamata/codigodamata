@@ -1,0 +1,44 @@
+---
+code: |
+  # Essa pergunta e respectiva função estava funcionando quando era um campo no bloco de questões descricao_fatica_crime.yml . Depois, começou a apresentar problemas. Separada como questão independente, continua com problema (adequacao_competencia não está apresentando o valor esperado).
+  # Ideia: colocar essa questão no final, na tabela de confirmação dos valores (possibilitando edição desse e de outros possíveis erros).
+
+---
+question: |
+ Confirmar unidade judicial
+fields:
+  - note: |
+      A variávvel adequacao_competencia = ${adequacao_competencia} .
+  - ATENÇÃO! Os juizados especiais criminais são competentes para julgar e processar informações de menor potencial ofensivo (cuja pena máxima seja igual ou menor a 02 anos). Verificamos um problema na competência. Você deseja rever o endereçamento?: alterar_unidade_judicial
+    datatype: radio
+    choices:
+      - sim
+      - não
+    show if:
+      code: |
+        adequacao_competencia == False
+  - Escolha novamente a unidade Judicial competente: UNIDADE_JUDICIAL
+    datatype: radio
+    code: |
+      lista_orgaos_jur_instancia_1
+    show if:
+      variable: alterar_unidade_judicial
+      is: sim
+---
+mandatory: True
+code: |
+  # Testa se o endereçamento é para o Juizado Especial Criminal
+  def adequacao_competencia():
+    if ((((float(crimes_dict[selected_crime]["pena_maxima"]) <= 730) and (violencia_domestica == "não"))) and ((UNIDADE_JUDICIAL == "JUIZADO ESPECIAL CRIMINAL") or (UNIDADE_JUDICIAL == "JUIZADO ESPECIAL VOLANTE AMBIENTAL"))):
+      return True
+    elif ((((float(crimes_dict[selected_crime]["pena_maxima"]) > 730) or (violencia_domestica == "sim"))) and ((UNIDADE_JUDICIAL == "JUIZADO ESPECIAL CRIMINAL") or (UNIDADE_JUDICIAL == "JUIZADO ESPECIAL VOLANTE AMBIENTAL"))):
+      return False
+    else:
+      return True
+
+  adequacao_competencia = adequacao_competencia()
+
+  if adequacao_competencia == False:
+    alterar_unidade_judicial
+  else:
+    pass

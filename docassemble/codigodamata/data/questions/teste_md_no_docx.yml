@@ -1,0 +1,18 @@
+---
+include:
+ - testes_execucao_penal.yml
+---
+question: Olá, equipe!
+subquestion: |
+  Sua minuta está pronta!
+  ${tese_relevancia_desmatamento}
+  ${manifestacoes_execucao['proposta_semiaberto']['conteudo']}
+
+buttons:
+  - Exit: exit
+mandatory: True
+
+---
+code:
+  |
+  tese_relevancia_desmatamento = ['Uma das principais ameaças à humanidade no século XXI são as consequências - não inteiramente previsíveis - das mudanças climáticas decorrentes do aquecimento global. Segundo o informe acadêmico do Future of Humanity Institute da Universidade de Oxford denominado "Existential Risk: Diplomacy and Governance Global Priorities Project 2017":', '"(...) É impossível dizer com confiança em que ponto o aquecimento global se tornará suficientemente grave para representar uma ameaça existencial [à Humanidade]. A pesquisa sugeriu que o aquecimento de 11-12°C tornaria a maior parte do planeta inabitável e devastaria completamente a agricultura. Isso representaria uma ameaça extrema à civilização humana como a conhecemos. O aquecimento de cerca de 7°C ou mais poderia potencialmente produzir conflitos e instabilidade em tal escala que os efeitos indiretos poderiam ser um risco existencial (...)." (GLOBAL PRIORITIES PROJECT 2017)', 'O desmatamento ilegal no Brasil é, por si só, responsável por 35% das emissões de gases do efeito estufa (GEE) no país, configurando-se como a atividade de maior impacto nas emissões brasileiras (maior, por exemplo, que as emissões decorrentes de toda a frota nacional de veículos automotores). Somada ao uso das áreas ilegalmente desflorestadas para o uso da pecuária na Amazônia Legal, esse percentual atinge 49% das emissões brasileiras (LEITE, 2015).  (Acrescentar dados de desmatamento histórico na região de Itiquira-MT)', 'Após a adoção de políticas públicas voltadas a coibir o desmatamento ilegal no Brasil, observou-se uma redução na área desmatada de 2005 a 2013 no território nacional (MELLO, 2016, p. 46). No entanto, nos últimos anos o índice tem se elevado novamente a patamares iguais ou superiores àqueles observados nos períodos de maior desmatamento.', 'Assim, garantir o cumprimento das normas ambientais brasileiras para proteger as florestas brasileiras é uma das principais contribuições que o Ministério Público pode oferecer para atenuar uma mudança climática abrupta e catastrófica.']

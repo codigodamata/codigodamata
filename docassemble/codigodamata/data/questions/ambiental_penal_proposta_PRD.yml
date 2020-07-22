@@ -1,0 +1,82 @@
+---
+include: 
+ - comum_base_dados_cadastrais.yml
+ - ambiental_geral_composicao_civil_dano_ambiental_var.yml
+
+---
+question: |
+  Monte a sua proposta
+fields:
+  - note: |
+      Crie sua proposta de pena (ou condições práticas equivalentes) restritiva de direitos.
+
+  - Tempo de suspensão condicional do processo: periodo_prova
+    default: 2    
+    required: True
+    show if:
+      code: |
+        ato_processual_escolhido == 'denúncia com proposta de suspensão condicional do processo'
+
+  - Cláusula da reparação integral do dano: condicao_reparar_dano
+    input type: area
+    rows: 5
+    default:
+      code: | 
+        reparacao_default
+ 
+  - Condição restritiva de direitos: proposta_PRD
+    datatype: radio
+    default: prestação de serviços a comunidade ou, alternativamente, prestação pecuniária
+    required: False
+    choices:
+      - prestação de serviços a comunidade
+      - prestação pecuniária
+      - prestação de serviços a comunidade ou, alternativamente, prestação pecuniária
+      
+  - Se a sua proposta não se encontra aí, descreva-a: proposta_PRD
+    required: False  
+    input type: area
+    rows: 5  
+    
+  - Entidade onde prestar serviços à comunidade: entidade_psc
+    default: Secretaria Municipal de Meio Ambiente    
+    required: False
+
+  - Tempo de prestação de serviços à comunidade (em meses): tempo_psc
+    default: 
+      code: | 
+        psc_default    
+    required: False
+
+  - Entidade onde destinar prestação pecuniária: entidade_pp      
+    default: a ser destinado à conta judicial desse órgão jurisdicional para fins  de destinação ao combate à Covid-19 (Resolução CNJ 154/2012 c/c art. 9º da Resolução CNJ 313/2020), nos termos da normativa do E. TJMT
+    input type: area
+    rows: 5    
+    required: False
+  
+  - Valor proposta prestação pecuniária (em salários mínimos): valor_pp
+    default: 
+      code: |
+        pp_default
+    required: False
+
+---
+code: |
+  psc_default = 6
+  pp_default = 2
+  reparacao_default = "prévia composição civil do dano ambiental, conforme proposta acima formulada, e a comprovação de sua reparação, nos termos do art. 27 da Lei 9.605/98"  
+  if ato_processual_escolhido == 'denúncia com proposta de suspensão condicional do processo':
+    psc_default = 2*psc_default
+    pp_default = 2*pp_default
+    reparacao_default = "prévia composição civil do dano ambiental, conforme proposta acima formulada, bem como comprovação de sua reparação, nos termos do art. 28 da Lei 9.605/98"
+
+
+---
+code: |
+  # Se houve período de prova escolhido, é porque o ato é SUSPRO e foi feita uma proposta de SUSPRO
+  if proposta_PRD == "prestação de serviços a comunidade ou, alternativamente, prestação pecuniária":
+    conteudo_proposta_PRD = "prestação de serviços por " + str(tempo_psc) + " meses " + "na entidade " + entidade_psc  + ", ou, alternativamente, prestação pecuniária no valor de " + str(valor_pp) + " salário(s) mínimo(s) a ser destinado a conta bancária da entidade " + entidade_pp +";"
+  else:
+    proposta_PRD == "incabível ao caso a aplicação de institutos despenalizadores."
+   
+  PROPOSTA_SUSPRO = "Tendo em vista os elementos objetivos e subjetivos favoráveis, oferece-se nesta oportunidade a suspensão condicional do processo ao denunciado, nos termos do art. 89 da Lei 9.099/95, pelo prazo (período de prova) de " + str(periodo_prova) + " anos e, ainda, mediante a aceitação das seguintes condições práticas equivalentes à penas restritivas de direitos: " + reparacao_default + conteudo_proposta_PRD + "requerendo-se a designação de audiência para manifestação do requerido quanto à proposta de suspensão condicional do processo ora formulada."

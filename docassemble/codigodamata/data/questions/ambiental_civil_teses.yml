@@ -1,0 +1,7 @@
+---
+template: DESMATAMENTO_VEGETACAO_SECUNDARIA
+content file:
+  code: conteudo_tese_desmatamento_veg_sec
+---
+code: |
+  conteudo_tese_desmatamento_veg_sec = "desmatamento_vegetacao_secundaria.md"

@@ -1,0 +1,51 @@
+---
+question: |
+  Escolha o tipo penal do crime
+fields:
+  - html: |
+      <span style="color: green;"> Escolha dentre os crimes relacionados ao desmatamento ilegal previstos na Lei dos Crimes Ambientais, principalmente dentre os <a href="https://www.planalto.gov.br/ccivil_03/leis/l9605.htm#art38" target="_blank">  Crimes Contra a Flora</a>, aplicável ao caso. </span>
+  - Crime: selected_crime
+    datatype: radio
+    code: |
+      myoptions
+  - Violência doméstica contra a mulher?: violencia_domestica
+    datatype: radio
+    default: não
+    choices:
+      - sim
+      - não
+    help: |
+      Embora de ocorrência rara, em situações excepcionalíssimas um crime ambiental poderia ser praticado no contexto da violência doméstica contra a mulher. Ex: art. 49 da Lei 9.605/98 (destruição de plantas ornamentais em propriedade privada), como uma forma de violência patrimonial contra a mulher.    
+
+mandatory: True
+
+---
+code: |
+  myoptions = []
+  crimes_dict = {}
+  crimes = objects_from_file("crimes.yml")
+  for crime_obj in crimes:
+    myoptions.append([crime_obj.TIPIFICACAO, crime_obj.TIPIFICACAO, None, crime_obj.TIPO_PENAL])
+    crime = {"tipificacao": crime_obj.TIPIFICACAO,
+      "nome_crime": crime_obj.NOME_CRIME,
+      "artigo": crime_obj.ARTIGO,
+      "caput_ou_paragrafo": crime_obj.CAPUT_OU_PARAGRAFO,
+      "inciso": crime_obj.INCISO,
+      "lei": crime_obj.LEI,
+      "preceito_primario": crime_obj.PRECEITO_PRIMARIO,
+      "tipo_penal": crime_obj.TIPO_PENAL,      
+      "pena_minima": crime_obj.PENA_MINIMA,
+      "pena_maxima": crime_obj.PENA_MAXIMA,
+      "sujeito_representacao": crime_obj.SUJEITO_REPRESENTACAO,
+      "necessidade_reparacao_dano": crime_obj.NECESSIDADE_REPARACAO_DANO,
+      "materialidade": crime_obj.MATERIALIDADE,
+      "coordenadas": crime_obj.COORDENADAS,
+      "area_destruida": crime_obj.AREA_DESTRUIDA,      
+      "doc_prova_materialidade": crime_obj.DOC_PROVA_MATERIALIDADE,
+      "violencia_domestica": crime_obj.VIOLENCIA_DOMESTICA,
+      "violencia_grave_ameaca": crime_obj.VIOLENCIA_GRAVE_AMEACA,    
+      "lei_crimes_hediondos": crime_obj.LEI_CRIMES_HEDIONDOS}
+    crimes_dict[crime_obj.TIPIFICACAO] = crime
+  object_type = str(type(crimes))
+  object_length = str(len(crimes))
+  

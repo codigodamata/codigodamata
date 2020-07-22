@@ -1,0 +1,43 @@
+---
+mandatory: True
+question: |
+  ![Bass logo](https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/River_in_the_Parque_Nacional_do_Pantanal_Matogrossense_-_Por_dentro_do_pantanal.jpg/640px-River_in_the_Parque_Nacional_do_Pantanal_Matogrossense_-_Por_dentro_do_pantanal.jpg)
+  >
+  > # codigo_da_mata>_
+
+subquestion: |
+  >  Bem-vindo ao *Código da Mata*, a aplicação web do
+  >  [Projeto Olhos da Mata](https://www.flipsnack.com/imprensampmt/projeto-olhos-da-mata.html) baseada no software *open source* [docassemble](https://docassemble.org/).
+
+   <img src="https://static.thenounproject.com/png/465738-200.png" width="100" />
+
+  > Nossa aplicação é experimental e está apenas no início do desenvolvimento. Confira algumas implementações:
+
+  - > **[Valoração do dano ambiental por desmatamento ilegal (PJEDAOU)](https://codigodamata.consciencia.eco.br/interview?i=docassemble.playground1codigodamata%3Aambiental_valoracao_dano_pjedaou.yml&new_session=1)** -Status: <span style="color: green;"> (**concluída**)</span>. Baseia-se nas Orientações Técnicas da [PJEDAOU](https://pjedaou.mpmt.mp.br/valoracao-do-dano-ambiental/)
+
+  - > **[Valoração dos danos ambientais por desmatamento ilegal](https://codigodamata.consciencia.eco.br/interview?i=docassemble.playground1codigodamata%3Aambiental_valoracao_dano_md.yml#page1&new_session=1)** - Status: <span style="color: green;"> (**concluída**)</span>. Baseia-se na proposta de reparação do dano no âmbito do Projeto Olhos da Mata com ênfase na reparação *in natura*
+
+  - > **[Representação ("denúncia anônima") por desmatamento ilegal](https://codigodamata.consciencia.eco.br/interview?i=docassemble.playground1codigodamata%3Aambiental_representacao_cidada_inicio.yml#page1&new_session=1)**. Status: <span style="color: red;"> (**em breve **) </span> 
+
+  - > **[Análise Crimes Contra a FLora](https://codigodamata.consciencia.eco.br/interview?reset=1&i=docassemble.playground1codigodamata%3Aambiental_penal_inicio.yml&new_session=1)**. Status: <span style="color: red;"> (**em desenvolvimento**) </span> 
+
+  - > **[Ação Civil Pública por desmatamento ilegal](http://codigodamata.consciencia.eco.br/interview?i=docassemble.playground1codigodamata%3Aambiental_penal.yml&new_session=1)**. Status: <span style="color: red;"> (**em desenvolvimento**) </span> 
+
+
+  > Os objetivos do Código da Mata são:
+
+  >  1. criar um conjunto de tutoriais e uma aplicação web que faça uma análise preliminar, de modo que qualquer cidadão, ONG ou coletivos de cidadãos que queiram representar às autoridades legais (órgãos ambientais e Ministério Público) contra o desmatamento legal em determinada localidade possam fazê-lo; 
+
+  > 2. usar a tecnologia da informação de montagem automatizada de documentos para para aumentar a eficiência, celeridade e produtividade dos agentes de fiscalização (fiscais do Ibama, fiscais estaduais) e operadores do direito (promotores, procuradores da República, juízes) que possuem atribuição/competência em casos que envolvam o desmatamento ilegal, a começar pelo trabalho dos promotores de Justiça no âmbito do Projeto Olhos da Mata.
+
+  > O código da versão inicial está disponível  [nesse repositório do Github](https://github.com/claudiogonzaga/codigodamata/tree/master).
+
+  > Além da equipe do Projeto Olhos da Mata, o **Código da Mata (Forest Code)** receberá o apoio da Universidade Federal de Minas Gerais mediante projeto de extensão do Prof. Dr. [Roberto Novaes](https://www.robertonovaes.com.br/), que ministra o curso de extenção [Programação Aplicada ao Direito](http://www.cursoseeventos.ufmg.br/CAE/DetalharCae.aspx?CAE=9278) na UFMG.
+
+  > Para saber mais sobre os projetos [Olhos da Mata](https://consciencia.eco.br/index.php?title=Projeto_Olhos_da_Mata) e [Código da Mata](https://consciencia.eco.br/index.php?title=Projeto_Código_da_Mata)
+
+  > Para saber mais sobre o docassemble, consulte tutoriais em [law.mit.edu](https://law.mit.edu/pub/howtocreateasimpledocassembleinterview) ou acesse a [documentação](https://docassemble.org/docs.html).
+
+  <img src="https://consciencia.eco.br/images/thumb/3/39/Logoolhosdamata.jpg/800px-Logoolhosdamata.jpg" width="500"/>
+ 
+

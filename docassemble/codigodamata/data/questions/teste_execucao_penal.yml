@@ -1,0 +1,43 @@
+template: template_proposta_RSA
+content file: proposta_RSA.md
+
+---
+include:
+ - qualificacao_partes.yml
+ - teses_execucao_penal.yml
+
+---
+objects:
+  - manifestacao_execucao: DAObject
+
+---
+code: |
+  arquivo_md_escolhido = template_proposta_RSA
+  CARGO_SUBSCRITOR = "Promotor de Justiça"
+  CIDADE = "Itiquira"
+  ORGAO_EXECUCAO = "PROJUS ITIQUIRA"
+  ORGAO_ENDERECO = "Rua Cuiaba, MT"
+  COMARCA = "Itiquira"
+  DATA_HOJE = "30/04/2020"
+  NUM_PROCESSO = "12345"
+  PARTE_AUTORA = "MPMT"
+  SUBSCRITOR = "CLAUDIO ANGELO CORREA GONZAGA"
+  TIPO_PROCEDIMENTO = "Executivo de Pena"
+  UNIDADE_JUDICIAL = "VARA ÚNICA"
+  PARECER_REQUERIMENTO = "seja o reeducando intimado"
+  CONTEUDO_MANIFESTACAO = arquivo_md_escolhido
+
+mandatory: True
+
+---
+question: Olá, equipe!
+subquestion: |
+  Sua minuta está pronta!
+  ${CONTEUDO_MANIFESTACAO}
+attachment:
+  name: Uma petição 
+  filename: minuta
+  docx template file: modelo_geral_minuta.docx
+buttons:
+  - Exit: exit
+mandatory: True

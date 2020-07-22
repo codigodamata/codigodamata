@@ -1,0 +1,40 @@
+---
+include:
+ - comum_base_dados_cadastrais.yml
+---
+question: |
+  > Dados dos órgãos
+fields: 
+  - Orgao de execução: ORGAO_EXECUCAO
+    default: "Promotoria de Justiça de Itiquira"
+    datatype: radio
+    code: |
+      lista_promotorias 
+
+  - Seu órgão de execução não está na lista?: ORGAO_EXECUCAO
+    hint: "Digite aqui o nome do seu órgão"  
+    datatype: area
+    rows: 2
+    show if:
+      variable: ORGAO_EXECUCAO
+      is: OUTRO
+
+
+---
+question: |
+  Confirme as informações do órgão de execução
+fields:
+  - Cidade em que você atua: CIDADE
+    datatype: text
+    default: ${ dic_promotorias[ORGAO_EXECUCAO]["cidade"] } 
+    
+  - Instituição: INSTITUICAO
+    datatype: area
+    rows: 2
+    default: ${ dic_promotorias[ORGAO_EXECUCAO]["ramo_mp"] } 
+
+  - Endereço órgão: ORGAO_ENDERECO
+    datatype: area
+    rows: 2  
+    default: ${ dic_promotorias[ORGAO_EXECUCAO]["endereco"] }
+      

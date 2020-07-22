@@ -1,0 +1,305 @@
+---
+objects:
+  - lista_crimes: DAList
+---
+include:
+ - comum_base_dados_cadastrais.yml
+ - comum_dados_orgao.yml
+
+---
+ modules:
+  - docassemble.base.core
+  - docassemble.base.util
+  - docassemble.base.legal
+
+---
+question: |
+  > Dados do processo
+fields: 
+  - Número do processo ou procedimento: SIMP
+    default: "000000-061/2020"
+  - Parte Requerida: REQUERIDOS
+    datatype: text    
+  - Tipo de procedimento ou processo: TIPO_PROCEDIMENTO
+    datatype: radio
+    default: "Inquérito Civil"
+    choices:
+      - "Inquérito Civil"
+      - "Inquérito Policial"
+      - "Notícia de Fato"
+      - "Peças de Informação"      
+      - "Procedimento Investigatório Criminal"
+      - "Termo Circunstanciado de Ocorrência"
+
+  - Parte autora: PARTE_AUTORA
+    datatype: text
+    default: ${ dic_promotorias[ORGAO_EXECUCAO]["ramo_mp"] }
+
+  - Data da minuta (data de hoje): DATA_HOJE
+    default: ${ data_hoje }
+
+  - Subscritor da minuta: SUBSCRITOR
+  - Cargo subscritor: CARGO_SUBSCRITOR
+
+---
+code: |    
+  import datetime
+  Meses=('janeiro','fevereiro','março','abril','maio','junho', 'julho','agosto','setembro','outubro','novembro','dezembro')
+  agora = datetime.date.today()
+  mes=(agora.month-1)
+  dia = agora.day
+  mes = Meses[mes]
+  ano = agora.year
+  data_hoje = (str(dia) + " de " + mes + " de " + str(ano))
+mandatory: True
+
+---
+mandatory: True
+question: |
+  Valoração do Dano Ambiental (material e extrapatrimonial)
+fields:
+  - note: |
+      A parte da valoração do dano material foi obtida na obra <span style="color: green;">  Orientação técnica desenvolvida para fundamentar a atuação ministerial dos Promotores de Justiça de Meio Ambiente do Estado de Mato Grosso <a href="https://pjedaou.mpmt.mp.br/wp-content/uploads/2017/10/VALORACAO_DANO_AMBIENTAL_MT_PJEDAOU-1.pdf">  (clique aqui para acessar) </a> </span> da Procuradoria de Justiça Especializada em Defesa Ambiental e Ordem Urbanística do Ministério Público do Estado de Mato Grosso.
+  - Área desmatada insuscetível (APP, reserva legal, uso restrito): AREA_DESMATADA_INSUSC
+    datatype: number
+    required: False
+
+  - Área desmatada suscetível, porém ilegalmente desmatada: AREA_DESMATADA_SUSC
+    datatype: number
+    required: False
+
+  - Tipo de vegetação: fitofisionomia
+    input type: radio
+    required: False  
+    choices:
+    - formação savânica
+    - formação florestal
+
+---
+mandatory: True
+question: |
+  Estágio Sucessional
+fields:
+  - note: |
+      O segundo passo é observar em qual estágio sucessional as áreas desflorestadas encontravam-se antes da intervenção (em caso de desflorestamento fora de APP e RL, deve-se pular diretamente para o terceiro passo e apenas calibrar a Valoração do Dano Ambiental, por um fator de correção).    
+  - Qual é o estágio de regeneração da área?: estagio_sucessional_selec
+    input type: radio
+    default: há presença de gado nas imediações da área
+    choices:
+    - Intervenção em florestas secundárias no estágio inicial ou em transição do estágio inicial para o médio de regeneração
+    - Intervenção em florestas secundárias no estágio médio ou em transição do estágio médio para o avançado de regeneração
+    - Intervenção em florestas secundárias no estágio avançado ou em transição do estágio avançado para floresta primária (clímax)
+
+---
+mandatory: True
+question: |
+  Fator de calibração
+fields:
+  - note: |
+      O terceiro passo é calibrar a Valoração do Dano Ambiental por um fator de correção que varia de acordo com o grau de alteração praticado contra a vegetação, cujo gradiente de variação vai do corte raso à implantação da cultura. Estes fatores de correção (0,4, 0,6, 0,8 1,0 e 1,2) correspondem respectivamente às seguintes etapas de desflorestamento:
+  - Fator de calibração: fator_calibracao
+    input type: radio 
+    choices:    
+    - Corte raso (0,4)
+    - Corte raso com destoca (0,6)
+    - Corte raso com destoca e revolvimento do solo (0,8)
+    - Corte raso com destoca e revolvimento do solo e implantação de cultura (1,0)
+    - Corte raso com queimada em período proibitivo ou sem autorização (1,2)
+
+---
+mandatory: True
+question: |
+ Método de cálculo do dano extrapatrimonial
+fields:
+  - note: |
+      A utilização da precificação (circunstanciada, como adiante se verá) de emissões de carbono como critério objetivo para a valoração do dano ambiental é uma proposta inicial de estudo, baseada em precedentes do STJ de fixação dos danos extrapatrimoniais, principalmente o <span style="color: green;"> AgRESP 1323104/GO <a href="https://consciencia.eco.br/index.php?title=AgRESP_1323104/GO">  (clique aqui para acessar) </a> </span> em que se fundamentou que “...não é necessário ser um cientista e especialista no tema para afirmar que a queimada da cana-de-açúcar causa poluição atmosférica e contribui para o famigerado efeito estufa e aquecimento global...”. Além disso, outros precedentes fazem expressa menção à questão climática, tais como RESP 1.000.731/RO e RESP 650.728/SC.
+      Para a precificação das emissões de carbono, utilizou-se o método descrito em <span style="color: green;"> Jacoski et al. (2014)  <a href="https://periodicos.pucpr.br/index.php/estudosdebiologia/article/view/22972">  (clique aqui para acessar) </a> </span>
+
+  - Método de estimativa do dano extrapatrimonial: metodo_dano_extrapatrimonial
+    input type: radio
+    required: False
+    default: tc
+    choices:
+    - estimativa de mercado da tonelada de carbono: tc
+    - percentual sobre o dano material: percentual 
+
+---
+question: |
+  > Escolha um percentual
+fields: 
+  - Percentual do dano extrapatrimonial: percentual_extra
+    datatype: number
+    required: False
+
+---
+question: |
+    Valores para precificação do carbono
+fields:
+  - note: |
+      Esses são os valores para precificação da tonelada de Carbono (tc) baseadas em Jacoski, et al. (2014). A única variável que você precisa atualizar é <span style="color: green;"> preço do dólar. Para obter o preço do dólar de hoje <a href="https://www.google.com/search?client=firefox-b-d&q=valor+d%C3%B3lar+hoje" target="_blank">  faça uma busca no Google </a> </span> 
+  - Preço tonelada de carbono (em dólar): preco_tc
+    default: 3
+    datatype: number
+    required: False
+  - Quantidade estimada de toneladas/ha: tc_ha
+    default: 75
+    datatype: number
+    required: False
+  - Valor do dólar : dolar_hoje
+    default: 5.48
+    datatype: number
+    required: True
+
+---
+question: |
+    Conversão de pecunia em mata nativa (opcional)
+fields:
+  - note: |
+      Esses são os critérios para conversão do pagamento de parte dos valores "in pecunia" em valores "in natura" por meio da instituição de servidão ambiental permanente (art. 9º-A da Lei n. 6.938/81). As informações do <span style="color: green;"> valor da terra nua (VTN) para preservação da flora e da fauna nos municípios do Estado de Mato Grosso <a href="http://sistemafamato.org.br/portal/famato/arquivos/VTN_PREFEITURAS_MT_2018_E_SIC.pdf" target="_blank"> estão disponíveis aqui </a></span>
+
+  - Preço médio do hectare de Área de Vegetação Nativa: preco_avn
+    default: 1203.01
+    datatype: number
+    required: False
+  - Ano da avaliação (ele será corrigido pelo INPC): ano_avaliacao_vtnpff
+    default: 2018
+    datatype: number
+    required: False    
+  - Fonte: fonte_vtnpff
+    default: "Ministério da Fazenda"
+    datatype: text
+    required: False
+    
+  - Link da fonte: link_fonte_vtnpff
+    default: "http://sistemafamato.org.br/portal/famato/arquivos/VTN_PREFEITURAS_MT_2018_E_SIC.pdf"
+    datatype: text
+    required: False
+  - Percentual da conversão de pecúnia em área de servidão ambiental: percent_conversao_serv_amb
+    default: 0.75
+    datatype: number
+    required: False
+ 
+---
+mandatory: True
+question: |
+ Circunstâncias que podem majorar o dano extrapatrimonial
+fields:
+  - note: |
+      Cada circunstância (que deve dizer respeito ao fato e suas consequências e não ao autor) majora o dano ambiental extrapatrimonial em 1/6. Escolha dentre as circunstâncias que agravam as consequências do dano ambiental extrapatrimonial.
+  - Circunstâncias: circunstancias_dano_escolhidas
+    datatype: checkboxes
+    required: False  
+    none of the above: False
+    code: |
+      lista_circunstancias_dano
+
+---
+question: | 
+  ![tuiuiu](https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Tuiuiu_-_Ave_Simbolo_do_Pantanal_de_Mato_Grosso.jpg/800px-Tuiuiu_-_Ave_Simbolo_do_Pantanal_de_Mato_Grosso.jpg)
+  Deu certo!
+subquestion: |
+  Sua minuta está pronta, agora é só baixar em PDF ou DOCX.
+attachment:
+  name: Sua minuta 
+  filename: minuta_juridica
+  docx template file: 'pjedaou_relatorio_tecnico_valoracao_dano.docx'
+buttons:
+  - Exit: exit
+mandatory: True
+
+--- 
+mandatory: True
+code: |
+  
+  lista_circunstancias_dano = ["houve o uso de fogo no período proibitivo de queimadas", "houve destruição de APP hídrica", "ilícito afetou ou expôs a perigo, de maneira grave, a saúde pública ou o meio ambiente", "fato concorreu para danos à propriedade alheia", "fato atingiu áreas de unidades de conservação ou áreas sujeitas, por ato do Poder Público, a regime especial de uso", "fato atingiu áreas urbanas ou quaisquer assentamentos humanos", "fato ocorreu em período de defeso à fauna", "fato ocorreu em épocas de seca ou inundações", "fato ocorreu interior do espaço territorial especialmente protegido", "houve emprego de métodos cruéis para abate ou captura de animais", "houve abuso do direito de licença, permissão ou autorização ambiental", "fato praticado no interesse de pessoa jurídica mantida, total ou parcialmente, por verbas públicas ou beneficiada por incentivos fiscais", "fato atingiu espécies ameaçadas, listadas em relatórios oficiais das autoridades competentes", "outras circunstâncias que impactaram negativamente a coletividade"]
+
+
+  dic_estagio_sucessional = {
+                       "Intervenção em florestas secundárias no estágio inicial ou em transição do estágio inicial para o médio de regeneração":
+                       {                 
+                       "cate": 4,
+                       "vcp": 3,
+                       "explicacao": "", 
+                       },
+                       "Intervenção em florestas secundárias no estágio médio ou em transição do estágio médio para o avançado de regeneração":
+                       {
+                       "cate": 6,
+                       "vcp": 4,
+                       "explicacao": "", 
+                       },                       
+                       "Intervenção em florestas secundárias no estágio avançado ou em transição do estágio avançado para floresta primária (clímax)":
+                       {
+                       "cate": 8,
+                       "vcp": 5,
+                       "explicacao": "",
+                        },
+                       }
+
+  fator_correcao = 0.0
+  if fator_calibracao == "Corte raso (0,4)":
+    fator_correcao = 0.4
+  elif fator_calibracao == "Corte raso com destoca (0,6)":
+    fator_correcao = 0.6
+  elif fator_calibracao == "Corte raso com destoca e revolvimento do solo (0,8)":
+    fator_correcao = 0.8 
+  elif fator_calibracao == "Corte raso com destoca e revolvimento do solo e implantação de cultura (1,0)":
+    fator_correcao = 1.0
+  elif fator_calibracao == "Corte raso com queimada em período proibitivo ou sem autorização (1,2)":
+    fator_correcao = 1.2
+
+---
+mandatory: True
+code: |
+  import math
+  # Argumentos da fórmula CATE
+  cd = 5375
+  estagio_suc_cate = dic_estagio_sucessional[estagio_sucessional_selec]["cate"]
+  cate_j = 0.1
+  n = 25
+  pre_potencia = 1+cate_j
+  potencia = math.pow(pre_potencia,n)
+  fator_correcao = fator_correcao
+  
+  valor_cate = round((((cd*estagio_suc_cate*potencia)/(potencia-1))*AREA_DESMATADA_INSUSC)*fator_correcao, 2)
+
+  # Argumentos da fórmula VCP
+  custo_recup = 2902.80
+  fator_correcao = fator_correcao
+  constante_vcp = {
+                   "formação florestal":5264.00,
+                   "formação savânica":2871.00,
+                   }
+                   
+  estagio_suc_vcp = dic_estagio_sucessional[estagio_sucessional_selec]["vcp"]
+
+  # O correto seria também multiplicar o custo_recup pela área (constante_vcp[fitofisionomia]*dolar_hoje*AREA_DESMATADA_INSUSC*fator_correcao*estagio_suc_vcp)+custo_recup
+  valor_vcp = round((constante_vcp[fitofisionomia]*dolar_hoje*AREA_DESMATADA_INSUSC*fator_correcao*estagio_suc_vcp)+custo_recup*AREA_DESMATADA_INSUSC, 2)
+
+  # Terceiro método (fora de APP, ARL, AUR)
+  calculo_fora_APP_ARL = round((AREA_DESMATADA_SUSC*12927.85*fator_correcao), 2)
+
+  # Descrição e quantificação das circunstâncias do dano ambiental
+  circunstancias_escolhidas = []
+  circunstancias_str = ""
+  fator_aumento_dano_extra = 1
+  existem_circunstancias = "Não foram constatadas, ao menos até o momento, outras circunstâncias relevantes do dano ambiental."
+  for circunstancia in circunstancias_dano_escolhidas:
+    if circunstancias_dano_escolhidas[circunstancia] == True:
+      existem_circunstancias = "Constataram-se as seguintes circunstâncias relativas ao dano ambiental relevantes: "
+      fator_aumento_dano_extra+=1/6
+      circunstancias_escolhidas.append(circunstancia)
+      circunstancias_str = circunstancias_str + circunstancia + "; "
+  circunstancias_dano = existem_circunstancias + circunstancias_str
+  AREA_DESMATADA_TOTAL = AREA_DESMATADA_SUSC + AREA_DESMATADA_INSUSC
+  
+  # Calculando o dano extrapatrimonial
+  if metodo_dano_extrapatrimonial == "tc":
+    valor_dano_extrapatrimonial = round(preco_tc*tc_ha*dolar_hoje*AREA_DESMATADA_TOTAL*fator_aumento_dano_extra, 2)
+    nome_metodo_extrapatrimonial = "valor no mercado voluntário de carbono pela tonelada de carbono emitida (" + "preço tonelada de carbono (em dólar) = US$ "+ str(preco_tc) + ", quantidade estimada de toneladas/ha = " +  str(tc_ha) + ", cotação do dólar = R$" + str(dolar_hoje) + ")."
+  elif metodo_dano_extrapatrimonial == "percentual_extra":
+    valor_dano_extrapatrimonial = round((valor_cate+calculo_fora_APP_ARL)*percentual_extra*fator_aumento_dano_extra, 2)
+    nome_metodo_extrapatrimonial = "em um percentual de " + str(percentual_extra) + " aplicado ao dano material pelo método CATE."
+
+  # Aqui foi excluída a parte em que arrola medidas cabíveis de acordo com o grau de proteção na área (consta do arquivo de valoração do dano ambiental
+  total_vcp_3o_metodo_e_extra = "R$ "+ str(round((valor_vcp + calculo_fora_APP_ARL+ valor_dano_extrapatrimonial),2))
+  total_cate_3o_metodo_e_extra =  "R$ "+ str(round((valor_cate + calculo_fora_APP_ARL + valor_dano_extrapatrimonial),2))

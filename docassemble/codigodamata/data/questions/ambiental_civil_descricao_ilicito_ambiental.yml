@@ -1,0 +1,189 @@
+---
+include: 
+ - comum_dados_orgao.yml
+ - comum_base_dados_cadastrais.yml
+ - ambiental_civil_teses.yml
+
+---
+mandatory: True
+question: |
+ Descrição do caso (descrição fática)
+fields:
+  - note: |
+      Preencha os elementos do ilícito ambiental
+  - Data do fato é exata?: data_exata
+    datatype: radio
+    default: não
+    choices:
+      - sim
+      - não
+
+  - Data do fato: DATA_FATO
+    default: 15/06/2020
+    required: False
+    show if:
+      variable: data_exata
+      is: sim
+
+  - Data aproximada do fato: DATA_FATO
+    default: "de maneira permanente, sendo o fato constatado na data da fiscalização ocorrida em "
+    input type: area
+    rows: 3     
+    required: False
+    show if:
+      variable: data_exata
+      is: não       
+ 
+  - Hora do fato: HORA_FATO
+    default: "em horário indeterminado"    
+    required: False
+    
+  - Local do fato: LOCAL_FATO
+    help: "Nome imóvel"
+    input type: area
+    rows: 2    
+    default: "FAZENDA "
+    required: False
+  
+  - Coordenadas geográficas do fato: COORDENADAS
+    required: False    
+        
+  - Área destruída ou degradada (em hectares): AREA_DESTRUIDA
+    datatype: number
+    required: False
+
+  - Qual é o tamanho do imóvel (em hectares): AREA_IMOVEL
+    datatype: number
+    required: False
+
+  - Número de inscrição da propriedade no CAR: NUMERO_CAR
+    datatype: number
+    required: False  
+
+  - Tipo de vegetação: TIPO_VEGETACAO
+    input type: radio
+    default: vegetação nativa do bioma Cerrado
+    required: False    
+    choices:
+    - vegetação nativa do bioma Pantanal Mato-grossense, patrimônio natural objeto de especial proteção (art. 225, § 4º, CF/1988)
+    - vegetação nativa do bioma Floresta Amazônica, patrimônio natural objeto de especial proteção (art. 225, § 4º, CF/1988) 
+    - vegetação nativa do bioma Cerrado
+
+  - Parágrafo sobre como se deu o conhecimento do fato: NOTICIA_CRIME
+    input type: area
+    rows: 4
+    default: "O conhecimento do fato se deu a partir de análise de alertas em tempo próximo ao real decorrente de sensoriamento remoto realizado pela plataforma Global Forest Watch (GFW)."
+    show if:
+      code: |
+        ato_processual_escolhido == "acp"        
+
+  - Parágrafo sobre como se deu a confirmação do fato: DILIGENCIA_REALIZADA
+    input type: radio
+    required: False
+    choices:
+    - Realizou-se análise técnica por imagenamento remoto para aferição das circunstâncias em que o fato ocorreu mediante a utilização de imagens de satélite de alta resolução.
+    - Diligência in loco de fiscalização pelo órgão ambiental e, posteriormente, dinâmica de desmatamento por imagens de satélite.
+    show if:
+      code: |
+        ato_processual_escolhido == "acp"
+        
+  - Se a confirmação do fato se deu de outra maneira, descreva-a aqui: DILIGENCIA_REALIZADA
+    required: False  
+    input type: area
+    rows: 5
+    show if:
+      code: |
+        ato_processual_escolhido == "acp"
+        
+  - Parágrafo da materialidade: MATERIALIDADE
+    help: "Não precisa mecher nesse texto, se a infração penal deixa vestígios materiais."
+    input type: area
+    rows: 3  
+    default: "A prova materialidade encontra-se demonstrada pelo "
+    required: False
+    
+  - Tipo de documento que comprova a materialidade: DOC_PROVA_MATERIALIDADE
+    help: "Geralmente será um auto de infração e termo de embargo ou relatório técnico."
+    default: "Auto de Infração "
+    required: False
+
+  - Número do documento que comprova materialidade: NUM_DOC_PROVA_MATERIALIDADE  
+    required: False
+
+  - Orgão responsável pela diligência "in loco"(se houver): ORGAO_DOC_PROVA_MATERIALIDADE
+    datatype: radio
+    code: |
+      dic_promotorias[ORGAO_EXECUCAO]["orgao_ambiental_fiscalizador"]   
+
+  - Valor do dano ambiental material: VALOR_DANO_AMBIENTAL_MATERIAL  
+    input type: number
+    help: utilize o formulário próprio para obter esse valor
+    required: True
+
+  - Valor do dano ambiental extrapatrimonial: VALOR_DANO_EXTRAPATRIMONIAL  
+    input type: number
+    help: utilize o formulário próprio para obter esse valor
+    required: True
+
+  - Tipo de vegetação: METODO_VALORACAO_DANO_AMBIENTAL
+    input type: radio
+    required: True    
+    choices:
+    - CATE
+    - VCP
+
+  - Requerimento: VALOR_DANO_AMBIENTAL_MATERIAL  
+    input type: number
+  # default: ${requerimento_reparacao_dano_desmate}
+    required: False
+    show if:
+      code: |
+        ato_processual_escolhido == "acp"
+
+  - Se seu requerimento não se encontra aí, descreva-o: PEDIDO_REPARACAO_DANO
+    required: False  
+    input type: area
+    rows: 5
+    show if:
+      code: |
+        ato_processual_escolhido == "acp"
+
+  - Pedir medida cautelar?: medida_cautelar_acp
+    input type: radio
+    required: True
+    help: "É o pedido para, cautelarmente, ser determinada judicialmente a suspensão de atividades antrópica na área, que deverá ser isolada até o final do processo"
+    choices:
+    - indisponibilidade do bem
+    - promover o isolamento da área e proibição de exercer atividades econômica, sob pena de multa
+
+
+  - Esclarecimentos requerido: ESCLARECIMENTOS_REQUERIDO
+    help: "Não precisa mecher nesse texto, se a infração penal deixa vestígios materiais."
+    input type: area
+    rows: 10  
+    required: False
+
+
+---
+mandatory: True
+question: |
+ Teses da ação civil pública
+fields:
+  - note: |
+      Confirme as teses que deseja defender/rebater
+  - Tese de que desmatamento não autorizado em áreas consolidadas gera dano ambiental?: tese_desmatamento_veg_sec_area_consolidada 
+    datatype: radio
+    default: sim
+    choices:
+      - sim: True
+      - não: False
+
+---
+code: |
+  PARAGRAFO_MATERIALIDADE = MATERIALIDADE + " " + DOC_PROVA_MATERIALIDADE + " " + NUM_DOC_PROVA_MATERIALIDADE + " elaborado por " + ORGAO_DOC_PROVA_MATERIALIDADE + ". "
+  VALOR_TOTAL_DANO_AMBIENTAL = "R$ "+ str(VALOR_DANO_AMBIENTAL_MATERIAL + VALOR_DANO_EXTRAPATRIMONIAL) 
+  VALOR_TOTAL_DANO_AMBIENTAL = "R$ "+ str(VALOR_DANO_AMBIENTAL_MATERIAL)
+  VALOR_DANO_EXTRAPATRIMONIAL = "R$ "+ str(VALOR_DANO_EXTRAPATRIMONIAL)
+  NOME_IMOVEL = LOCAL_FATO
+  VALOR_ESTIMADO_IMOVEL = "R$ "+ str(AREA_IMOVEL*5000)
+  

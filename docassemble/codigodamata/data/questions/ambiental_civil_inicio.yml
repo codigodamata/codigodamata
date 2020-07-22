@@ -1,0 +1,40 @@
+modules:
+  - docassemble.base.core
+  - docassemble.base.util
+  - docassemble.base.legal
+---
+objects:
+  - requeridos: DAList.using(object_type=Individual)
+---
+code: | 
+  ato_processual_escolhido == "acp"  
+
+---
+include:
+ - comum_base_dados_cadastrais.yml
+ - comum_dados_orgao.yml
+ - comum_dados_proc.yml
+ - comum_qualificacao_partes.yml
+ - ambiental_civil_teses.yml
+---
+mandatory: True
+code: |
+  if True:
+    template_name = 'acp_desmatamento_e_queimadas.docx'
+    ato_processual_escolhido = 'acp' 
+
+---
+mandatory: True
+question: |
+  ![tuiuiu](https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Tuiuiu_-_Ave_Simbolo_do_Pantanal_de_Mato_Grosso.jpg/800px-Tuiuiu_-_Ave_Simbolo_do_Pantanal_de_Mato_Grosso.jpg)
+  Deu certo!
+subquestion: |
+  Sua minuta está pronta, agora é só baixar em PDF ou DOCX.
+attachment:
+  name: Sua petição 
+  filename: minuta_juridica
+  docx template file: 
+    code: |
+      template_name 
+buttons:
+  - Exit: exit

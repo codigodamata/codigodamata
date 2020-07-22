@@ -1,0 +1,161 @@
+---
+include: 
+ - ambiental_geral_composicao_civil_dano_ambiental_var.yml
+ - ambiental_penal_proposta_PRD.yml
+ 
+---
+mandatory: True
+question: |
+  Requisitos subjetivos para institutos despenalizadores
+fields:
+  - Fazer análise dos requisitos subjetivos para transação, SUSPRO ou ANPP?: fazer_analise_req_subjetivos
+    datatype: radio
+    required: True
+    choices:
+      - sim
+      - não
+  - Quanto aos elementos subjetivos, escolha o que se aplicar: elementos_subjetivos
+    datatype: checkboxes
+    required: False   
+    choices:
+      - o requerido foi beneficiado nos últimos 5 anos pela transação penal: ja_beneficiado_transacao_5anos
+      - o requerido foi beneficiado nos últimos 5 anos pelo ANPP, transação penal ou suspensão condicional do processo: ja_beneficiado_ANPP_5anos
+      - os antecedentes e a conduta social do requerido indicam não ser a medida despenalizadora suficiente ou recomendável: antecedentes_conduta_social_desfavoraveis
+      - o requerido foi condenado anteriormente, por sentença definitiva, por crime que prevê pena restritiva de liberdade: condenacao_anterior_ppl
+      - o requerido é reincidente: reincidente
+      - o agente não possui antecedentes que denotem conduta criminosa habitual: habitualidade_criminosa     
+      - o requerido já está respondendo a outro processo penal (com denúncia oferecida): responde_outro_processo
+      - o requerido **não confessou** circunstanciadamente o crime (ou confessou de maneira incompleta ou qualificada o fato, alegando, por exemplo, legítima defesa): ausencia_confissao
+    none of the above: False
+    show if:
+      variable: fazer_analise_req_subjetivos
+      is: sim    
+  - Indique as folhas ou documentos que comprovem o não cabimento?: explicacao_fundamentos_elementos_subjetivos
+    datatype: area
+    default: conforme comprova a certidão de fls. [insira o número de fls. ou id], o requerido
+    required: False
+    show if:
+      variable: fazer_analise_req_subjetivos
+      is: sim
+
+---
+question: |
+  Escolha o ato processual a ser praticado
+fields:
+  - Elementos subjetivos do investigado permitem transação. Oferecer transação penal?: oferecer_transacao
+    datatype: radio
+    choices:
+      - sim
+      - não
+    show if:
+      code: |
+        cabimento_transacao
+        
+  - Elementos subjetivos do investigado permitem ANPP. Oferecer ANPP?: oferecer_anpp
+    datatype: radio
+    choices:
+      - sim
+      - não
+    show if:
+      code: |
+        cabimento_anpp    
+
+  - Elementos subjetivos do investigado permitem suspensão condicinal do processo (SUSPRO). Denunciar e oferecer SUSPRO?: oferecer_suspro
+    datatype: radio
+    choices:
+      - sim
+      - não
+    show if:
+      code: |
+        cabimento_suspro 
+
+---
+question: |
+  Confirmar denúncia?
+fields:
+  - Confirmar prosseguir com a denúncia?: oferecer_denuncia
+    datatype: radio
+    choices:
+      - sim
+      - não
+---
+mandatory: True
+code: |
+  just_nao_cabimento_objetivo_transacao = ''
+  cabimento_objetivo_transacao = ((float(crimes_dict[selected_crime]["pena_maxima"]) <= 730) and (float(crimes_dict[selected_crime]["pena_minima"]) <= 365) and (violencia_domestica == "não"))
+  cabimento_subjetivo_transacao = ((elementos_subjetivos['ja_beneficiado_transacao_5anos'] == False) and (elementos_subjetivos['antecedentes_conduta_social_desfavoraveis'] == False) and (elementos_subjetivos['condenacao_anterior_ppl']  == False ))
+  cabimento_transacao = cabimento_objetivo_transacao and cabimento_subjetivo_transacao
+
+  cabimento_objetivo_anpp = ( (cabimento_transacao == False) and (float(crimes_dict[selected_crime]["pena_minima"]) <= 1460) and (violencia_domestica == "não") )
+  cabimento_subjetivo_anpp = ((elementos_subjetivos['ja_beneficiado_ANPP_5anos'] == False) and (elementos_subjetivos['reincidente'] == False) and (elementos_subjetivos['antecedentes_conduta_social_desfavoraveis'] == False) and (elementos_subjetivos['ausencia_confissao']  == False ) and (elementos_subjetivos['habitualidade_criminosa']  == False ) )  
+  cabimento_anpp = cabimento_objetivo_anpp and cabimento_subjetivo_anpp
+
+  #SUSPRO
+  cabimento_objetivo_suspro = ( (cabimento_transacao == False) and  (cabimento_anpp == False) and (float(crimes_dict[selected_crime]["pena_minima"]) <= 730) )
+  cabimento_subjetivo_suspro = ( (elementos_subjetivos['antecedentes_conduta_social_desfavoraveis'] == False) and (elementos_subjetivos['responde_outro_processo']  == False ) and (elementos_subjetivos['habitualidade_criminosa']  == False ) )    
+  
+  cabimento_suspro = cabimento_objetivo_suspro and cabimento_subjetivo_suspro
+
+---
+mandatory: True
+code: |
+  if cabimento_transacao:
+    if oferecer_transacao:
+      template_name = 'proposta_transacao_penal_ambiental.docx'
+      ato_processual_escolhido = 'transação penal' 
+      
+  elif cabimento_anpp:
+    if oferecer_anpp:
+      template_name = 'anpp.docx'
+      ato_processual_escolhido = 'acordo de não persecução penal'      
+  elif cabimento_suspro:
+    if oferecer_suspro:
+      template_name = 'denuncia.docx'   
+      ato_processual_escolhido = 'denúncia com proposta de suspensão condicional do processo'      
+  else:
+    template_name = 'denuncia.docx'
+    ato_processual_escolhido = 'denúncia'
+
+  ANPP = "Proposta de ANPP"  
+  if cabimento_objetivo_suspro == False:
+    PROPOSTA_SUSPRO = "Os requisitos objetivos não permitem a suspensão condicional do processo"
+  elif cabimento_subjetivo_suspro == False:
+    PROPOSTA_SUSPRO = "Os requisitos subjetivos do investigado não permitem a suspensão condicional do processo"
+
+
+  # Início da justificativa do não cabimento da transação. Precisa ser refatorado (código escrito rapidamente)
+  just_nao_cabimento_transacao = [] 
+  if cabimento_objetivo_transacao == False:
+    just_nao_cabimento_transacao.append("elementos objetivos não permitem transação")
+  if cabimento_subjetivo_transacao == False:
+    if (elementos_subjetivos['ja_beneficiado_transacao_5anos'] == True):      
+      just_nao_cabimento_transacao.append(" o requerido já foi beneficiado com a transação penal nos últimos 05 anos")
+    if (elementos_subjetivos['antecedentes_conduta_social_desfavoraveis'] == True):      
+      just_nao_cabimento_transacao.append(" os antecedentes, a conduta social e a personalidade do agente, bem como os motivos e as circunstâncias, indicam não ser necessária e suficiente a adoção da medida")
+    if (elementos_subjetivos['condenacao_anterior_ppl'] == True):    
+      just_nao_cabimento_transacao.append(" o requerido foi condenado, pela prática de crime, à pena privativa de liberdade, por sentença definitiva")
+  # Fim justificativa não cambimento transação
+
+  # Início da justificativa do não cabimento da SUSPRO
+  just_nao_cabimento_suspro = []
+  if cabimento_objetivo_suspro == False:
+      just_nao_cabimento_suspro.append(" os elementos objetivos não permitem a suspensão condicional do processo")
+  if cabimento_subjetivo_suspro == False:
+    if (elementos_subjetivos['responde_outro_processo'] == True):      
+      just_nao_cabimento_suspro.append(" o acusado está sendo processado por outro crime")
+    if (elementos_subjetivos['antecedentes_conduta_social_desfavoraveis'] == True):
+      just_nao_cabimento_suspro.append(" os antecedentes, a conduta social, bem como os motivos e as circunstâncias, indicam não ser necessária e suficiente a adoção da medida")
+    if (elementos_subjetivos['condenacao_anterior_ppl'] == True):    
+      just_nao_cabimento_suspro.append(" o requerido foi condenado, pela prática de crime, à pena privativa de liberdade, por sentença definitiva")
+      
+  if len(just_nao_cabimento_suspro)>0:
+    justificativa_nao_cabimento_suspro = "Incabível a suspensão condicional do processo no caso porque "
+    for just in just_nao_cabimento_suspro:
+      conector = "; "
+      if just == just_nao_cabimento_suspro[-1]:
+        conector = ". "   
+      justificativa_nao_cabimento_suspro = justificativa_nao_cabimento_suspro + just + conector
+    
+---
+code: |
+  TIPO_PENAL = crimes_dict[selected_crime]["tipo_penal"]

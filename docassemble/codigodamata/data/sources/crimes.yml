@@ -1,0 +1,279 @@
+object: DAObject
+module: docassemble.base.util
+items:
+
+  - TIPIFICACAO: "38 da Lei n. 9.605/1998"
+    NOME_CRIME: 
+    ARTIGO: 38
+    CAPUT_OU_PARAGRAFO:
+    INCISO: 
+    LEI: Lei n. 9.605/1998
+    CLASSIFICACAO_QUANTO_BEM_JURIDICO: "Crimes contra a Flora"
+    PRECEITO_PRIMARIO: "destruiu ou danificou dolosamente floresta considerada de preservação permanente e utilizou-a com infringência das normas de proteção"
+    TIPO_PENAL: "Art. 38. Destruir ou danificar floresta considerada de preservação permanente, mesmo que em formação, ou utilizá-la com infringência das normas de proteção:\nPena - detenção, de um a três anos, ou multa, ou ambas as penas cumulativamente."
+    PENA_MINIMA: 365
+    SUBSTITUIVEL_POR_MULTA: TRUE
+    PENA_MAXIMA: 1095
+    ELEMENTO_SUBJETIVO: DOLO
+    VIOLENCIA_DOMESTICA: FALSE
+    LEI_CRIMES_HEDIONDOS: FALSE
+    VIOLENCIA_GRAVE_AMEACA: FALSE
+    NECESSIDADE_REPARACAO_DANO: TRUE
+    SUJEITO_REPRESENTACAO: FALSE
+    MATERIALIDADE: TRUE
+    DOC_PROVA_MATERIALIDADE: Auto de infração n. 
+    AREA_DESTRUIDA: TRUE
+    COORDENADAS: TRUE
+
+  - TIPIFICACAO: "38, parágrafo único, da Lei n. 9.605/1998"
+    NOME_CRIME: 
+    ARTIGO: 38
+    CAPUT_OU_PARAGRAFO: ", parágrafo único,"
+    INCISO: 
+    LEI: Lei n. 9.605/1998
+    CLASSIFICACAO_QUANTO_BEM_JURIDICO: "Crimes contra a Flora"
+    PRECEITO_PRIMARIO: "agindo mediante negligência, imprudência ou imperícia, destruiu ou danificou culposamente floresta considerada de preservação permanente e utilizou-a com infringência das normas de proteção\n\n"
+    TIPO_PENAL: "Art. 38. Destruir ou danificar floresta considerada de preservação permanente, mesmo que em formação, ou utilizá-la com infringência das normas de proteção:\nPena - detenção, de um a três anos, ou multa, ou ambas as penas cumulativamente.\nParágrafo único. Se o crime for culposo, a pena será reduzida à metade.\n\n"
+    PENA_MINIMA: 180
+    SUBSTITUIVEL_POR_MULTA: TRUE
+    PENA_MAXIMA: 547
+    ELEMENTO_SUBJETIVO: CULPA
+    VIOLENCIA_DOMESTICA: FALSE
+    LEI_CRIMES_HEDIONDOS: FALSE
+    VIOLENCIA_GRAVE_AMEACA: FALSE
+    NECESSIDADE_REPARACAO_DANO: TRUE
+    SUJEITO_REPRESENTACAO: FALSE
+    MATERIALIDADE: TRUE
+    DOC_PROVA_MATERIALIDADE: Auto de infração n. 
+    AREA_DESTRUIDA: TRUE
+    COORDENADAS: TRUE
+
+  - TIPIFICACAO: 39 da Lei n. 9.605/1998
+    NOME_CRIME: 
+    ARTIGO: 39
+    CAPUT_OU_PARAGRAFO: 
+    INCISO: 
+    LEI: Lei n. 9.605/1998
+    CLASSIFICACAO_QUANTO_BEM_JURIDICO: "Crimes contra a Flora"
+    PRECEITO_PRIMARIO: "cortou árvores em floresta considerada de preservação permanente, sem permissão da autoridade competente"
+    TIPO_PENAL: "Art. 39. Cortar árvores em floresta considerada de preservação permanente, sem permissão da autoridade competente: Pena - detenção, de um a três anos, ou multa, ou ambas as penas cumulativamente."
+    PENA_MINIMA: 365
+    SUBSTITUIVEL_POR_MULTA: TRUE
+    PENA_MAXIMA: 1095
+    ELEMENTO_SUBJETIVO: 
+    VIOLENCIA_DOMESTICA: FALSE
+    LEI_CRIMES_HEDIONDOS: FALSE
+    VIOLENCIA_GRAVE_AMEACA: FALSE
+    NECESSIDADE_REPARACAO_DANO: TRUE
+    SUJEITO_REPRESENTACAO: FALSE
+    MATERIALIDADE: TRUE
+    DOC_PROVA_MATERIALIDADE: Auto de infração n. 
+    AREA_DESTRUIDA: TRUE
+    COORDENADAS: TRUE
+
+  - TIPIFICACAO: 41 da Lei n. 9.605/1998
+    NOME_CRIME: 
+    ARTIGO: 41
+    CAPUT_OU_PARAGRAFO: 
+    INCISO: 
+    LEI: Lei n. 9.605/1998
+    CLASSIFICACAO_QUANTO_BEM_JURIDICO: "Crimes contra a Flora"
+    PRECEITO_PRIMARIO: "provocou dolosamente incêndio em mata ou floresta"
+    TIPO_PENAL: "Art. 41. Provocar incêndio em mata ou floresta:\nPena - reclusão, de dois a quatro anos, e multa.\nParágrafo único. Se o crime é culposo, a pena é de detenção de seis meses a um ano, e multa."
+    PENA_MINIMA: 730
+    SUBSTITUIVEL_POR_MULTA: TRUE
+    PENA_MAXIMA: 1460
+    ELEMENTO_SUBJETIVO: DOLO
+    VIOLENCIA_DOMESTICA: FALSE
+    LEI_CRIMES_HEDIONDOS: FALSE
+    VIOLENCIA_GRAVE_AMEACA: FALSE
+    NECESSIDADE_REPARACAO_DANO: TRUE
+    SUJEITO_REPRESENTACAO: FALSE
+    MATERIALIDADE: TRUE
+    DOC_PROVA_MATERIALIDADE: Auto de infração n. 
+    AREA_DESTRUIDA: TRUE
+    COORDENADAS: TRUE
+
+  - TIPIFICACAO: "41, parágrafo único, da Lei n. 9.605/1998"
+    NOME_CRIME: 
+    ARTIGO: 41
+    CAPUT_OU_PARAGRAFO: ", parágrafo único,"
+    INCISO: 
+    LEI: Lei n. 9.605/1998
+    CLASSIFICACAO_QUANTO_BEM_JURIDICO: "Crimes contra a Flora"
+    PRECEITO_PRIMARIO: "agindo mediante negligência, imprudência ou imperícia, provocou culposamente incêndio em mata ou floresta"
+    TIPO_PENAL: "Art. 41. Provocar incêndio em mata ou floresta:\nPena - reclusão, de dois a quatro anos, e multa.\nParágrafo único. Se o crime é culposo, a pena é de detenção de seis meses a um ano, e multa."
+    PENA_MINIMA: 180
+    SUBSTITUIVEL_POR_MULTA: FALSE
+    PENA_MAXIMA: 365
+    ELEMENTO_SUBJETIVO: CULPA
+    VIOLENCIA_DOMESTICA: FALSE
+    LEI_CRIMES_HEDIONDOS: FALSE
+    VIOLENCIA_GRAVE_AMEACA: FALSE
+    NECESSIDADE_REPARACAO_DANO: TRUE
+    SUJEITO_REPRESENTACAO: FALSE
+    MATERIALIDADE: TRUE
+    DOC_PROVA_MATERIALIDADE: Auto de infração n. 
+    AREA_DESTRUIDA: TRUE
+    COORDENADAS: TRUE
+
+  - TIPIFICACAO: 46 da Lei n. 9.605/1998
+    NOME_CRIME: 
+    ARTIGO: 46
+    CAPUT_OU_PARAGRAFO: 
+    INCISO: 
+    LEI: Lei n. 9.605/1998
+    CLASSIFICACAO_QUANTO_BEM_JURIDICO: "Crimes contra a Flora"
+    PRECEITO_PRIMARIO: "tinha em depósito ou guarda madeira, lenha, carvão e outros produtos de origem vegetal, sem licença válida para todo o tempo da viagem ou do armazenamento, outorgada pela autoridade competente"
+    TIPO_PENAL: "Art. 46. Receber ou adquirir, para fins comerciais ou industriais, madeira, lenha, carvão e outros produtos de origem vegetal, sem exigir a exibição de licença do vendedor, outorgada pela autoridade competente, e sem munir-se da via que deverá acompanhar o produto até final beneficiamento:\nPena - detenção, de seis meses a um ano, e multa.\nParágrafo único. Incorre nas mesmas penas quem vende, expõe à venda, tem em depósito, transporta ou guarda madeira, lenha, carvão e outros produtos de origem vegetal, sem licença válida para todo o tempo da viagem ou do armazenamento, outorgada pela autoridade competente."
+    PENA_MINIMA: 180
+    SUBSTITUIVEL_POR_MULTA: 
+    PENA_MAXIMA: 365
+    ELEMENTO_SUBJETIVO: 
+    VIOLENCIA_DOMESTICA: FALSE
+    LEI_CRIMES_HEDIONDOS: FALSE
+    VIOLENCIA_GRAVE_AMEACA: FALSE
+    NECESSIDADE_REPARACAO_DANO: TRUE
+    SUJEITO_REPRESENTACAO: FALSE
+    MATERIALIDADE: TRUE
+    DOC_PROVA_MATERIALIDADE: Auto de infração n. 
+    AREA_DESTRUIDA: TRUE
+    COORDENADAS: TRUE
+
+  - TIPIFICACAO: 48 da Lei n. 9.605/1998
+    NOME_CRIME: 
+    ARTIGO: 48
+    CAPUT_OU_PARAGRAFO: 
+    INCISO: 
+    LEI: Lei n. 9.605/1998
+    CLASSIFICACAO_QUANTO_BEM_JURIDICO: "Crimes contra a Flora"
+    PRECEITO_PRIMARIO: "impediu ou dificultou a regeneração natural de florestas e demais formas de vegetação\n\n"
+    TIPO_PENAL: "Art. 48. Impedir ou dificultar a regeneração natural de florestas e demais formas de vegetação:\nPena - detenção, de seis meses a um ano, e multa."
+    PENA_MINIMA: 180
+    SUBSTITUIVEL_POR_MULTA: 
+    PENA_MAXIMA: 365
+    ELEMENTO_SUBJETIVO: 
+    VIOLENCIA_DOMESTICA: FALSE
+    LEI_CRIMES_HEDIONDOS: FALSE
+    VIOLENCIA_GRAVE_AMEACA: FALSE
+    NECESSIDADE_REPARACAO_DANO: TRUE
+    SUJEITO_REPRESENTACAO: FALSE
+    MATERIALIDADE: TRUE
+    DOC_PROVA_MATERIALIDADE: Auto de infração n. 
+    AREA_DESTRUIDA: TRUE
+    COORDENADAS: TRUE
+
+  - TIPIFICACAO: "49, parágrafo único, da Lei n. 9.605/1998"
+    NOME_CRIME: 
+    ARTIGO: 49
+    CAPUT_OU_PARAGRAFO: ", parágrafo único,"
+    INCISO: 
+    LEI: Lei n. 9.605/1998
+    CLASSIFICACAO_QUANTO_BEM_JURIDICO: "Crimes contra a Flora"
+    PRECEITO_PRIMARIO: "destruiu, danificou, lesou ou maltratou culposamente, por qualquer modo ou meio, plantas de ornamentação de logradouros públicos ou em propriedade privada alheia"
+    TIPO_PENAL: "Art. 49. Destruir, danificar, lesar ou maltratar, por qualquer modo ou meio, plantas de ornamentação de logradouros públicos ou em propriedade privada alheia:\nPena - detenção, de três meses a um ano, ou multa, ou ambas as penas cumulativamente.\nParágrafo único. No crime culposo, a pena é de um a seis meses, ou multa."
+    PENA_MINIMA: 90
+    SUBSTITUIVEL_POR_MULTA: TRUE
+    PENA_MAXIMA: 365
+    ELEMENTO_SUBJETIVO: 
+    VIOLENCIA_DOMESTICA: TRUE
+    LEI_CRIMES_HEDIONDOS: FALSE
+    VIOLENCIA_GRAVE_AMEACA: FALSE
+    NECESSIDADE_REPARACAO_DANO: TRUE
+    SUJEITO_REPRESENTACAO: FALSE
+    MATERIALIDADE: TRUE
+    DOC_PROVA_MATERIALIDADE: Auto de infração n. 
+    AREA_DESTRUIDA: TRUE
+    COORDENADAS: TRUE
+
+  - TIPIFICACAO: 49 da Lei n. 9.605/1998
+    NOME_CRIME: 
+    ARTIGO: 49
+    CAPUT_OU_PARAGRAFO: 
+    INCISO: 
+    LEI: Lei n. 9.605/1998
+    CLASSIFICACAO_QUANTO_BEM_JURIDICO: "Crimes contra a Flora"
+    PRECEITO_PRIMARIO: "destruiu, danificou, lesou ou maltratou dolosamente, por qualquer modo ou meio, plantas de ornamentação de logradouros públicos ou em propriedade privada alheia"
+    TIPO_PENAL: "Art. 49. Destruir, danificar, lesar ou maltratar, por qualquer modo ou meio, plantas de ornamentação de logradouros públicos ou em propriedade privada alheia:\nPena - detenção, de três meses a um ano, ou multa, ou ambas as penas cumulativamente.\nParágrafo único. No crime culposo, a pena é de um a seis meses, ou multa."
+    PENA_MINIMA: 30
+    SUBSTITUIVEL_POR_MULTA: TRUE
+    PENA_MAXIMA: 180
+    ELEMENTO_SUBJETIVO: 
+    VIOLENCIA_DOMESTICA: TRUE
+    LEI_CRIMES_HEDIONDOS: FALSE
+    VIOLENCIA_GRAVE_AMEACA: FALSE
+    NECESSIDADE_REPARACAO_DANO: TRUE
+    SUJEITO_REPRESENTACAO: FALSE
+    MATERIALIDADE: TRUE
+    DOC_PROVA_MATERIALIDADE: Auto de infração n. 
+    AREA_DESTRUIDA: TRUE
+    COORDENADAS: TRUE
+
+  - TIPIFICACAO: 50 da Lei n. 9.605/1998
+    NOME_CRIME: 
+    ARTIGO: 50
+    CAPUT_OU_PARAGRAFO: 
+    INCISO: 
+    LEI: Lei n. 9.605/1998
+    CLASSIFICACAO_QUANTO_BEM_JURIDICO: "Crimes contra a Flora"
+    PRECEITO_PRIMARIO: "destruiu ou danificou florestas nativas ou plantadas ou vegetação fixadora de dunas, protetora de mangues, objeto de especial preservação"
+    TIPO_PENAL: "Art. 50. Destruir ou danificar florestas nativas ou plantadas ou vegetação fixadora de dunas, protetora de mangues, objeto de especial preservação:\nPena - detenção, de três meses a um ano, e multa."
+    PENA_MINIMA: 90
+    SUBSTITUIVEL_POR_MULTA: 
+    PENA_MAXIMA: 365
+    ELEMENTO_SUBJETIVO: 
+    VIOLENCIA_DOMESTICA: FALSE
+    LEI_CRIMES_HEDIONDOS: FALSE
+    VIOLENCIA_GRAVE_AMEACA: FALSE
+    NECESSIDADE_REPARACAO_DANO: TRUE
+    SUJEITO_REPRESENTACAO: FALSE
+    MATERIALIDADE: TRUE
+    DOC_PROVA_MATERIALIDADE: Auto de infração n. 
+    AREA_DESTRUIDA: TRUE
+    COORDENADAS: TRUE
+
+  - TIPIFICACAO: 50-A da Lei n. 9.605/1998
+    NOME_CRIME: 
+    ARTIGO: 50-A
+    CAPUT_OU_PARAGRAFO: 
+    INCISO: 
+    LEI: Lei n. 9.605/1998
+    CLASSIFICACAO_QUANTO_BEM_JURIDICO: "Crimes contra a Flora"
+    PRECEITO_PRIMARIO: "desmatou, explorou economicamente ou degradar floresta em terras de domínio público sem autorização do órgão competente"
+    TIPO_PENAL: "Art. 50-A. Desmatar, explorar economicamente ou degradar floresta, plantada ou nativa, em terras de domínio público ou devolutas, sem autorização do órgão competente:\nPena - reclusão de 2 (dois) a 4 (quatro) anos e multa.\n§ 1o Não é crime a conduta praticada quando necessária à subsistência imediata pessoal do agente ou de sua família.\n§ 2o Se a área explorada for superior a 1.000 ha (mil hectares), a pena será aumentada de 1 (um) ano por milhar de hectare.  "
+    PENA_MINIMA: 730
+    SUBSTITUIVEL_POR_MULTA: 
+    PENA_MAXIMA: 1460
+    ELEMENTO_SUBJETIVO: 
+    VIOLENCIA_DOMESTICA: FALSE
+    LEI_CRIMES_HEDIONDOS: FALSE
+    VIOLENCIA_GRAVE_AMEACA: FALSE
+    NECESSIDADE_REPARACAO_DANO: TRUE
+    SUJEITO_REPRESENTACAO: FALSE
+    MATERIALIDADE: TRUE
+    DOC_PROVA_MATERIALIDADE: Auto de infração n. 
+    AREA_DESTRUIDA: TRUE
+    COORDENADAS: TRUE
+
+  - TIPIFICACAO: 60 da Lei n. 9.605/1998
+    NOME_CRIME: 
+    ARTIGO: 60
+    CAPUT_OU_PARAGRAFO: 
+    INCISO: 
+    LEI: Lei n. 9.605/1998
+    CLASSIFICACAO_QUANTO_BEM_JURIDICO: "Crimes contra a Administração Ambiental"
+    PRECEITO_PRIMARIO: "construiu, ampliou ou fez funcionar estabelecimento, obras ou serviços potencialmente poluidores, sem licença ou autorização dos órgãos ambientais competentes, consistente em desmatar"
+    TIPO_PENAL: "Art. 60. Construir, reformar, ampliar, instalar ou fazer funcionar, em qualquer parte do território nacional, estabelecimentos, obras ou serviços potencialmente poluidores, sem licença ou autorização dos órgãos ambientais competentes, ou contrariando as normas legais e regulamentares pertinentes:\nPena - detenção, de um a seis meses, ou multa, ou ambas as penas cumulativamente."
+    PENA_MINIMA: 30
+    SUBSTITUIVEL_POR_MULTA: 
+    PENA_MAXIMA: 180
+    ELEMENTO_SUBJETIVO: 
+    VIOLENCIA_DOMESTICA: FALSE
+    LEI_CRIMES_HEDIONDOS: FALSE
+    VIOLENCIA_GRAVE_AMEACA: FALSE
+    NECESSIDADE_REPARACAO_DANO: TRUE
+    SUJEITO_REPRESENTACAO: FALSE
+    MATERIALIDADE: TRUE
+    DOC_PROVA_MATERIALIDADE: Auto de infração n. 
+    AREA_DESTRUIDA: TRUE
+    COORDENADAS: TRUE

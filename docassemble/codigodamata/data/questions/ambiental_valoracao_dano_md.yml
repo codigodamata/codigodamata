@@ -1,0 +1,421 @@
+---
+objects:
+  - lista_crimes: DAList
+ 
+---
+include:
+ - comum_base_dados_cadastrais.yml
+ - comum_dados_orgao.yml
+
+---
+ modules:
+  - docassemble.base.core
+  - docassemble.base.util
+  - docassemble.base.legal
+
+---
+mandatory: True
+continue button field: metodo_dano_extrapatrimonial
+question: |
+  Sobre o método de cálculo do dano extrapatrimonial
+fields:
+  - note: |
+      A utilização da precificação (circunstanciada, como adiante se verá) de emissões de carbono como critério objetivo para a valoração do dano ambiental é uma proposta inicial de estudo, baseada em precedentes do STJ de fixação dos danos extrapatrimoniais, principalmente o <span style="color: green;"> AgRESP 1323104/GO <a href="https://consciencia.eco.br/index.php?title=AgRESP_1323104/GO">  (clique aqui para acessar) </a> </span> em que se fundamentou que “...não é necessário ser um cientista e especialista no tema para afirmar que a queimada da cana-de-açúcar causa poluição atmosférica e contribui para o famigerado efeito estufa e aquecimento global...”. Além disso, outros precedentes fazem expressa menção à questão climática, tais como RESP 1.000.731/RO e RESP 650.728/SC.
+      Para a precificação das emissões de carbono, utilizou-se o método descrito em <span style="color: green;"> Jacoski et al. (2014)  <a href="https://periodicos.pucpr.br/index.php/estudosdebiologia/article/view/22972">  (clique aqui para acessar) </a> </span>
+      
+      Dito isso, essa aplicação está sendo disponibilizada em **caráter experimental**. Críticas, informações de falhas e sugestões de melhoria serão muito bem recebidas (itiquira arouba mpmt.mp.br ). 
+      
+      Caso concorde com os termos acima, clique em continuar.
+      
+---      
+question: |
+  > Dados do processo
+fields: 
+  - Número do processo ou procedimento: SIMP
+    default: "000000-061/2020"
+  - Parte Requerida: REQUERIDOS
+    datatype: text    
+  - Tipo de procedimento ou processo: TIPO_PROCEDIMENTO
+    datatype: radio
+    default: "Inquérito Civil"
+    choices:
+      - "Inquérito Civil"
+      - "Inquérito Policial"
+      - "Notícia de Fato"
+      - "Peças de Informação"      
+      - "Procedimento Investigatório Criminal"
+      - "Termo Circunstanciado de Ocorrência"
+
+  - Parte autora: PARTE_AUTORA
+    datatype: text
+    default: ${ dic_promotorias[ORGAO_EXECUCAO]["ramo_mp"] }
+
+  - Data da minuta (data de hoje): DATA_HOJE
+    default: ${ data_hoje }
+
+  - Subscritor da minuta: SUBSCRITOR
+  - Cargo subscritor: CARGO_SUBSCRITOR
+
+---
+code: |    
+  import datetime
+  Meses=('janeiro','fevereiro','março','abril','maio','junho', 'julho','agosto','setembro','outubro','novembro','dezembro')
+  agora = datetime.date.today()
+  mes=(agora.month-1)
+  dia = agora.day
+  mes = Meses[mes]
+  ano = agora.year
+  data_hoje = (str(dia) + " de " + mes + " de " + str(ano))
+mandatory: True
+
+---
+mandatory: True
+question: |
+  Valoração do Dano Ambiental (material e extrapatrimonial)
+fields:
+  - note: |
+      A parte da valoração do dano material foi inspirada em <span style="color: green;"> Roquette (2019) <a href="http://ucs.br/etc/revistas/index.php/direitoambiental/article/view/7981">  (clique aqui para acessar) </a> </span> A Valoração do dano extrapatrimonial é uma proposta inicial de estudo. 
+  - Bioma: BIOMA
+    input type: radio
+    required: False  
+    default: vegetação nativa do bioma Cerrado
+    choices:
+    - vegetação nativa do bioma Pantanal Mato-grossense, patrimônio natural objeto de especial proteção (art. 225, § 4º, CF/1988) 
+    - vegetação nativa do bioma Floresta Amazônica, patrimônio natural objeto de especial proteção (art. 225, § 4º, CF/1988)
+    - vegetação nativa do bioma Cerrado
+
+---
+mandatory: True
+question: |
+  Potencial de resiliência da área
+fields:
+  - note: |
+      Descreva as características conhecidas da área quanto ao potencial de resiliência.
+  - Houve remoção do solo?: remocao_solo
+    input type: radio 
+    default: não houve remoção do solo
+    choices:    
+    - houve remoção do solo
+    - não houve remoção do solo
+    - ignora-se a remoção do solo no local do desflorestamento
+
+  - Existem grandes fragmentos de vegetação nativa, superiores à área desmatada, a menos de 50 metros?: potencial_resiliencia
+    input type: radio
+    required: False
+    default: há presença grandes fragmentos de vegetação nativa nas imediações
+    choices:
+    - há presença grandes fragmentos de vegetação nativa nas imediações
+    - não há grandes fragmentos de vegetação nativa nas proximidades
+    - ignora-se a presença de grandes fragmentos de vegetação nativa nas imediações do local
+ 
+  - Há queimadas frequentes no imóvel (mais de duas vezes nos últimos 5 anos)?: ocorrencia_queimadas
+    input type: radio
+    required: False
+    default: não há reiterada ocorrência de queimadas
+    choices:
+    - há reiterada ocorrência de queimadas
+    - não há reiterada ocorrência de queimadas
+    - ignora-se a ocorrência de queimadas no local
+    
+  - Há presença de gado nas proximidades?: presenca_gado
+    input type: radio
+    default: há presença de gado nas imediações da área
+    choices:
+    - há presença de gado nas imediações da área
+    - não há presença de gado nas imediações da área
+    - há presença de gado nas imediações, mas, ainda assim, ela se regenerou (era vegetação secundária)
+    - ignora-se a presença de gado no local
+
+---
+mandatory: True
+question: |
+  Valoração do Dano Ambiental (material e extrapatrimonial)
+fields:
+  - note: |
+      A parte da valoração do dano material foi inspirada em <span style="color: green;"> Roquette (2019) <a href="http://ucs.br/etc/revistas/index.php/direitoambiental/article/view/7981">  (clique aqui para acessar) </a> </span> A Valoração do dano extrapatrimonial é uma proposta inicial de estudo. 
+  - Área insuscetível de desmatamento (APP, ARL, uso restrito) e que será recuperada: area_desmate_insuscet_recup
+    datatype: number
+    required: False
+  - Área insuscetível de desmatamento (APP, ARL, uso restrito) e que NÃO poderá ser recuperada: area_desmate_insuscet_irrecup
+    datatype: number
+    required: False
+  - Área suscetível de desmatamento (mediante autorização) e vegetação primária: area_desmate_suscet_veg_prim
+    datatype: number
+    required: False    
+  - Área suscetível de desmatamento (área consolidada antes de 22/07/2008) e de vegetação secundária: area_desmate_suscet_veg_sec
+    datatype: number
+    required: False
+    
+---
+mandatory: True
+question: |
+  Escolha o critério quantitativo relativo ao método de valoração do dano material
+fields:
+  - note: |
+       O critério varia conforme a urgência em recuperação da área, seu potencial de resiliência e a presença de fatores de risco. Na ausência destas informações, deve ser escolhida a média dos valores.
+  - Métodos de reparação do dano ambiental e seus valores: texto_metodo_reparacao_escolhido
+    datatype: radio
+    code: |
+      lista_metodos_reparacao
+
+---
+question: |
+    Valores para precificação do carbono
+fields:
+  - note: |
+      Esses são os valores para precificação da tonelada de Carbono (tc) baseadas em Jacoski, et al. (2014). A única variável que você precisa atualizar é <span style="color: green;"> preço do dólar. Para obter o preço do dólar de hoje <a href="https://www.google.com/search?client=firefox-b-d&q=valor+d%C3%B3lar+hoje" target="_blank">  faça uma busca no Google </a> </span> 
+  - Preço tonelada de carbono (em dólar): preco_tc
+    default: 3
+    datatype: number
+    required: False
+  - Quantidade estimada de toneladas/ha: tc_ha
+    default: 75
+    datatype: number
+    required: False
+  - Valor do dólar : dolar_hoje
+    default: 5.48
+    datatype: number
+    required: True
+
+---
+question: |
+    Conversão de pecunia em mata nativa (opcional)
+fields:
+  - note: |
+      Esses são os critérios para conversão do pagamento de parte dos valores "in pecunia" em valores "in natura" por meio da instituição de servidão ambiental permanente (art. 9º-A da Lei n. 6.938/81). As informações do <span style="color: green;"> valor da terra nua (VTN) para preservação da flora e da fauna nos municípios do Estado de Mato Grosso <a href="http://sistemafamato.org.br/portal/famato/arquivos/VTN_PREFEITURAS_MT_2018_E_SIC.pdf" target="_blank"> estão disponíveis aqui </a></span>
+
+  - Preço médio do hectare de Área de Vegetação Nativa: preco_avn
+    default: 1203.01
+    datatype: number
+    required: False
+  - Ano da avaliação (ele será corrigido pelo INPC): ano_avaliacao_vtnpff
+    default: 2018
+    datatype: number
+    required: False    
+  - Fonte: fonte_vtnpff
+    default: "Ministério da Fazenda"
+    datatype: text
+    required: False
+    
+  - Link da fonte: link_fonte_vtnpff
+    default: "http://sistemafamato.org.br/portal/famato/arquivos/VTN_PREFEITURAS_MT_2018_E_SIC.pdf"
+    datatype: text
+    required: False
+  - Percentual da conversão de pecúnia em área de servidão ambiental: percent_conversao_serv_amb
+    default: 0.75
+    datatype: number
+    required: False
+    
+  - Percentual de compensação do dano extrapatrimonial pela servidão ambiental: percent_desc_dano_extra
+    default: 0.5
+    datatype: number
+    required: False
+
+ 
+---
+mandatory: True
+question: |
+ Circunstâncias que podem majorar o dano extrapatrimonial
+fields:
+  - note: |
+      Cada circunstância (que deve dizer respeito ao fato e suas consequências e não ao autor) majora o dano ambiental extrapatrimonial em 1/6. Escolha dentre as circunstâncias que agravam as consequências do dano ambiental extrapatrimonial.
+  - Circunstâncias: circ_dano_escolhidas
+    datatype: checkboxes
+    required: False  
+    none of the above: False
+    code: |
+      lista_circunstancias_dano
+
+---
+mandatory: True
+code: |
+  lista_circunstancias_agravantes_art_15_L9605 = ["reiteracao nos atos de dano ambiental", "fato cometido para obter vantagem pecuniária", "ter o agente cometido a infração coagido outrem para a execução material da infração", "ilícito afetou ou expôs a perigo, de maneira grave, a saúde pública ou o meio ambiente", "fato concorreu para danos à propriedade alheia", "fato atingiu áreas de unidades de conservação ou áreas sujeitas, por ato do Poder Público, a regime especial de uso", "fato atingiu áreas urbanas ou quaisquer assentamentos humanos", "fato ocorreu em período de defeso à fauna", "fato ocorreu em domingos ou feriados", "fato ocorreu à noite", "fato ocorreu em épocas de seca ou inundações", "fato ocorreu interior do espaço territorial especialmente protegido", "houve emprego de métodos cruéis para abate ou captura de animais", "houve fraude ou abuso de confiança", "houve abuso do direito de licença, permissão ou autorização ambiental", "fato praticado no interesse de pessoa jurídica mantida, total ou parcialmente, por verbas públicas ou beneficiada por incentivos fiscais", "fato atingiu espécies ameaçadas, listadas em relatórios oficiais das autoridades competentes", "fato foi facilitado por funcionário público no exercício de suas funções", "outras circunstâncias que impactaram negativamente a coletividade"]
+  
+  lista_circunstancias_dano = ["houve o uso de fogo no período proibitivo de queimadas", "houve destruição de APP hídrica", "ilícito afetou ou expôs a perigo, de maneira grave, a saúde pública ou o meio ambiente", "fato concorreu para danos à propriedade alheia", "fato atingiu áreas de unidades de conservação ou áreas sujeitas, por ato do Poder Público, a regime especial de uso", "fato atingiu áreas urbanas ou quaisquer assentamentos humanos", "fato ocorreu em período de defeso à fauna", "fato ocorreu em épocas de seca ou inundações", "fato ocorreu interior do espaço territorial especialmente protegido", "houve emprego de métodos cruéis para abate ou captura de animais", "houve abuso do direito de licença, permissão ou autorização ambiental", "fato praticado no interesse de pessoa jurídica mantida, total ou parcialmente, por verbas públicas ou beneficiada por incentivos fiscais", "fato atingiu espécies ameaçadas, listadas em relatórios oficiais das autoridades competentes", "outras circunstâncias que impactaram negativamente a coletividade"]
+
+  indice_INPC = {2017: 1.0207,
+                 2018: 1.0343,
+                 2019: 1.0343,
+                }
+                
+  def correcao_monetaria(valor_inicial, serie_historica, ano_inicio):
+    valor_corrigido = valor_inicial
+    for ano in serie_historica:
+      if ano >= ano_inicio:
+        valor_corrigido = valor_corrigido*serie_historica[ano]
+    return round(valor_corrigido, 2)
+
+  def gerar_texto_metodo(metodo, custo_reparacao, custo_rep_corrigido):
+    custo_rep_corrigido = dic_metodo_recuperacao[metodo]["valor_corrigido"] 
+    metodo_str = metodo + ": custo de recuperação (R$ ha-1) = " + str(custo_reparacao) + ", atualizado pelo INPC em R$ "+ str(custo_rep_corrigido) + '/ha-1);'
+    return metodo_str
+
+  dic_metodo_recuperacao = {
+                       "Plantio (3m x 2m)":
+                       {                 
+                       "custo_2017": 29249.41,
+                       "valor_corrigido": correcao_monetaria(29249.41, indice_INPC, 2017),
+                       "explicacao": "Método recomendado para área com baixo potencial de regeneração natural, presença de fatores de risco e necessidade de rápida recuperação", 
+                       },
+                       "Plantio (3m x 3m)":
+                       {
+                       "custo_2017": 19505.46,
+                       "valor_corrigido": correcao_monetaria(19505.46, indice_INPC, 2017),
+                       "explicacao": "Método recomendado para área com baixo potencial de regeneração natural, presença de fatores de risco e necessidade de recuperação eem período normal", 
+                       },                       
+                       "Plantio (5m x 5m)":
+                       {
+                       "custo_2017": 7022.67,
+                       "valor_corrigido": correcao_monetaria(7022.67, indice_INPC, 2017),
+                       "explicacao": "Método recomendado para área com médio potencial de regeneração natural, presença de fatores de risco e necessidade de recuperação em período normal",
+                        },
+                       "Cercamento":
+                       {
+                       "custo_2017": 4675.00,
+                       "valor_corrigido": correcao_monetaria(4675.00, indice_INPC, 2017),
+                        "explicacao": "Método recomendado para área com alto potencial de regeneração natural e presença de fatores de risco, como a presença de gado na própria propriedade ou vizinhos",
+                       },
+                       "Abandono":
+                       {
+                       "custo_2017": 1875.00,
+                       "valor_corrigido": correcao_monetaria(1875.00, indice_INPC, 2017),
+                        "explicacao": "Método recomendado para área com alto potencial de regeneração natural e presença de fatores de risco, como a presença de gado na própria propriedade ou vizinhos",
+                       },
+                       "Média":
+                      {
+                       "custo_2017": 12465.51,
+                       "valor_corrigido": correcao_monetaria(12465.51, indice_INPC, 2017),
+                       "explicacao": "Método recomendado para área com alto potencial de regeneração natural e presença de fatores de risco, como a presença de gado na própria propriedade ou vizinhos",                      
+                       },
+                       }
+
+  lista_metodos_reparacao = []
+  for metodo in dic_metodo_recuperacao:
+    custo_2017 = dic_metodo_recuperacao[metodo]["custo_2017"]
+    custo_atualizado = dic_metodo_recuperacao[metodo]["valor_corrigido"]
+    default = False
+    metodo_reparacao_recomendado = obter_metodo_recup_recomendado(remocao_solo, potencial_resiliencia, ocorrencia_queimadas, presenca_gado)
+    if metodo == metodo_reparacao_recomendado:
+      default = True
+    explicacao = dic_metodo_recuperacao[metodo]["explicacao"]
+    texto_metodo = gerar_texto_metodo(metodo, custo_2017, custo_atualizado)
+    lista_metodos_reparacao.append([texto_metodo, texto_metodo, default, explicacao])
+
+---
+mandatory: True
+code: |
+  def obter_metodo_recup_recomendado(remocao_solo, potencial_resiliencia, ocorrencia_queimadas, presenca_gado):
+    metodo_recup_default = "Cercamento"
+    if remocao_solo == "houve remoção do solo":
+      metodo_recup_recomendado = "Plantio (3m x 2m)"    
+    elif (potencial_resiliencia == "há presença grandes fragmentos de vegetação nativa nas imediações") and (ocorrencia_queimadas == "não há reiterada ocorrência de queimadas" or ocorrencia_queimadas.split(" a ")[0] == "ignora-se") and (presenca_gado == "não há presença de gado nas imediações da área" or presenca_gado == "há presença de gado nas imediações, mas, ainda assim, ela se regenerou (era vegetação secundária)"):
+      metodo_recup_recomendado = "Abandono"
+    else:
+      metodo_recup_recomendado = metodo_recup_default    
+    return metodo_recup_recomendado
+
+---
+mandatory: True
+code: |
+  import math
+  # metodo_reparacao_escolhido é o custo de reparação escolhido.
+  metodo_reparacao_escolhido = float(texto_metodo_reparacao_escolhido.split(", atualizado pelo INPC em R$ ")[1].split('/ha-1);')[0])
+  
+  def valor_custo_reparacao_total_area(area_desmate, metodo_reparacao_escolhido): 
+    custos_reparacao = round(metodo_reparacao_escolhido*float(area_desmate), 2)
+    return custos_reparacao
+
+  def lucros_cessante(area_desmate, tempo_recuperacao, taxa_juros):
+    lc = round((((((metodo_reparacao_escolhido)/tempo_recuperacao)*(math.pow((1+taxa_juros), tempo_recuperacao)-1 )*(math.pow((1+taxa_juros), 1)))/(taxa_juros))/math.pow((1+taxa_juros), tempo_recuperacao))*area_desmate, 2)
+    return lc
+  
+  def compensacao_danos_irreparaveis_vda(area_desmate):
+    taxa_juros = 0.06  
+    vda = (math.pow((custo_atualizado*area_desmate)*(1+taxa_juros), 1)/taxa_juros)
+    return vda
+
+  def majoracao_dano_extra(circ_dano_escolhidas):
+    circunstancias_escolhidas = []
+    circunstancias_str = "Constaram-se as seguintes circunstâncias do dano ambiental: "
+    fator_aumento_dano_extra = 1
+    for circunstancia in circ_dano_escolhidas:
+      if circ_dano_escolhidas[circunstancia] == True:
+        fator_aumento_dano_extra+=1/6
+        circunstancias_escolhidas.append(circunstancia)
+        circunstancias_str = circunstancias_str + circunstancia + " "
+    if not circunstancias_escolhidas:
+      circunstancias_str = "não foram constatadas circunstâncias que agravam o dano extrapatrimonial"
+    return [fator_aumento_dano_extra, circunstancias_str]
+
+  circunstancias_dano = majoracao_dano_extra(circ_dano_escolhidas)[1]
+  
+  def dano_extrapatrimonial(area_desmate):
+    majoracao = majoracao_dano_extra(circ_dano_escolhidas)[0]
+    de = round(preco_tc*tc_ha*dolar_hoje*area_desmate_total*majoracao, 2)
+    return de
+    
+  nome_metodo_extrapatrimonial = "valor no mercado voluntário de carbono pela tonelada de carbono emitida (" + "preço tonelada de carbono (em dólar) = US$ "+ str(preco_tc) + ", quantidade estimada de toneladas/ha = " +  str(tc_ha) + ", valor do dólar = R$" + str(dolar_hoje) + ")."
+
+  complemento_serv_amb = 'Propõem-se a conversão do dano material "in pecunia", até o percentual de ' + str(percent_conversao_serv_amb) + ' em servidão ambiental permanente. Com a instituição de servidão ambiental, desconta-se 90% do valor do dano extrapatrimonial, considerando que, embora o desmatamento ilegal gere dano extrapatrimonial, considera-se que a destinação perpétua da área à conservação ambiental é um ato que, por se projetar indefinidamente no futuro, aproxima-se da compensação do dano extrapatrimonial causado (exceto pelos danos à imagem do país).'
+
+  # Desmatamento em APP, ARL e AU recuperável
+  dano_material_desmate_insuscet_recup = lucros_cessante(area_desmate_insuscet_recup, 20, 0.06)
+  intervencoes_cabiveis_insuscet_recup = 'isolamento, recuperação da área degradada perante o órgão ambiental mediante PRADA, pagamento de DANOS MATERIAIS (lucros cessantes) no valor de R$ ' + str(dano_material_desmate_insuscet_recup)
+
+  # Desmatamento em APP, ARL e AU irrecuperável
+  dano_material_vda = round(compensacao_danos_irreparaveis_vda(area_desmate_insuscet_irrecup), 2)
+  intervencoes_cabiveis_desmate_insuscet_irrecup = 'regularização (licenciamento da atividade) perante o órgão ambiental, pagamento de DANOS MATERIAIS (compensão ambiental por danos irrecuperáveis e permanentes - VDA) no valor de R$ ' + str(dano_material_vda)
+
+  # Desmatamento em área passível de desmatamento (porém realizado de forma ilegal):
+  dano_material_desmate_fora_APP_ARL = valor_custo_reparacao_total_area(area_desmate_suscet_veg_prim, metodo_reparacao_escolhido)
+  intervencoes_cabiveis_desmate_fora_APP_ARL = 'regularização ambiental da área perante o órgão ambiental, pagamento de DANOS MATERIAIS (custos de recuperação) no valor  R$' + str(dano_material_desmate_fora_APP_ARL) + ' ou constituição de servidão ambiental perpétua sobre a área.'
+
+  # Desmatamento em área consolidada e de vegetação em estágio inicial de regeneração, passível de desmatamento (porém realizado de forma ilegal) (valor do dano material é considerado 50% menor)
+  dano_material_area_consolidada = valor_custo_reparacao_total_area(area_desmate_suscet_veg_sec, metodo_reparacao_escolhido)*0.50
+  intervencoes_cabiveis_desmate_area_consolidada = 'regularização ambiental da área perante o órgão ambiental, pagamento de DANOS MATERIAIS (custos de recuperação reduzido em 50%) no valor  R$ ' + str(dano_material_area_consolidada) + ' ou constituição de servidão ambiental perpétua sobre a área.'
+
+  area_desmate_total = area_desmate_insuscet_recup + area_desmate_insuscet_irrecup + area_desmate_suscet_veg_prim + area_desmate_suscet_veg_sec
+
+  # Desmatamento em áreas de vegetação secundária em estágio inicial tem dano extrapatrimonial 50% menor 
+  dano_extra_patr = dano_extrapatrimonial(area_desmate_total) - dano_extrapatrimonial(area_desmate_suscet_veg_sec)*0.5
+  
+  # Valor total em pecúnia
+  pecunia_total = round(dano_material_desmate_insuscet_recup + dano_material_vda + dano_material_desmate_fora_APP_ARL + dano_material_area_consolidada + dano_extra_patr, 2)
+
+  #quantifica a dimensão da área de SAP. O dano material fica compensado pelo caráter perpétuo da serv ambiental
+  # Pecúnia total para fins de servidão ambiental: exclui os custos de reparação e lucro cessantes, porém não na fórmula da VDA
+  pecunia_total_serv_amb = dano_material_vda + dano_extra_patr*(1-percent_desc_dano_extra)
+  preco_avn_atualizado = correcao_monetaria(preco_avn, indice_INPC, 2018)
+  
+  area_serv_amb = math.ceil(area_desmate_total + (pecunia_total_serv_amb*percent_conversao_serv_amb)/preco_avn_atualizado)
+  
+  area_serv_amb_mesmo_imovel = math.ceil(area_serv_amb + area_serv_amb*0.10)
+  area_serv_amb_outro_imovel_municipio = math.ceil(area_serv_amb + area_serv_amb*0.20)
+  area_serv_amb_outro_imovel_mesma_bacia_hidro = math.ceil(area_serv_amb + area_serv_amb*0.30)
+  resto_pecunia = pecunia_total_serv_amb*(1-percent_conversao_serv_amb)
+  conversao_servidao_ambiental = 'Na hipótese de opção por servidão ambiental como meio de pagamento de '+ str(percent_conversao_serv_amb*100) + '% dos danos ambientais, está poderá ser instituída "in situ" em área de ' + str(area_serv_amb) + ' ha, ou em área prístina do mesmo imóvel, em dimensão 10% maior, isto é, ' + str(area_serv_amb_mesmo_imovel) + ' ha, ou em área prístina de outro imóvel no mesmo município em dimensão 20% maior, isto é, ' + str(area_serv_amb_outro_imovel_municipio) + ' ha, ou em área prístina de outro imóvel em outro município na mesma bacia hidrográfica em dimensão 30% maior, isto é, ' + str(area_serv_amb_outro_imovel_mesma_bacia_hidro) + ' ha,  O valor remanescente em pecúnia (' + str(round((1 - percent_conversao_serv_amb)*100)) + '%) será de R$ ' + str(round(resto_pecunia,2)) + '.'
+  info_utilizadas =  'Valor da Terra Nua para preservação da fauna e da flora (VTN-PFF): R$ ' + str(preco_avn) + '; VTN-PFF atualizado: R$' + str(preco_avn_atualizado) + '; índice utilizado: INPC; ano da avaliação: ' + str(ano_avaliacao_vtnpff) + '; fonte: ' +  fonte_vtnpff + ' ('+ link_fonte_vtnpff +').'
+   
+---
+question: | 
+  ![tuiuiu](https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Tuiuiu_-_Ave_Simbolo_do_Pantanal_de_Mato_Grosso.jpg/800px-Tuiuiu_-_Ave_Simbolo_do_Pantanal_de_Mato_Grosso.jpg)
+  Deu certo!
+subquestion: |
+  Sua minuta está pronta, agora é só baixar em PDF ou RTF.
+attachment:
+  name: Seu relatório está pronto
+  filename: calculo_dano_ambiental_desmate
+  metadata:
+    FirstHeaderCenter: |
+      [FILE https://consciencia.eco.br/images/1/12/Logo_mpmt.png, 200px]  
+    HeaderRight: |
+      Page [PAGENUM] of [TOTALPAGES]
+    HeaderCenter: |
+      [FILE https://consciencia.eco.br/images/1/12/Logo_mpmt.png, 200px]       
+    FooterLeft: |
+      Promotoria de Justiça de Itiquira Rua Mato Grosso, S/N, Itiquira/MT – CEP. 78790-000 Tel. (65) 3491-1144  
+  content file: 'relatorio_tecnico_valoracao_dano_ambiental.md'
+
+buttons:
+  - Exit: exit
+mandatory: True

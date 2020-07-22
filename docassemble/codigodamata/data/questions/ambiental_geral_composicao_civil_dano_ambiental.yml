@@ -1,0 +1,21 @@
+
+---
+question: |
+  Composição civil do dano ambiental
+fields:
+  - Dano ambiental material: proposta_composicao_dano_material_desmate
+    required: False
+    input type: area
+    default: ${composicao_civil_dano_material_desmate}
+    rows: 10
+
+  - Dano ambiental extrapatrimonial: proposta_composicao_dano_extra_escolhida 
+    datatype: radio
+    code: |
+      opcoes_reparacao_dano_extrapatr    
+    required: False    
+  - Se sua proposta para o dano extrapatrimonial não se encontra aí, descreva-a: proposta_composicao_dano_extra_escolhida
+    required: False  
+    input type: area
+    rows: 5
+  

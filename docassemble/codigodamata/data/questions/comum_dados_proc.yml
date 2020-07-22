@@ -1,0 +1,59 @@
+---
+include:
+ - comum_base_dados_cadastrais.yml
+
+---
+question: |
+  > Dados do processo
+fields: 
+  - Unidade Judicial: UNIDADE_JUDICIAL
+    datatype: radio
+    required: True
+    code: |
+      dic_promotorias[ORGAO_EXECUCAO]["unidade_judicial"]
+
+  - Comarca: COMARCA
+    datatype: text
+    default: ${ dic_promotorias[ORGAO_EXECUCAO]["comarca"] }    
+
+  - Órgão Jurisdicional de 2ª Instância: ORGAO_JUR_2A_INSTANCIA
+    datatype: text
+    default: ${ dic_promotorias[ORGAO_EXECUCAO]["orgao_jur_instancia_2"] }  
+    
+  - Número do processo: NUM_PROCESSO
+    default: "0000000-00.2020.8.11.0027"  
+  - Número SIMP: SIMP
+    default: "000000-061/2020"
+  - Tipo de procedimento ou processo: TIPO_PROCEDIMENTO
+    datatype: radio
+    choices:
+      - "Inquérito Civil"
+      - "Inquérito Policial"
+      - "Notícia de Fato"
+      - "Peças de Informação"      
+      - "Procedimento Investigatório Criminal"
+      - "Termo Circunstanciado de Ocorrência"
+
+  - Parte autora: PARTE_AUTORA
+    datatype: text
+    default: ${ dic_promotorias[ORGAO_EXECUCAO]["ramo_mp"] } 
+    
+  - Data da minuta (data de hoje): DATA_HOJE
+    default: ${ data_hoje }
+
+  - Subscritor da minuta: SUBSCRITOR
+    default: ${ dic_promotorias[ORGAO_EXECUCAO]["membro"] }
+  - Cargo subscritor: CARGO_SUBSCRITOR
+    default: ${ dic_promotorias[ORGAO_EXECUCAO]["cargo"] }
+
+---
+code: |    
+  import datetime
+  Meses=('janeiro','fevereiro','março','abril','maio','junho', 'julho','agosto','setembro','outubro','novembro','dezembro')
+  agora = datetime.date.today()
+  mes=(agora.month-1)
+  dia = agora.day
+  mes = Meses[mes]
+  ano = agora.year
+  data_hoje = (str(dia) + " de " + mes + " de " + str(ano))
+mandatory: True

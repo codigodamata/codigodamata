@@ -1,0 +1,121 @@
+objects:
+  - requeridos: DAList.using(object_type=Individual)
+---
+question: Nomear o requerido? (representado, réu, suspeito da ação ilícita)
+yesno: requeridos.there_are_any
+default: yes
+
+---
+question: Adicionar mais um requerido?
+yesno: requeridos.there_is_another
+---
+code: |
+  pessoas = requeridos.complete_elements()
+---
+reconsider:
+  - pessoas
+question: |
+  Quem é o ${ ordinal(i) } requerido?
+fields:
+  - Existing or New: requeridos[i].existing_or_new
+    datatype: radio
+    default: New
+    choices:
+      - Existing
+      - New
+  - Person: requeridos[i]
+    show if:
+      variable: requeridos[i].existing_or_new
+      is: Existing
+    datatype: object
+    choices: pessoas
+  - Nome: requeridos[i].name.first
+    help: "Se não for uma petição inicial ou denúncia, não é necessário qualificar o requerido por inteiro."
+  - Nacionalidade: requeridos[i].nacionalidade
+    default: "de nacionalidade brasileira"
+    required: False
+    show if:
+      variable: requeridos[i].existing_or_new
+      is: New
+  - Estado Civil: requeridos[i].estadocivil
+    required: False
+    datatype: radio
+    choices:
+      - solteiro(a)
+      - casado(a)
+      - divorciado(a)
+      - viúvo(a)
+      - convivente em união estável
+    show if:
+      variable: requeridos[i].existing_or_new
+      is: New
+  - Ocupação: requeridos[i].ocupacao
+    required: False
+    show if:
+      variable: requeridos[i].existing_or_new
+      is: New
+  - Data de Nascimento: requeridos[i].birthdate
+    required: False
+    datatype: date
+    show if:
+      variable: requeridos[i].existing_or_new
+      is: New
+  - Endereço: requeridos[i].address.address
+    required: False
+    show if:
+      variable: requeridos[i].existing_or_new
+      is: New
+  - Número: requeridos[i].address.unit
+    required: False
+    show if:
+      variable: requeridos[i].existing_or_new
+      is: New   
+  - Cidade: requeridos[i].address.city
+    required: False
+    default: "Itiquira/MT"
+    show if:
+      variable: requeridos[i].existing_or_new
+      is: New
+  - Estado: requeridos[i].address.state
+    required: False
+    default: "Mato Grosso"  
+    show if:
+      variable: requeridos[i].existing_or_new
+      is: New 
+  - CEP: requeridos[i].address.postal_code
+    show if:
+      variable: requeridos[i].existing_or_new
+      is: New
+    required: False
+  - País: requeridos[i].address.country
+    code: |
+      countries_list()
+    required: False
+    show if:
+      variable: requeridos[i].existing_or_new
+      is: New
+  - Telefone celular: requeridos[i].mobile_number
+    required: False
+    show if:
+      variable: requeridos[i].existing_or_new
+      is: New
+  - Nome da mãe: requeridos[i].nome_mae
+    required: False
+    show if:
+      variable: requeridos[i].existing_or_new
+      is: New      
+  - Usa whatsapp: requeridos[i].uses_whatsapp
+    required: False
+    datatype: yesno
+    show if:
+      variable: requeridos[i].existing_or_new
+      is: New
+      
+---
+code: |
+  REQUERIDOS = "A APURAR"
+  QUALIFICACAO_REQUERIDO = ""
+  if requeridos.there_are_any:
+    for requerido in requeridos:
+      REQUERIDOS = requerido.name.first
+      QUALIFICACAO_REQUERIDO = requerido.nacionalidade + ", "+ requerido.estadocivil + ", " + requerido.ocupacao + ", nascido aos " + requerido.birthdate + ", filho de " + requerido.nome_mae +  ", residente e domiciliado na " + requerido.address.address + " " + requerido.address.unit +  ", "+ requerido.address.city + ", " + requerido.address.state +  ", telefone: " + requerido.mobile_number +";"

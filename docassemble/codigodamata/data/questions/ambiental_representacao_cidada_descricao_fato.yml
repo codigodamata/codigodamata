@@ -1,0 +1,208 @@
+---
+include: 
+ - comum_base_dados_cadastrais.yml
+
+---
+mandatory: True
+question: |
+ Descrição fática. Descreva o que você sabe sobre o fato ocorrido.
+fields:
+  - note: |
+      Preencha os elementos do fato
+  - Qual é o tipo de dano ambiental que você quer reportar?: TIPO_DANO_AMBIENTAL
+    datatype: radio
+    default: desmatamento ilegal
+    choices:
+      - desmatamento ilegal
+      - queimada ilegal
+      - outros
+
+---
+question: |
+ Descrição fática. Descreva o que você sabe sobre o fato ocorrido.
+fields:
+  - note: |
+      Preencha apenas o que souber (deixe em branco o que não souber)
+  - Data do fato é exata?: data_exata
+    datatype: radio
+    choices:
+      - sim
+      - não
+
+  - Data do fato: DATA_FATO
+    required: False
+    default: ${data_hoje_curta}
+    show if:
+      variable: data_exata
+      is: sim
+
+  - Data aproximada do fato: DATA_FATO
+    default:
+      code: |
+        "de maneira permanente, sendo o fato constatado nesta data (" + data_hoje_curta + ")"
+    input type: area
+    rows: 3     
+    required: False
+    show if:
+      variable: data_exata
+      is: não        
+  - Hora do fato: HORA_FATO
+    default: "em horário indeterminado"    
+    required: False
+
+  - note: |
+      Uma das informações mais importantes é o par de coordenadas do local do ilícito ambiental. Prefira o formato decimal (usado pelo Google Maps). <span style="color: green;"> Para saber como descobrir as coordenadas de um local <a href="https://www.google.com/search?q=como+descobrir+uma+coordenadas+geogr%C3%A1fica&oq=como+descobrir+uma+coordenadas+geogr%C3%A1fica&aqs=chrome..69i57j0l7.7733j0j7&sourceid=chrome&ie=UTF-8" target="_blank"> clique aqui. </a> </span> 
+  - Possui as coordenadas geográficas do local?: possui_coordenadas  
+    required: True  
+    datatype: radio
+    choices:
+      - sim: True
+      - não: False
+
+  - Coordenadas geográficas do fato: COORDENADAS
+    required: False
+    hint: "-17.213684, -54.162734"
+    show if:
+      variable: possui_coordenadas
+      is: True
+
+  - Local do fato: LOCAL_FATO
+    hint: "Ex: Fazenda Tal, nas proximidades da BR 163"
+    input type: area
+    rows: 2    
+    required: True
+    
+  - Estado (UF): UF
+    default: "MT"
+    input type: text 
+
+  - Município: MUNICIPIO
+    datatype: dropdownlist
+    default: Itiquira
+    code: |
+      lista_municipios_MT
+
+---
+question: |
+ Detalhes do crime contra a flora.
+fields:
+  - note: |
+      Preencha o que souber sobre os elementos do fato
+    
+  - Área destruída ou degradada (em hectares): AREA_DESTRUIDA
+    datatype: number
+    required: False
+
+  - Qual é o tamanho do imóvel (em hectares): AREA_IMOVEL
+    datatype: number
+    required: False
+
+  - Sabe o número do CAR do imóvel?: NUMERO_CAR
+    datatype: number
+    required: False
+        
+  - Possui algum documento adicional que comprova o fato: DOC_COMPROVA_FATO
+    help: "Relatório do GFW, laudo do MapBiomas, fotografia, etc."
+    input type: area
+    rows: 3  
+    required: False
+
+  - Existe algum link para documento ue comprova o fato: LINK_DOCUMENTO_ONLINE
+    help: "Link para algum documento público que possa ser acessado por qualquer pessoa"
+    input type: area
+    rows: 3  
+    required: False
+
+  - Informações adicionais adicionais sobre o dano: INFORMACOES_COMPLEMENTARES
+    hint: "Provas podem ser encontradas no lugar tal, ou o instrumento do ilícito encontra-se no lugar tal"
+    input type: area
+    rows: 10  
+    required: False
+
+---
+question: |
+ Conhecendo o fato
+fields:
+  - Como você ficou sabendo desse dano?: modo_conhecimento_fato
+    datatype: radio
+    default: não
+    choices:
+      - consultando plataformas de alertas de desmatamento
+      - outro
+
+---
+question: |
+ Indícios de autoria
+fields:
+  - Possui conhecimento sobre o autor do fato?: conhecimento_autoria
+    datatype: radio
+    choices:
+      - sim: True
+      - não: False  
+
+---
+question: |
+ Informações sobre a autoria
+fields:
+  - Quem é o autor do dano? Como ele age?: INFORMACOES_COMPL_AUTORIA
+    hint: "O autor do fato é Fulano de tal, filho de , pode ser entrado em..., contou com a ajuda de..."
+    input type: area
+    rows: 10  
+    required: False
+
+---
+mandatory: False
+question: |
+  Como o fato foi descoberto?
+subquestion: |
+  Em consulta à plataforma [FIELD PLATAFORMA_SENSORIAMENTO] em [FIELD DATA_CONSULTA] foi possível perceber a existência de [FIELD NUMERO_ALERTAS] alertas do tipo alertas [FIELD TIPO_ALERTA].
+fields:
+  - Tipo de plataforma: PLATAFORMA_SENSORIAMENTO
+    choices:
+      - Global Forest Watch (GFW)
+      - MapBiomas Alerta
+      - Terra Brasilis
+  - Data da sua consulta: DATA_CONSULTA
+    input type: date
+    default: ${data_hoje_curta}
+    hint: data da sua pesquisa
+  - Numero de alertas: NUMERO_ALERTAS
+    input type: num
+    default: 01
+  - Tipo de plataforma: TIPO_ALERTA
+    choices:
+      - GLAD
+      - VIIRS
+      - MapBiomas Alerta
+      - DETER
+
+---
+question: |
+  Como o fato se tornou conhecido
+fields:
+  - Descobri de outra maneira: descricao_alternativa_conhecimento_fato
+    help: "Conte-nos como ficou sabendo do fato?"
+    input type: area
+    rows: 10  
+    required: False   
+
+---
+question: |
+  Deseja anonimato
+fields:
+  - Qual é o seu nome?: SUBSCRITOR
+  - Deseja manter o anonimato?: solicitacao_anonimato
+    datatype: radio
+    default: sim
+    choices:
+      - sim: True
+      - não: False
+  - Justificativa anonimato: JUSTIFICATIVA_ANONIMATO
+    default: "Solicito o anonimato porque estou apenas fazendo minha parte como cidadão, mas temo represálias. Ademais, a autoria da representação não possui importância, já que se baseia em dados públicos de sensoriamento remoto, podendo ser verificados de plano e de ofício pelas autoridades"
+    input type: area
+    rows: 7    
+    required: False
+    show if:
+      variable: solicitacao_anonimato
+      is: True  
+  - Qual é a sua cidade?: CIDADE

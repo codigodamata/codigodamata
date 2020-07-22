@@ -1,0 +1,185 @@
+---
+objects:
+  - lista_crimes: DAList
+---
+include: 
+ - comum_dados_orgao.yml
+ - comum_base_dados_cadastrais.yml
+ - ambiental_penal_teses.yml
+
+---
+question: |
+ Descrição do caso (descrição fática)
+fields:
+  - note: |
+      O ato processual escolhido foi ${ ato_processual_escolhido } .
+  - fundamento normativo: FUNDAMENTO_NORMATIVO
+    default: ${ selected_crime }
+    required: False
+  - Preceito primário: PRECEITO_PRIMARIO
+    default: ${ crimes_dict[selected_crime]["preceito_primario"] }   
+    required: False
+    
+  - Data do fato é exata?: data_exata
+    datatype: radio
+    default: sim
+    choices:
+      - sim
+      - não
+  - Data do fato: DATA_FATO
+    default: 15/06/2020
+    required: False
+    show if:
+      variable: data_exata
+      is: sim
+      
+  - Data aproximada do fato: DATA_FATO
+    default: "de maneira permanente, sendo o fato constatado na data da fiscalização ocorrida em "
+    input type: area
+    rows: 2 
+    required: False
+    show if:
+      variable: data_exata
+      is: não        
+  - Hora do fato: HORA_FATO
+    default: "em horário indeterminado"    
+    required: False
+  - Local do fato: LOCAL_FATO
+    help: "Se for uma fazenda, informar o nome do imóvel"
+    input type: area
+    rows: 2    
+    default: "imóvel rural localizado na Zona Rural deste município de Itiquira/MT"
+    required: False
+  - Coordenadas geográficas do fato: COORDENADAS
+    required: False
+    show if:
+      code: |
+        crimes_dict[selected_crime]["coordenadas"] == True     
+  - Área destruída ou degradada (em hectares): AREA_DESTRUIDA
+    datatype: number
+    required: False
+    show if:
+      code: |
+        crimes_dict[selected_crime]["area_destruida"] == True
+  - Tipo de vegetação: TIPO_VEGETACAO
+    input type: radio
+    default: vegetação nativa do bioma Cerrado
+    required: False    
+    choices:
+    - vegetação nativa do bioma Pantanal Mato-grossense, patrimônio natural objeto de especial proteção (art. 225, § 4º, CF/1988)
+    - vegetação nativa do bioma Floresta Amazônica, patrimônio natural objeto de especial proteção (art. 225, § 4º, CF/1988) 
+    - vegetação nativa do bioma Cerrado    
+    show if:
+      code: |
+        crimes_dict[selected_crime]["area_destruida"] == True  
+
+  - Parágrafo sobre como se deu o conhecimento do fato: NOTICIA_CRIME
+    input type: area
+    rows: 4
+    default: "O conhecimento do fato se deu a partir de análise de alertas em tempo próximo ao real decorrente de sensoriamento remoto realizado pela plataforma Global Forest Watch (GFW)."
+    show if:
+      code: |
+        ato_processual_escolhido == "denúncia" or ato_processual_escolhido == 'denúncia com proposta de suspensão condicional do processo'
+
+  - Parágrafo sobre como se deu a confirmação do fato: DILIGENCIA_REALIZADA
+    input type: radio
+    required: False
+    choices:
+    - Realizou-se análise técnica por imagenamento remoto para aferição das circunstâncias em que o fato ocorreu mediante a utilização de imagens de satélite de alta resolução.
+    - Diligência in loco de fiscalização pelo órgão ambiental e, posteriormente, dinâmica de desmatamento por imagens de satélite.
+    show if:
+      code: |
+        ato_processual_escolhido == "denúncia" or ato_processual_escolhido == 'denúncia com proposta de suspensão condicional do processo'
+        
+  - Se a confirmação do fato se deu de outra maneira, descreva-a aqui: DILIGENCIA_REALIZADA
+    required: False  
+    input type: area
+    rows: 5
+    show if:
+      code: |
+        ato_processual_escolhido == "denúncia" or ato_processual_escolhido == 'denúncia com proposta de suspensão condicional do processo'
+        
+  - Parágrafo da materialidade: MATERIALIDADE
+    help: "Não precisa mecher nesse texto, se a infração penal deixa vestígios materiais."
+    input type: area
+    rows: 3  
+    default: "A prova materialidade encontra-se demonstrada pelo "
+    show if:
+      code: |
+        crimes_dict[selected_crime]["materialidade"] == True 
+    required: False
+    
+  - Tipo de documento que comprova a materialidade: DOC_PROVA_MATERIALIDADE
+    help: "Geralmente será um auto de infração e termo de embargo ou relatório técnico."
+    default: "Auto de Infração "  
+    show if:
+      code: |    
+        crimes_dict[selected_crime]["materialidade"] == True 
+    required: False
+
+  - Número do documento que comprova materialidade: NUM_DOC_PROVA_MATERIALIDADE  
+    required: False
+    show if:
+       code: |  
+         crimes_dict[selected_crime]["materialidade"] == True
+
+  - Orgão responsável pela diligência "in loco"(se houver): ORGAO_DOC_PROVA_MATERIALIDADE
+    datatype: radio
+    code: |
+      dic_promotorias[ORGAO_EXECUCAO]["orgao_ambiental_fiscalizador"]   
+    show if:
+       code: |  
+         crimes_dict[selected_crime]["materialidade"] == True         
+         
+  - Crime sujeito a representação?: REPRESENTACAO
+    input type: area
+    rows: 2    
+    default: "O crime em questão procede-se mediante ação penal pública incondicionada."
+    required: False
+    
+  - Folhas ou ID do Termo de Representação?: FLS_REPRESENTACAO
+    required: False
+    show if:
+       code: |  
+         crimes_dict[selected_crime]["sujeito_representacao"] == True
+    
+  - Pedido de reparação do dano: PEDIDO_REPARACAO_DANO  
+    input type: area
+    default: ${requerimento_reparacao_dano_desmate}
+    rows: 7
+    required: False
+    show if:
+      code: |
+        ato_processual_escolhido == "denúncia" or ato_processual_escolhido == 'denúncia com proposta de suspensão condicional do processo'
+        
+  - Se seu requerimento não se encontra aí, descreva-o: PEDIDO_REPARACAO_DANO
+    required: False  
+    input type: area
+    rows: 5
+    show if:
+      code: |
+        ato_processual_escolhido == "denúncia" or ato_processual_escolhido == 'denúncia com proposta de suspensão condicional do processo'
+
+  - Pedir medida cautelar diversa da prisão?: pedir_medida_cautelar_diversa_prisao
+    input type: radio
+    required: True
+    help: "É o pedido para, cautelarmente, ser determinada judicialmente a suspensão de atividades antrópica na área, que deverá ser isolada até o final do processo"
+    choices:
+    - sim: True
+    - não: False
+
+  - Testemunhas do fato: TESTEMUNHAS
+    datatype: area
+    rows: 5    
+    default: "Testemunha: , CPF n. , endereço à fl.  ;"
+    required: False
+    show if:
+      code: |
+        ato_processual_escolhido == "denúncia" or ato_processual_escolhido == 'denúncia com proposta de suspensão condicional do processo'
+
+---
+code: |
+  PARAGRAFO_MATERIALIDADE = MATERIALIDADE + " " + DOC_PROVA_MATERIALIDADE + " " + NUM_DOC_PROVA_MATERIALIDADE + " elaborado por " + ORGAO_DOC_PROVA_MATERIALIDADE + ". "
+
+  if pedir_medida_cautelar_diversa_prisao:
+      MEDIDA_CAUTELAR_DESMATAMENTO
