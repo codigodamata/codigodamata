@@ -19,12 +19,18 @@ REQUERIDO: ${REQUERIDOS}
 
 # INTRODUÇÃO
 
-A presente valoração do dano ambiental baseia-se nos trabalhos de Roquette (20191) e Gonzaga e Roquette (20202).
+A presente valoração do dano ambiental baseia-se nos trabalhos de Roquette (2019) e Gonzaga e Roquette (2020).
+
+A utilização da precificação (circunstanciada) de emissões de carbono como critério objetivo para a valoração do dano ambiental é uma proposta inicial de estudo, baseada em precedentes do STJ de fixação dos danos extrapatrimoniais, principalmente o [**AgRESP 1323104/GO**](https://consciencia.eco.br/index.php?title=AgRESP_1323104/GO) em que se fundamentou que *“...não é necessário ser um cientista e especialista no tema para afirmar que a queimada da cana-de-açúcar causa poluição atmosférica e contribui para o famigerado efeito estufa e aquecimento global...”. Além disso, outros precedentes fazem expressa menção à questão climática, tais como RESP 1.000.731/RO e RESP 650.728/SC*.
+
+Para a precificação das emissões de carbono, utilizou-se o método descrito em [Jacoski et al. (2014)](https://periodicos.pucpr.br/index.php/estudosdebiologia/article/view/22972). 
+
+A valoração do dano material foi inspirada na proposta de [Roquette (2019)](http://ucs.br/etc/revistas/index.php/direitoambiental/article/view/7981).
 
 Utilizaram-se os seguintes critérios:
 
--  dano material: ${texto_metodo_reparacao_escolhido}
--  dano extrapatrimonial: ${nome_metodo_extrapatrimonial}
+- dano material: ${texto_metodo_reparacao_escolhido}
+- dano extrapatrimonial: ${nome_metodo_extrapatrimonial}
 - informações complementares:  ${info_utilizadas}
   
 # CARACTERÍSTICAS  
