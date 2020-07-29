@@ -5,18 +5,18 @@ include:
 question: |
   > Dados dos órgãos
 fields: 
-  - Orgao de execução: ORGAO_EXECUCAO
+  - Orgao de execução: orgao_execucao
     default: "Promotoria de Justiça de Itiquira"
     datatype: radio
     code: |
       lista_promotorias 
 
-  - Seu órgão de execução não está na lista?: ORGAO_EXECUCAO
+  - Seu órgão de execução não está na lista?: orgao_execucao
     hint: "Digite aqui o nome do seu órgão"  
     datatype: area
     rows: 2
     show if:
-      variable: ORGAO_EXECUCAO
+      variable: orgao_execucao
       is: OUTRO
 
 
@@ -24,16 +24,16 @@ fields:
 question: |
   Confirme as informações do órgão de execução
 fields:
-  - Cidade em que você atua: CIDADE
+  - Cidade em que você atua: cidade
     datatype: text
     default: ${ dic_promotorias[ORGAO_EXECUCAO]["cidade"] } 
     
-  - Instituição: INSTITUICAO
+  - Instituição: instituicao
     datatype: area
     rows: 2
     default: ${ dic_promotorias[ORGAO_EXECUCAO]["ramo_mp"] } 
 
-  - Endereço órgão: ORGAO_ENDERECO
+  - Endereço órgão: orgao_endereco
     datatype: area
     rows: 2  
     default: ${ dic_promotorias[ORGAO_EXECUCAO]["endereco"] }

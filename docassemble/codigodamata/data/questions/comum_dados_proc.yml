@@ -6,25 +6,25 @@ include:
 question: |
   > Dados do processo
 fields: 
-  - Unidade Judicial: UNIDADE_JUDICIAL
+  - Unidade Judicial: unidade_judicial
     datatype: radio
     required: True
     code: |
       dic_promotorias[ORGAO_EXECUCAO]["unidade_judicial"]
 
-  - Comarca: COMARCA
+  - Comarca: comarca
     datatype: text
     default: ${ dic_promotorias[ORGAO_EXECUCAO]["comarca"] }    
 
-  - Órgão Jurisdicional de 2ª Instância: ORGAO_JUR_2A_INSTANCIA
+  - Órgão Jurisdicional de 2ª Instância: orgao_jur_2a_instancia
     datatype: text
     default: ${ dic_promotorias[ORGAO_EXECUCAO]["orgao_jur_instancia_2"] }  
     
-  - Número do processo: NUM_PROCESSO
+  - Número do processo: num_processo
     default: "0000000-00.2020.8.11.0027"  
-  - Número SIMP: SIMP
+  - Número SIMP: simp
     default: "000000-061/2020"
-  - Tipo de procedimento ou processo: TIPO_PROCEDIMENTO
+  - Tipo de procedimento ou processo: tipo_procedimento
     datatype: radio
     choices:
       - "Inquérito Civil"
@@ -34,14 +34,14 @@ fields:
       - "Procedimento Investigatório Criminal"
       - "Termo Circunstanciado de Ocorrência"
 
-  - Parte autora: PARTE_AUTORA
+  - Parte autora: parte_autora
     datatype: text
     default: ${ dic_promotorias[ORGAO_EXECUCAO]["ramo_mp"] } 
     
-  - Data da minuta (data de hoje): DATA_HOJE
+  - Data da minuta (data de hoje): data_hoje
     default: ${ data_hoje }
 
-  - Subscritor da minuta: SUBSCRITOR
+  - Subscritor da minuta: subscritor
     default: ${ dic_promotorias[ORGAO_EXECUCAO]["membro"] }
   - Cargo subscritor: CARGO_SUBSCRITOR
     default: ${ dic_promotorias[ORGAO_EXECUCAO]["cargo"] }
