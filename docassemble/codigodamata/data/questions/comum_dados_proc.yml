@@ -1,0 +1,47 @@
+---
+include:
+ - comum_base_dados_cadastrais.yml
+
+---
+question: |
+  > Dados do processo
+fields: 
+  - Unidade Judicial: unidade_judicial
+    datatype: radio
+    required: True
+    code: |
+      dic_promotorias[orgao_execucao]["unidade_judicial"]
+
+  - Comarca: comarca
+    datatype: text
+    default: ${ dic_promotorias[orgao_execucao]["comarca"] }    
+
+  - Órgão Jurisdicional de 2ª Instância: orgao_jur_2a_instancia
+    datatype: text
+    default: ${ dic_promotorias[orgao_execucao]["orgao_jur_instancia_2"] }  
+    
+  - Número do processo: num_processo
+    default: "0000000-00.2020.8.11.0027"  
+  - Número SIMP: simp
+    default: "000000-061/2020"
+  - Tipo de procedimento ou processo: tipo_procedimento
+    datatype: radio
+    choices:
+      - "Inquérito Civil"
+      - "Inquérito Policial"
+      - "Notícia de Fato"
+      - "Peças de Informação"      
+      - "Procedimento Investigatório Criminal"
+      - "Termo Circunstanciado de Ocorrência"
+
+  - Parte autora: parte_autora
+    datatype: text
+    default: ${ dic_promotorias[orgao_execucao]["ramo_mp"] } 
+    
+  - Data da minuta (data de hoje): data_hoje
+    default: ${ data_hoje }
+
+  - Subscritor da minuta: subscritor
+    default: ${ dic_promotorias[orgao_execucao]["membro"] }
+  - Cargo subscritor: cargo_subscritor
+    default: ${ dic_promotorias[orgao_execucao]["cargo"] }

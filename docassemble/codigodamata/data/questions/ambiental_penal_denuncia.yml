@@ -1,0 +1,48 @@
+---
+template: denuncia
+content file:
+  code: conteudo_denuncia
+
+---
+code: |
+  conteudo_denuncia = "denuncia.md"
+
+---
+objects:
+  - requeridos: DAList.using(object_type=Individual)
+
+---
+mandatory: True
+code: |
+  cabimento_suspro = False
+  justificativa_nao_cabimento_suspro = "Deixa-se de oferecer a suspensão condicional do processo (art. 89 da Lei 9.099/95) em razão de elementos de informação constantes dos autos apontarem que os antecedentes, o comportamento e a conduta social do denunciado demonstrarem não ser a medida suficiente ou adequada (fls.19/20)."
+  templates_md = denuncia
+  ato_processual_escolhido = "denúncia"
+
+---
+include:
+ - comum_scripts.yml
+ - ambiental_geral_descricao_fato_ilicito_desmatamento.yml
+ - ambiental_penal_escolha_crime.yml
+ - ambiental_penal_composicao_civil_dano_ambiental.yml
+ - ambiental_penal_medidas_cautelares_diversas_prisao.yml 
+ - ambiental_penal_proposta_prd.yml
+ - comum_base_dados_cadastrais.yml
+ - comum_dados_orgao.yml
+ - comum_dados_proc.yml
+ - comum_qualificacao_requerido.yml
+
+---
+mandatory: True
+question: |
+  ![tuiuiu](https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Tuiuiu_-_Ave_Simbolo_do_Pantanal_de_Mato_Grosso.jpg/800px-Tuiuiu_-_Ave_Simbolo_do_Pantanal_de_Mato_Grosso.jpg)
+  Deu certo!
+subquestion: |
+  Sua minuta está pronta, agora é só baixar em PDF ou DOCX.
+attachment:
+  name: Sua petição 
+  filename: ato_processual_escolhido
+  docx template file: minuta_cabecalho.docx
+  pdf/a: True
+buttons:
+  - Exit: exit

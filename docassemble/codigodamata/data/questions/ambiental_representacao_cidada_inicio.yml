@@ -1,0 +1,73 @@
+modules:
+  - docassemble.base.core
+  - docassemble.base.util
+  - docassemble.base.legal
+
+---
+mandatory: True
+continue button field: iniciar_entrevista
+
+question: |
+  <img src="https://consciencia.eco.br/images/thumb/3/39/Logoolhosdamata.jpg/800px-Logoolhosdamata.jpg" width="500"/>
+  >
+  > # representação cidadã
+  
+subquestion: |
+  >  Bem-vindo à entrevista do  [Projeto Olhos da Mata](https://consciencia.eco.br/index.php?title=Projeto_Olhos_da_Mata) para manifestação anônima baseada no uso de plataformas de sensoriamento remoto.
+
+  > Essa entrevista é experimental e está apenas no início do desenvolvimento.
+
+---
+mandatory: True
+code: |
+  if iniciar_entrevista:
+    pass
+  if tipo_dano_ambiental:
+    data_fato
+  if modo_conhecimento_fato == "consultando plataformas de alertas de desmatamento":
+    modo_conhecimento_dano_ambiental = "Em consulta à plataforma " + plataforma_sensoriamento + " em " + data_consulta + " foi possível perceber a existência de "+ str(numero_alertas) + " alertas do tipo alertas " + tipo_alerta +", fato este ocorrido em área localizada no imóvel rural em cujo polígono se encontra as coordenadas geográficas " + coordenadas +"."
+  else:
+    modo_conhecimento_dano_ambiental = descricao_alternativa_conhecimento_fato
+  if conhecimento_autoria:
+    informacoes_compl_autoria
+  if area_imovel or numero_car or doc_comprova_fato or link_documento_online:
+    pass
+  ato_processual_escolhido = 'representacao_cidada'
+
+---
+include:
+ - ambiental_representacao_cidada_descricao_fato.yml 
+
+---
+mandatory: True
+question: |
+  ![tuiuiu](https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Tuiuiu_-_Ave_Simbolo_do_Pantanal_de_Mato_Grosso.jpg/800px-Tuiuiu_-_Ave_Simbolo_do_Pantanal_de_Mato_Grosso.jpg)
+  Deu certo!
+subquestion: |
+  Sua minuta está pronta, agora é só baixar em PDF ou DOCX.
+attachment:
+  - name: Sua petição 
+    filename: minuta_juridica
+    content file: "representacao_cidada.md"
+    pdf/a: True
+buttons:
+  - Exit: exit
+
+---
+code: |    
+  import datetime
+  Meses=('janeiro','fevereiro','março','abril','maio','junho', 'julho','agosto','setembro','outubro','novembro','dezembro')
+  agora = datetime.date.today()
+  mes_numerico =(agora.month)
+  dia = agora.day
+  mes = Meses[mes_numerico]
+  ano = agora.year
+  data_hoje = (str(dia) + " de " + mes + " de " + str(ano))
+  data_hoje_curta = (str(dia) + "/" + str(mes_numerico) + "/" + str(ano))
+mandatory: True
+
+
+
+
+
+

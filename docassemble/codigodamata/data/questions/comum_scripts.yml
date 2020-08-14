@@ -1,0 +1,16 @@
+---
+code: |
+  import datetime
+
+  Meses=('janeiro','fevereiro','março','abril','maio','junho', 'julho','agosto','setembro','outubro','novembro','dezembro')
+  agora = datetime.date.today()
+  mes_numerico=(agora.month-1)
+  dia = agora.day
+  mes_hoje = Meses[mes_numerico]
+  ano_hoje = agora.year
+  data_hoje = (str(dia) + " de " + mes_hoje + " de " + str(ano_hoje))
+  data_hoje_curta = str(dia) + "/" + str(mes_hoje) + "/" + str(ano_hoje)
+  print(data_hoje_curta)
+  print(data_hoje)
+
+mandatory: True

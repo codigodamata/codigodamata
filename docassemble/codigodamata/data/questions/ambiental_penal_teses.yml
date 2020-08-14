@@ -1,0 +1,7 @@
+---
+template: medida_cautelar_desmatamento
+content file:
+  code: medida_cautelar_escolhida
+---
+code: |
+  cautelar_diversa_prisao_escolhida = "medidas_cautelares_desmatamento_ilegal.md"
