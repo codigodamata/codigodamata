@@ -8,8 +8,7 @@
 
 PROC. N. ${simp}
 
-REQUERIDO: ${requerido.name}
-
+REQUERIDO: ${nome_parte_requerida}
 
 &nbsp;
 &nbsp;
