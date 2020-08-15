@@ -25,11 +25,10 @@ fields:
 ---      
 question: |
   > Dados do processo
-fields: 
+fields:
+  - Nome da parte requerida: nome_parte_requerida
   - Número do processo ou procedimento: simp
     default: "000000-061/2020"
-  - Parte Requerida: requerido.name
-    datatype: text    
   - Tipo de procedimento ou processo: tipo_procedimento
     datatype: radio
     default: "Inquérito Civil"
@@ -58,7 +57,7 @@ question: |
 fields:
   - note: |
       A valoração do dano material foi inspirada na proposta de <span style="color: green;"> Roquette (2019) <a href="http://ucs.br/etc/revistas/index.php/direitoambiental/article/view/7981">  (clique aqui para acessar) </a> </span> A Valoração do dano extrapatrimonial é uma proposta inicial de estudo. 
-  - Bioma: BIOMA
+  - Bioma: bioma
     input type: radio
     required: False  
     default: vegetação nativa do bioma Cerrado
@@ -389,7 +388,7 @@ subquestion: |
   Sua minuta está pronta, agora é só baixar em PDF ou RTF.
 attachment:
   name: Seu relatório está pronto
-  filename: calculo_dano_ambiental_desmate
+  filename: ${"valoracao_dano_ambiental "+ " " + simp}
   metadata:
     FirstHeaderCenter: |
       [FILE 320px_logo_mpmt.png]
