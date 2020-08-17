@@ -5,22 +5,17 @@ objects:
 include:
  - comum_base_dados_cadastrais.yml
  - comum_dados_orgao.yml
-
----
- modules:
-  - docassemble.base.core
-  - docassemble.base.util
-  - docassemble.base.legal
+ - comum_scripts.yml
 
 ---
 question: |
   > Dados do processo
 fields: 
-  - Número do processo ou procedimento: SIMP
+  - Número do processo ou procedimento: simp
     default: "000000-061/2020"
-  - Parte Requerida: REQUERIDOS
+  - Parte Requerida: requeridos
     datatype: text    
-  - Tipo de procedimento ou processo: TIPO_PROCEDIMENTO
+  - Tipo de procedimento ou processo: tipo_procedimento
     datatype: radio
     default: "Inquérito Civil"
     choices:
@@ -31,27 +26,15 @@ fields:
       - "Procedimento Investigatório Criminal"
       - "Termo Circunstanciado de Ocorrência"
 
-  - Parte autora: PARTE_AUTORA
+  - Parte autora: parte_autora
     datatype: text
-    default: ${ dic_promotorias[ORGAO_EXECUCAO]["ramo_mp"] }
+    default: ${ dic_promotorias[orgao_execucao]["ramo_mp"] }
 
-  - Data da minuta (data de hoje): DATA_HOJE
+  - Data da minuta (data de hoje): data_hoje
     default: ${ data_hoje }
 
-  - Subscritor da minuta: SUBSCRITOR
-  - Cargo subscritor: CARGO_SUBSCRITOR
-
----
-code: |    
-  import datetime
-  Meses=('janeiro','fevereiro','março','abril','maio','junho', 'julho','agosto','setembro','outubro','novembro','dezembro')
-  agora = datetime.date.today()
-  mes=(agora.month-1)
-  dia = agora.day
-  mes = Meses[mes]
-  ano = agora.year
-  data_hoje = (str(dia) + " de " + mes + " de " + str(ano))
-mandatory: True
+  - Subscritor da minuta: subscritor
+  - Cargo subscritor: cargo_subscritor
 
 ---
 mandatory: True
@@ -60,11 +43,11 @@ question: |
 fields:
   - note: |
       A parte da valoração do dano material foi obtida na obra <span style="color: green;">  Orientação técnica desenvolvida para fundamentar a atuação ministerial dos Promotores de Justiça de Meio Ambiente do Estado de Mato Grosso <a href="https://pjedaou.mpmt.mp.br/wp-content/uploads/2017/10/VALORACAO_DANO_AMBIENTAL_MT_PJEDAOU-1.pdf">  (clique aqui para acessar) </a> </span> da Procuradoria de Justiça Especializada em Defesa Ambiental e Ordem Urbanística do Ministério Público do Estado de Mato Grosso.
-  - Área desmatada insuscetível (APP, reserva legal, uso restrito): AREA_DESMATADA_INSUSC
+  - Área desmatada insuscetível (APP, reserva legal, uso restrito): area_desmatada_insusc
     datatype: number
     required: False
 
-  - Área desmatada suscetível, porém ilegalmente desmatada: AREA_DESMATADA_SUSC
+  - Área desmatada suscetível, porém ilegalmente desmatada: area_desmatada_susc
     datatype: number
     required: False
 
@@ -260,7 +243,7 @@ code: |
   potencia = math.pow(pre_potencia,n)
   fator_correcao = fator_correcao
   
-  valor_cate = round((((cd*estagio_suc_cate*potencia)/(potencia-1))*AREA_DESMATADA_INSUSC)*fator_correcao, 2)
+  valor_cate = round((((cd*estagio_suc_cate*potencia)/(potencia-1))*area_desmatada_insusc)*fator_correcao, 2)
 
   # Argumentos da fórmula VCP
   custo_recup = 2902.80
@@ -273,10 +256,10 @@ code: |
   estagio_suc_vcp = dic_estagio_sucessional[estagio_sucessional_selec]["vcp"]
 
   # O correto seria também multiplicar o custo_recup pela área (constante_vcp[fitofisionomia]*dolar_hoje*AREA_DESMATADA_INSUSC*fator_correcao*estagio_suc_vcp)+custo_recup
-  valor_vcp = round((constante_vcp[fitofisionomia]*dolar_hoje*AREA_DESMATADA_INSUSC*fator_correcao*estagio_suc_vcp)+custo_recup*AREA_DESMATADA_INSUSC, 2)
+  valor_vcp = round((constante_vcp[fitofisionomia]*dolar_hoje*area_desmatada_insusc*fator_correcao*estagio_suc_vcp)+custo_recup*area_desmatada_insusc, 2)
 
   # Terceiro método (fora de APP, ARL, AUR)
-  calculo_fora_APP_ARL = round((AREA_DESMATADA_SUSC*12927.85*fator_correcao), 2)
+  calculo_fora_app_arl = round((area_desmatada_susc*12927.85*fator_correcao), 2)
 
   # Descrição e quantificação das circunstâncias do dano ambiental
   circunstancias_escolhidas = []
@@ -290,16 +273,16 @@ code: |
       circunstancias_escolhidas.append(circunstancia)
       circunstancias_str = circunstancias_str + circunstancia + "; "
   circunstancias_dano = existem_circunstancias + circunstancias_str
-  AREA_DESMATADA_TOTAL = AREA_DESMATADA_SUSC + AREA_DESMATADA_INSUSC
+  area_desmatada_total = area_desmatada_susc + area_desmatada_insusc
   
   # Calculando o dano extrapatrimonial
   if metodo_dano_extrapatrimonial == "tc":
-    valor_dano_extrapatrimonial = round(preco_tc*tc_ha*dolar_hoje*AREA_DESMATADA_TOTAL*fator_aumento_dano_extra, 2)
+    valor_dano_extrapatrimonial = round(preco_tc*tc_ha*dolar_hoje*area_desmatada_total*fator_aumento_dano_extra, 2)
     nome_metodo_extrapatrimonial = "valor no mercado voluntário de carbono pela tonelada de carbono emitida (" + "preço tonelada de carbono (em dólar) = US$ "+ str(preco_tc) + ", quantidade estimada de toneladas/ha = " +  str(tc_ha) + ", cotação do dólar = R$" + str(dolar_hoje) + ")."
   elif metodo_dano_extrapatrimonial == "percentual_extra":
-    valor_dano_extrapatrimonial = round((valor_cate+calculo_fora_APP_ARL)*percentual_extra*fator_aumento_dano_extra, 2)
+    valor_dano_extrapatrimonial = round((valor_cate+calculo_fora_app_arl)*percentual_extra*fator_aumento_dano_extra, 2)
     nome_metodo_extrapatrimonial = "em um percentual de " + str(percentual_extra) + " aplicado ao dano material pelo método CATE."
 
   # Aqui foi excluída a parte em que arrola medidas cabíveis de acordo com o grau de proteção na área (consta do arquivo de valoração do dano ambiental
-  total_vcp_3o_metodo_e_extra = "R$ "+ str(round((valor_vcp + calculo_fora_APP_ARL+ valor_dano_extrapatrimonial),2))
-  total_cate_3o_metodo_e_extra =  "R$ "+ str(round((valor_cate + calculo_fora_APP_ARL + valor_dano_extrapatrimonial),2))
+  total_vcp_3o_metodo_e_extra = "R$ "+ str(round((valor_vcp + calculo_fora_app_arl+ valor_dano_extrapatrimonial),2))
+  total_cate_3o_metodo_e_extra =  "R$ "+ str(round((valor_cate + calculo_fora_app_arl + valor_dano_extrapatrimonial),2))

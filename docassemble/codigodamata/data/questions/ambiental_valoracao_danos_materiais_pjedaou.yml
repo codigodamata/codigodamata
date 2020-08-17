@@ -1,0 +1,209 @@
+---
+objects:
+  - lista_crimes: DAList
+---
+include:
+ - comum_base_dados_cadastrais.yml
+ - comum_dados_orgao.yml
+ - comum_scripts.yml
+
+---
+question: |
+  > Dados do processo
+fields: 
+  - Número do processo ou procedimento: simp
+    default: "000000-061/2020"
+  - Parte Requerida: requeridos
+    datatype: text    
+  - Tipo de procedimento ou processo: tipo_procedimento
+    datatype: radio
+    default: "Inquérito Civil"
+    choices:
+      - "Inquérito Civil"
+      - "Inquérito Policial"
+      - "Notícia de Fato"
+      - "Peças de Informação"      
+      - "Procedimento Investigatório Criminal"
+      - "Termo Circunstanciado de Ocorrência"
+
+  - Parte autora: parte_autora
+    datatype: text
+    default: ${ dic_promotorias[orgao_execucao]["ramo_mp"] }
+
+  - Data da minuta (data de hoje): data_hoje
+    default: ${ data_hoje }
+
+  - Subscritor da minuta: subscritor
+  - Cargo subscritor: cargo_subscritor
+
+
+---
+mandatory: True
+question: |
+  Valoração do Dano Ambiental Material
+fields:
+  - note: |
+      A presente valoração do dano material foi obtida na obra <span style="color: green;">  Orientação técnica desenvolvida para fundamentar a atuação ministerial dos Promotores de Justiça de Meio Ambiente do Estado de Mato Grosso <a href="https://pjedaou.mpmt.mp.br/wp-content/uploads/2017/10/VALORACAO_DANO_AMBIENTAL_MT_PJEDAOU-1.pdf">  (clique aqui para acessar) </a> </span> da Procuradoria de Justiça Especializada em Defesa Ambiental e Ordem Urbanística do Ministério Público do Estado de Mato Grosso.
+  - Área desmatada insuscetível (APP, reserva legal, uso restrito): area_desmatada_insusc
+    datatype: number
+    required: False
+
+  - Área desmatada suscetível, porém ilegalmente desmatada: area_desmatada_susc
+    datatype: number
+    required: False
+
+  - Tipo de vegetação: fitofisionomia
+    input type: radio
+    required: False  
+    choices:
+    - formação savânica
+    - formação florestal
+
+---
+mandatory: True
+question: |
+  Estágio Sucessional
+fields:
+  - note: |
+      O segundo passo é observar em qual estágio sucessional as áreas desflorestadas encontravam-se antes da intervenção (em caso de desflorestamento fora de APP e RL, deve-se pular diretamente para o terceiro passo e apenas calibrar a Valoração do Dano Ambiental, por um fator de correção).    
+  - Qual é o estágio de regeneração da área?: estagio_sucessional_selec
+    input type: radio
+    default: há presença de gado nas imediações da área
+    choices:
+    - Intervenção em florestas secundárias no estágio inicial ou em transição do estágio inicial para o médio de regeneração
+    - Intervenção em florestas secundárias no estágio médio ou em transição do estágio médio para o avançado de regeneração
+    - Intervenção em florestas secundárias no estágio avançado ou em transição do estágio avançado para floresta primária (clímax)
+
+---
+mandatory: True
+question: |
+  Fator de calibração
+fields:
+  - note: |
+      O terceiro passo é calibrar a Valoração do Dano Ambiental por um fator de correção que varia de acordo com o grau de alteração praticado contra a vegetação, cujo gradiente de variação vai do corte raso à implantação da cultura. Estes fatores de correção (0,4, 0,6, 0,8 1,0 e 1,2) correspondem respectivamente às seguintes etapas de desflorestamento:
+  - Fator de calibração: fator_calibracao
+    input type: radio 
+    choices:    
+    - Corte raso (0,4)
+    - Corte raso com destoca (0,6)
+    - Corte raso com destoca e revolvimento do solo (0,8)
+    - Corte raso com destoca e revolvimento do solo e implantação de cultura (1,0)
+    - Corte raso com queimada em período proibitivo ou sem autorização (1,2)
+
+---
+question: |
+    Variáveis utilizadas no cálculo
+fields:
+  - note: |
+      Para o cálculo pelo método VPC, você precisa atualizar <span style="color: green;"> o valor do dólar. Para obter o preço do dólar de hoje <a href="https://www.google.com/search?client=firefox-b-d&q=valor+d%C3%B3lar+hoje" target="_blank">  faça uma busca no Google </a> </span> 
+  - Valor do dólar : dolar_hoje
+    default: 5.48
+    datatype: number
+    required: True
+
+---
+question: | 
+  ![tuiuiu](https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Tuiuiu_-_Ave_Simbolo_do_Pantanal_de_Mato_Grosso.jpg/800px-Tuiuiu_-_Ave_Simbolo_do_Pantanal_de_Mato_Grosso.jpg)
+  Deu certo!
+subquestion: |
+  Sua minuta está pronta, agora é só baixar em PDF ou DOCX.
+attachment:
+  name: Sua minuta 
+  filename: relatorio_tecnico_valoracao_dano_material_pjedaou
+  docx template file: 'pjedaou_relatorio_tecnico_valoracao_dano_v2.docx'
+  pdf/a: True  
+buttons:
+  - Exit: exit
+mandatory: True
+
+--- 
+mandatory: True
+code: |
+
+  dic_estagio_sucessional = {
+                       "Intervenção em florestas secundárias no estágio inicial ou em transição do estágio inicial para o médio de regeneração":
+                       {                 
+                       "cate": 4,
+                       "vcp": 3,
+                       "explicacao": "", 
+                       },
+                       "Intervenção em florestas secundárias no estágio médio ou em transição do estágio médio para o avançado de regeneração":
+                       {
+                       "cate": 6,
+                       "vcp": 4,
+                       "explicacao": "", 
+                       },                       
+                       "Intervenção em florestas secundárias no estágio avançado ou em transição do estágio avançado para floresta primária (clímax)":
+                       {
+                       "cate": 8,
+                       "vcp": 5,
+                       "explicacao": "",
+                        },
+                       }
+
+  fator_correcao = 0.0
+  if fator_calibracao == "Corte raso (0,4)":
+    fator_correcao = 0.4
+  elif fator_calibracao == "Corte raso com destoca (0,6)":
+    fator_correcao = 0.6
+  elif fator_calibracao == "Corte raso com destoca e revolvimento do solo (0,8)":
+    fator_correcao = 0.8 
+  elif fator_calibracao == "Corte raso com destoca e revolvimento do solo e implantação de cultura (1,0)":
+    fator_correcao = 1.0
+  elif fator_calibracao == "Corte raso com queimada em período proibitivo ou sem autorização (1,2)":
+    fator_correcao = 1.2
+
+---
+mandatory: True
+code: |
+  import math
+  # Argumentos da fórmula CATE
+  cd = 5375
+  estagio_suc_cate = dic_estagio_sucessional[estagio_sucessional_selec]["cate"]
+  cate_j = 0.1
+  n = 25
+  pre_potencia = 1+cate_j
+  potencia = math.pow(pre_potencia,n)
+  fator_correcao = fator_correcao
+  
+  valor_cate = round((((cd*estagio_suc_cate*potencia)/(potencia-1))*area_desmatada_insusc)*fator_correcao, 2)
+
+  # Argumentos da fórmula VCP
+  custo_recup = 2902.80
+  fator_correcao = fator_correcao
+  constante_vcp = {
+                   "formação florestal":5264.00,
+                   "formação savânica":2871.00,
+                   }
+                   
+  estagio_suc_vcp = dic_estagio_sucessional[estagio_sucessional_selec]["vcp"]
+
+
+  # Os valores dos custos de reparação deveriam ser corrigidos (NÃO estão sendo corrigidos nesses cálculos, mas coloquei a função para correcão
+  # usando o NPC. Exemplo de valor corrigido:  valor_corrigido = correcao_monetaria(19505.46, indice_INPC, 2017)
+  
+  # Série histórica do Índice INPC
+  indice_INPC = {2017: 1.0207,
+                 2018: 1.0343,
+                 2019: 1.0343,
+                }
+                
+  def correcao_monetaria(valor_inicial, serie_historica, ano_inicio):
+    valor_corrigido = valor_inicial
+    for ano in serie_historica:
+      if ano >= ano_inicio:
+        valor_corrigido = valor_corrigido*serie_historica[ano]
+    return round(valor_corrigido, 2)
+
+
+  # O correto seria também multiplicar o custo_recup pela área (constante_vcp[fitofisionomia]*dolar_hoje*AREA_DESMATADA_INSUSC*fator_correcao*estagio_suc_vcp)+custo_recup
+  valor_vcp = round((constante_vcp[fitofisionomia]*dolar_hoje*area_desmatada_insusc*fator_correcao*estagio_suc_vcp)+custo_recup*area_desmatada_insusc, 2)
+
+  # Terceiro método (fora de APP, ARL, AUR)
+  calculo_fora_app_arl = round((area_desmatada_susc*12927.85*fator_correcao), 2)
+
+  area_desmatada_total = area_desmatada_susc + area_desmatada_insusc
+  
+  # Aqui foi excluída a parte em que arrola medidas cabíveis de acordo com o grau de proteção na área (consta do arquivo de valoração do dano ambiental
+  total_vcp_3o_metodo = "R$ "+ str(round((valor_vcp + calculo_fora_app_arl),2))
+  total_cate_3o_metodo =  "R$ "+ str(round((valor_cate + calculo_fora_app_arl),2))

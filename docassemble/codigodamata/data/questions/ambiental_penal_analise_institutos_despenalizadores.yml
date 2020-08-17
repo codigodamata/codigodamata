@@ -110,10 +110,10 @@ code: |
       ato_processual_escolhido = 'acordo de não persecução penal'      
   elif cabimento_suspro:
     if oferecer_suspro:
-      template_name = 'denuncia.docx'   
+      template_name = 'denuncia.md'   
       ato_processual_escolhido = 'denúncia com proposta de suspensão condicional do processo'      
   else:
-    template_name = 'denuncia.docx'
+    template_name = 'denuncia.md'
     ato_processual_escolhido = 'denúncia'
 
   ANPP = "Proposta de ANPP"  

@@ -1,0 +1,137 @@
+---
+objects:
+  - lista_crimes: DAList
+---
+include:
+ - comum_base_dados_cadastrais.yml
+ - comum_dados_orgao.yml
+ - comum_scripts.yml
+
+
+---
+mandatory: True
+continue button field: metodo_dano_extrapatrimonial
+question: |
+  Sobre o método de cálculo do dano extrapatrimonial
+fields:
+  - note: |
+      A utilização da precificação (circunstanciada, como adiante se verá) de emissões de carbono como critério objetivo para a valoração do dano ambiental é uma proposta inicial de estudo, baseada em precedentes do STJ de fixação dos danos extrapatrimoniais, principalmente o <span style="color: green;"> AgRESP 1323104/GO <a href="https://consciencia.eco.br/index.php?title=AgRESP_1323104/GO">  (clique aqui para acessar) </a> </span> em que se fundamentou que “...não é necessário ser um cientista e especialista no tema para afirmar que a queimada da cana-de-açúcar causa poluição atmosférica e contribui para o famigerado efeito estufa e aquecimento global...”. Além disso, outros precedentes fazem expressa menção à questão climática, tais como RESP 1.000.731/RO e RESP 650.728/SC.
+      Para a precificação das emissões de carbono, utilizou-se o método descrito em <span style="color: green;"> Jacoski et al. (2014)  <a href="https://periodicos.pucpr.br/index.php/estudosdebiologia/article/view/22972">  (clique aqui para acessar) </a> </span>
+      
+      Dito isso, essa aplicação está sendo disponibilizada em **caráter experimental**. Críticas, informações de falhas e sugestões de melhoria serão muito bem recebidas (gabinetepromotor@gmail.com). 
+      
+      Caso concorde com os termos acima, clique em continuar.
+---
+question: |
+  > Dados do processo
+fields: 
+  - Número do processo ou procedimento: simp
+    default: "000000-061/2020"
+  - Parte Requerida: requeridos
+    datatype: text    
+  - Tipo de procedimento ou processo: tipo_procedimento
+    datatype: radio
+    default: "Inquérito Civil"
+    choices:
+      - "Inquérito Civil"
+      - "Inquérito Policial"
+      - "Notícia de Fato"
+      - "Peças de Informação"      
+      - "Procedimento Investigatório Criminal"
+      - "Termo Circunstanciado de Ocorrência"
+
+  - Parte autora: parte_autora
+    datatype: text
+    default: ${ dic_promotorias[orgao_execucao]["ramo_mp"] }
+
+  - Data da minuta (data de hoje): data_hoje
+    default: ${ data_hoje }
+
+  - Subscritor da minuta: subscritor
+  - Cargo subscritor: cargo_subscritor
+
+---
+mandatory: True
+question: |
+  Valoração do Dano Ambiental (material e extrapatrimonial)
+fields:
+  - note: |
+      Preencha cada campo, caso disponha da informação. O importante, no entanto, é o número absoluto de área desmatada.
+  - Área desmatada insuscetível (APP, reserva legal, uso restrito): area_desmatada_insusc
+    datatype: number
+    required: False
+
+  - Área desmatada suscetível, porém ilegalmente desmatada: area_desmatada_susc
+    datatype: number
+    required: False
+
+---
+question: |
+    Valores para precificação do carbono
+fields:
+  - note: |
+      Esses são os valores para precificação da tonelada de Carbono (tc) baseadas em Jacoski, et al. (2014). A única variável que você precisa atualizar é <span style="color: green;"> preço do dólar. Para obter o preço do dólar de hoje <a href="https://www.google.com/search?client=firefox-b-d&q=valor+d%C3%B3lar+hoje" target="_blank">  faça uma busca no Google </a> </span> 
+  - Preço tonelada de carbono (em dólar): preco_tc
+    default: 3
+    datatype: number
+    required: False
+  - Quantidade estimada de toneladas/ha: tc_ha
+    default: 75
+    datatype: number
+    required: False
+  - Valor do dólar : dolar_hoje
+    default: 5.48
+    datatype: number
+    required: True
+
+
+---
+mandatory: True
+question: |
+ Circunstâncias que podem majorar o dano extrapatrimonial
+fields:
+  - note: |
+      Cada circunstância (que deve dizer respeito ao fato e suas consequências e não ao autor) majora o dano ambiental extrapatrimonial em 1/6. Escolha dentre as circunstâncias que agravam as consequências do dano ambiental extrapatrimonial.
+  - Circunstâncias: circunstancias_dano_escolhidas
+    datatype: checkboxes
+    required: False  
+    none of the above: False
+    code: |
+      lista_circunstancias_dano
+
+---
+question: | 
+  ![tuiuiu](https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Tuiuiu_-_Ave_Simbolo_do_Pantanal_de_Mato_Grosso.jpg/800px-Tuiuiu_-_Ave_Simbolo_do_Pantanal_de_Mato_Grosso.jpg)
+  Deu certo!
+subquestion: |
+  Sua minuta está pronta, agora é só baixar em PDF ou DOCX.
+attachment:
+  name: Sua minuta 
+  filename: relatorio_valoracao_dano_extrapatrimonial_carbono
+  docx template file: 'relatorio_tecnico_valoracao_dano_extrapatrimonial_carbono.docx'
+buttons:
+  - Exit: exit
+mandatory: True
+
+--- 
+mandatory: True
+code: |  
+  lista_circunstancias_dano = ["houve o uso de fogo no período proibitivo de queimadas", "houve destruição de APP hídrica", "ilícito afetou ou expôs a perigo, de maneira grave, a saúde pública ou o meio ambiente", "fato concorreu para danos à propriedade alheia", "fato atingiu áreas de unidades de conservação ou áreas sujeitas, por ato do Poder Público, a regime especial de uso", "fato atingiu áreas urbanas ou quaisquer assentamentos humanos", "fato ocorreu em período de defeso à fauna", "fato ocorreu em épocas de seca ou inundações", "fato ocorreu interior do espaço territorial especialmente protegido", "houve emprego de métodos cruéis para abate ou captura de animais", "houve abuso do direito de licença, permissão ou autorização ambiental", "fato praticado no interesse de pessoa jurídica mantida, total ou parcialmente, por verbas públicas ou beneficiada por incentivos fiscais", "fato atingiu espécies ameaçadas, listadas em relatórios oficiais das autoridades competentes", "outras circunstâncias que impactaram negativamente a coletividade"]
+
+  # Descrição e quantificação das circunstâncias do dano ambiental
+  circunstancias_escolhidas = []
+  circunstancias_str = ""
+  fator_aumento_dano_extra = 1
+  existem_circunstancias = "Não foram constatadas, ao menos até o momento, outras circunstâncias relevantes do dano ambiental."
+  for circunstancia in circunstancias_dano_escolhidas:
+    if circunstancias_dano_escolhidas[circunstancia] == True:
+      existem_circunstancias = "Constataram-se as seguintes circunstâncias relativas ao dano ambiental relevantes: "
+      fator_aumento_dano_extra+=1/6
+      circunstancias_escolhidas.append(circunstancia)
+      circunstancias_str = circunstancias_str + circunstancia + "; "
+  circunstancias_dano = existem_circunstancias + circunstancias_str
+  area_desmatada_total = area_desmatada_susc + area_desmatada_insusc
+  
+  # Calculando o dano extrapatrimonial
+  valor_dano_extrapatrimonial = round(preco_tc*tc_ha*dolar_hoje*area_desmatada_total*fator_aumento_dano_extra, 2)
+  nome_metodo_extrapatrimonial = "valor no mercado voluntário de carbono pela tonelada de carbono emitida (" + "preço tonelada de carbono (em dólar) = US$ "+ str(preco_tc) + ", quantidade estimada de toneladas/ha = " +  str(tc_ha) + ", cotação do dólar = R$" + str(dolar_hoje) + ")."

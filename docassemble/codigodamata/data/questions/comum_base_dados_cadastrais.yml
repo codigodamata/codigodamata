@@ -5,7 +5,7 @@ code: |
   lista_comarcas = ["CUIABÁ", "ITIQUIRA", "OUTRO"]
   lista_cidades = ["CUIABÁ", "ITIQUIRA", "OUTRO"]
   lista_orgaos_mp = ["MINISTÉRIO PÚBLICO DO ESTADO DE MATO GROSSO", "OUTRO"]
-  mpmt = "MINISTÉRIO PÚBL ICO DO ESTADO DE MATO GROSSO"
+  mpmt = "MINISTÉRIO PÚBLICO DO ESTADO DE MATO GROSSO"
   
   dic_promotorias = {
                        "Promotoria de Justiça de Itiquira":

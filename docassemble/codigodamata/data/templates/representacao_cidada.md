@@ -1,4 +1,4 @@
-Excelentíssimo Senhor Promotor de Justiça com atribuição ambiental no Município de   **${MUNICIPIO}**, Estado de **${UF}**
+Excelentíssimo Senhor Promotor de Justiça com atribuição ambiental no Município de   **${municipio}**, Estado de **${uf}**
                    
 &nbsp;
 &nbsp;
@@ -17,41 +17,42 @@ Nos termos do art. 225, caput, da Constituição Federal e art. 70, §§ 2º e 3
 &nbsp;
 
 # DOS FATOS
-Trata-se de **${TIPO_DANO_AMBIENTAL}** ocorrido em **${DATA_FATO}**, no local **${LOCAL_FATO}**, no  município de **${MUNICIPIO}**, **${UF}** 
+Trata-se de **${tipo_dano_ambiental}** ocorrido em **${data_fato}**, no local **${local_fato}**, no  município de **${municipio}**, **${uf}** 
 % if possui_coordenadas:
-nas proximidades das coordenadas geográficas **${COORDENADAS}**.
+nas proximidades das coordenadas geográficas **${coordenadas}**.
 % else:
 .
 % endif
 
-O fato chegou ao meu conhecimento da seguinte maneira: ${MODO_CONHECIMENTO_DANO_AMBIENTAL}.
+O fato chegou ao meu conhecimento da seguinte maneira: ${modo_conhecimento_dano_ambiental}.
 
 
 % if AREA_DESTRUIDA:
-A área destruída é de ${AREA_DESTRUIDA}
+A área destruída é de ${area_destruida}
 % endif
 
 % if AREA_IMOVEL:
-A área do imóvel é ${AREA_IMOVEL}
+A área do imóvel é ${area_imovel}
 % endif
 
 % if NUMERO_CAR:
-A inscrição do imóvel no CAR é ${NUMERO_CAR}
+A inscrição do imóvel no CAR é ${numero_car}
 % endif
 
 % if DOC_COMPROVA_FATO or LINK_DOCUMENTO_ONLINE:
 Elementos de informação adicionais:
-${DOC_COMPROVA_FATO}
-${LINK_DOCUMENTO_ONLINE}
+${doc_comprova_fato}
+${link_documento_online}
 % endif %
 
 % if conhecimento_autoria:
 Informações adcionais sobre a autoria dos fatos:
-${INFORMACOES_COMPL_AUTORIA}
+${informacoes_compl_autoria}
 % endif %
 
 &nbsp;
 &nbsp;
+
 # DO DIREITO
 
 Sabe-se que a responsabilidade civil pela reparação do dano ambiental é objetiva na modalidade de risco integral (art. 2º, § 2º, Lei n. 12.651/2012), sendo a obrigação decorrente do referido dano solidária, propter rem e imprescritível.
@@ -75,7 +76,7 @@ O art. 70 da Lei n. 9.605/98 traz as seguintes disposição:
 > *§ 3º A autoridade ambiental que tiver conhecimento de infração ambiental é obrigada a promover a sua apuração imediata, mediante processo administrativo próprio, sob pena de co-responsabilidade.*
 
 % if solicitacao_anonimato:
-${JUSTIFICATIVA_ANONIMATO}
+${justificativa_anonimato}
 % endif
 
 &nbsp;
@@ -86,7 +87,7 @@ ${JUSTIFICATIVA_ANONIMATO}
 Ante o exposto, o ora comunicante requer providências para apuração do fato em questão.
 
  
-${CIDADE}, ${data_hoje}
+${cidade}, ${data_hoje}
 
 &nbsp;
 &nbsp;
@@ -94,6 +95,6 @@ ${CIDADE}, ${data_hoje}
 % if solicitacao_anonimato:
 **Informante do Bem anônimo**
 % else:
-${SUBSCRITOR}
+${subscritor}
 % endif
  

@@ -17,7 +17,7 @@ fields:
     show if:
       code: |
         adequacao_competencia == False
-  - Escolha novamente a unidade Judicial competente: UNIDADE_JUDICIAL
+  - Escolha novamente a unidade Judicial competente: unidade_judicial
     datatype: radio
     code: |
       lista_orgaos_jur_instancia_1
@@ -29,9 +29,9 @@ mandatory: True
 code: |
   # Testa se o endereçamento é para o Juizado Especial Criminal
   def adequacao_competencia():
-    if ((((float(crimes_dict[selected_crime]["pena_maxima"]) <= 730) and (violencia_domestica == "não"))) and ((UNIDADE_JUDICIAL == "JUIZADO ESPECIAL CRIMINAL") or (UNIDADE_JUDICIAL == "JUIZADO ESPECIAL VOLANTE AMBIENTAL"))):
+    if ((((float(crimes_dict[selected_crime]["pena_maxima"]) <= 730) and (violencia_domestica == "não"))) and ((unidade_judicial == "JUIZADO ESPECIAL CRIMINAL") or (unidade_judicial == "JUIZADO ESPECIAL VOLANTE AMBIENTAL"))):
       return True
-    elif ((((float(crimes_dict[selected_crime]["pena_maxima"]) > 730) or (violencia_domestica == "sim"))) and ((UNIDADE_JUDICIAL == "JUIZADO ESPECIAL CRIMINAL") or (UNIDADE_JUDICIAL == "JUIZADO ESPECIAL VOLANTE AMBIENTAL"))):
+    elif ((((float(crimes_dict[selected_crime]["pena_maxima"]) > 730) or (violencia_domestica == "sim"))) and ((unidade_judicial == "JUIZADO ESPECIAL CRIMINAL") or (unidade_judicial == "JUIZADO ESPECIAL VOLANTE AMBIENTAL"))):
       return False
     else:
       return True

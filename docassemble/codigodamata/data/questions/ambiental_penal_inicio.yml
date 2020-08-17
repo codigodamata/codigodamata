@@ -1,8 +1,3 @@
-modules:
-  - docassemble.base.core
-  - docassemble.base.util
-  - docassemble.base.legal
-
 ---
 objects:
   - requeridos: DAList.using(object_type=Individual)
@@ -12,7 +7,8 @@ include:
  - ambiental_geral_descricao_fato_ilicito.yml
  - ambiental_penal_escolha_crime.yml
  - ambiental_penal_analise_institutos_despenalizadores.yml
- - ambiental_geral_composicao_civil_dano_ambiental.yml
+ - ambiental_penal_composicao_civil_dano_ambiental.yml
+ - ambiental_penal_medidas_cautelares_diversas_prisao.yml
  - ambiental_penal_proposta_PRD.yml
  - comum_base_dados_cadastrais.yml
  - comum_dados_orgao.yml

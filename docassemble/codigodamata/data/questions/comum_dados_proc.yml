@@ -10,15 +10,15 @@ fields:
     datatype: radio
     required: True
     code: |
-      dic_promotorias[ORGAO_EXECUCAO]["unidade_judicial"]
+      dic_promotorias[orgao_execucao]["unidade_judicial"]
 
   - Comarca: comarca
     datatype: text
-    default: ${ dic_promotorias[ORGAO_EXECUCAO]["comarca"] }    
+    default: ${ dic_promotorias[orgao_execucao]["comarca"] }    
 
   - Órgão Jurisdicional de 2ª Instância: orgao_jur_2a_instancia
     datatype: text
-    default: ${ dic_promotorias[ORGAO_EXECUCAO]["orgao_jur_instancia_2"] }  
+    default: ${ dic_promotorias[orgao_execucao]["orgao_jur_instancia_2"] }  
     
   - Número do processo: num_processo
     default: "0000000-00.2020.8.11.0027"  
@@ -36,24 +36,12 @@ fields:
 
   - Parte autora: parte_autora
     datatype: text
-    default: ${ dic_promotorias[ORGAO_EXECUCAO]["ramo_mp"] } 
+    default: ${ dic_promotorias[orgao_execucao]["ramo_mp"] } 
     
   - Data da minuta (data de hoje): data_hoje
     default: ${ data_hoje }
 
   - Subscritor da minuta: subscritor
-    default: ${ dic_promotorias[ORGAO_EXECUCAO]["membro"] }
-  - Cargo subscritor: CARGO_SUBSCRITOR
-    default: ${ dic_promotorias[ORGAO_EXECUCAO]["cargo"] }
-
----
-code: |    
-  import datetime
-  Meses=('janeiro','fevereiro','março','abril','maio','junho', 'julho','agosto','setembro','outubro','novembro','dezembro')
-  agora = datetime.date.today()
-  mes=(agora.month-1)
-  dia = agora.day
-  mes = Meses[mes]
-  ano = agora.year
-  data_hoje = (str(dia) + " de " + mes + " de " + str(ano))
-mandatory: True
+    default: ${ dic_promotorias[orgao_execucao]["membro"] }
+  - Cargo subscritor: cargo_subscritor
+    default: ${ dic_promotorias[orgao_execucao]["cargo"] }

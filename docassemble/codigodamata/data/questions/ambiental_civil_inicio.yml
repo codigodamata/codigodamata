@@ -14,14 +14,92 @@ include:
  - comum_base_dados_cadastrais.yml
  - comum_dados_orgao.yml
  - comum_dados_proc.yml
- - comum_qualificacao_partes.yml
+ - comum_qualificacao_requerido.yml
  - ambiental_civil_teses.yml
+ - ambiental_geral_descricao_fato_ilicito_desmatamento.yml
 ---
 mandatory: True
 code: |
   if True:
     template_name = 'acp_desmatamento_e_queimadas.docx'
     ato_processual_escolhido = 'acp' 
+
+
+
+---
+mandatory: True
+question: |
+ Requerimentos da ACP
+fields:
+  - Valor do dano ambiental material: valor_dano_ambiental_material  
+    input type: number
+    help: utilize o formulário próprio para obter esse valor
+    required: True
+
+  - Valor do dano ambiental extrapatrimonial: valor_dano_extrapatrimonial  
+    input type: number
+    help: utilize o formulário próprio para obter esse valor
+    required: True
+
+  - Tipo de vegetação: metodo_valoracao_dano_ambiental
+    input type: radio
+    required: True    
+    choices:
+    - CATE
+    - VCP
+
+  - Requerimento: valor_dano_ambiental_material  
+    input type: number
+  # default: ${requerimento_reparacao_dano_desmate}
+    required: False
+    show if:
+      code: |
+        ato_processual_escolhido == "acp"
+  - Se seu requerimento não se encontra aí, descreva-o: pedido_reparacao_dano
+    required: False  
+    input type: area
+    rows: 5
+    show if:
+      code: |
+        ato_processual_escolhido == "acp"
+  - Pedir medida cautelar?: medida_cautelar_acp
+    input type: radio
+    required: True
+    help: "É o pedido para, cautelarmente, ser determinada judicialmente a suspensão de atividades antrópica na área, que deverá ser isolada até o final do processo"
+    choices:
+    - indisponibilidade do bem
+    - promover o isolamento da área e proibição de exercer atividades econômica, sob pena de multa
+
+
+  - Esclarecimentos requerido: esclarecimentos_requerido
+    help: "Não precisa mecher nesse texto, se a infração penal deixa vestígios materiais."
+    input type: area
+    rows: 10  
+    required: False
+
+
+---
+mandatory: True
+question: |
+ Teses da ação civil pública
+fields:
+  - note: |
+      Confirme as teses que deseja defender/rebater
+  - Tese de que desmatamento não autorizado em áreas consolidadas gera dano ambiental?: tese_desmatamento_veg_sec_area_consolidada 
+    datatype: radio
+    default: sim
+    choices:
+      - sim: True
+      - não: False
+
+---
+code: |
+  paragrafo_materialidade = materialidade + " " + doc_prova_materialidade + " " + num_doc_prova_materialidade + " elaborado por " + orgao_doc_prova_materialidade + ". "
+  valor_total_dano_ambiental = "R$ "+ str(valor_dano_ambiental_material + valor_dano_extrapatrimonial) 
+  valor_dano_ambiental_material = "R$ "+ str(valor_dano_ambiental_material)
+  valor_dano_extrapatrimonial = "R$ "+ str(valor_dano_extrapatrimonial)
+  nome_imovel = local_fato
+  valor_estimado_imovel = "R$ "+ str(area_imovel*5000)
 
 ---
 mandatory: True

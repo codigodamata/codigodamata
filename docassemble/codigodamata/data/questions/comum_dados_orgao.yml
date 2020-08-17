@@ -17,7 +17,7 @@ fields:
     rows: 2
     show if:
       variable: orgao_execucao
-      is: OUTRO
+      is: outro
 
 
 ---
@@ -26,15 +26,15 @@ question: |
 fields:
   - Cidade em que você atua: cidade
     datatype: text
-    default: ${ dic_promotorias[ORGAO_EXECUCAO]["cidade"] } 
+    default: ${ dic_promotorias[orgao_execucao]["cidade"] } 
     
   - Instituição: instituicao
     datatype: area
     rows: 2
-    default: ${ dic_promotorias[ORGAO_EXECUCAO]["ramo_mp"] } 
+    default: ${ dic_promotorias[orgao_execucao]["ramo_mp"] } 
 
   - Endereço órgão: orgao_endereco
     datatype: area
     rows: 2  
-    default: ${ dic_promotorias[ORGAO_EXECUCAO]["endereco"] }
+    default: ${ dic_promotorias[orgao_execucao]["endereco"] }
       
