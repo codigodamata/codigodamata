@@ -1,7 +1,4 @@
-<<<<<<< HEAD
-=======
 ---
->>>>>>> 8807a61946a825d83966413b476718e02d56d245
 objects:
   - lista_crimes: DAList
 ---
@@ -16,12 +13,8 @@ question: |
 fields: 
   - Número do processo ou procedimento: simp
     default: "000000-061/2020"
-<<<<<<< HEAD
   - Parte Requerida: nome_parte_requerida
-=======
-  - Parte Requerida: requeridos
->>>>>>> 8807a61946a825d83966413b476718e02d56d245
-    datatype: text    
+    datatype: text
   - Tipo de procedimento ou processo: tipo_procedimento
     datatype: radio
     default: "Inquérito Civil"
@@ -109,29 +102,21 @@ fields:
     required: True
 
 ---
-<<<<<<< HEAD
 code: |
   import re
   simp_re = new_string = re.sub("[-,/]", "_", simp)
 
 ---
-=======
->>>>>>> 8807a61946a825d83966413b476718e02d56d245
-question: | 
+question: |
   ![tuiuiu](https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Tuiuiu_-_Ave_Simbolo_do_Pantanal_de_Mato_Grosso.jpg/800px-Tuiuiu_-_Ave_Simbolo_do_Pantanal_de_Mato_Grosso.jpg)
   Deu certo!
 subquestion: |
   Sua minuta está pronta, agora é só baixar em PDF ou DOCX.
 attachment:
   name: Sua minuta 
-<<<<<<< HEAD
   filename: ${"valoracao_dano_ambiental_"+ simp_re}
   docx template file: 'pjedaou_relatorio_tecnico_valoracao_dano.docx'
-=======
-  filename: relatorio_tecnico_valoracao_dano_material_pjedaou
-  docx template file: 'pjedaou_relatorio_tecnico_valoracao_dano_v2.docx'
->>>>>>> 8807a61946a825d83966413b476718e02d56d245
-  pdf/a: True  
+  pdf/a: True
 buttons:
   - Exit: exit
 mandatory: True
