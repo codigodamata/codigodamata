@@ -1,4 +1,18 @@
 ---
+<<<<<<< HEAD
+template: template_denuncia
+content file:
+  code: conteudo_denuncia
+  
+---
+template: template_denuncia_cota
+content file:  
+  code: conteudo_denuncia_cota
+---
+code: |
+  conteudo_denuncia = "denuncia.md"
+  conteudo_denuncia_cota = "denuncia_cota.md"
+=======
 template: denuncia
 content file:
   code: conteudo_denuncia
@@ -10,10 +24,35 @@ code: |
 ---
 objects:
   - requeridos: DAList.using(object_type=Individual)
+>>>>>>> 8807a61946a825d83966413b476718e02d56d245
 
 ---
 mandatory: True
 code: |
+<<<<<<< HEAD
+  set_language('pt')
+  import re
+  ato_processual_escolhido = "denúncia"
+  orgao_execucao
+  if fatos.there_are_any:
+    for fato in fatos:
+      fato.selected_crime
+      fato.name.text
+  cabimento_suspro = False
+  justificativa_nao_cabimento_suspro = "Deixa-se de oferecer a proposta de transação penal e de suspensão condicional do processo (art. 89 da Lei 9.099/95) em razão da recusa do denunciado à prévia composição civil do dano ambiental, fato impeditivo para tais benefícios, 'ex vi' do disposto no art. 27 da Lei 9.605/98 e art. art. 89, § 1º, da Lei 9.099/95."
+  insert_template_md = template_denuncia
+  insert_template_md_2 = template_denuncia_cota
+  indent_num = 12
+  indentation = indent_num*"&nbsp;"
+  simp_re = new_string = re.sub("[-,/]", "_", simp)
+  tese_desmatamento_veg_sec_area_consolidada = "ERRO EM ENCONTRAR A VARIÁVEL tese_desmatamento_veg_sec_area_consolidada"
+  proposta_composicao_dano_extra_escolhida = "ERRO EM proposta_composicao_dano_extra_escolhida"
+
+---
+include:
+ - projus_comum_minha_promotoria.yml
+ - ambiental_geral_descricao_fato_ilicito_desmatamento.yml
+=======
   cabimento_suspro = False
   justificativa_nao_cabimento_suspro = "Deixa-se de oferecer a suspensão condicional do processo (art. 89 da Lei 9.099/95) em razão de elementos de informação constantes dos autos apontarem que os antecedentes, o comportamento e a conduta social do denunciado demonstrarem não ser a medida suficiente ou adequada (fls.19/20)."
   templates_md = denuncia
@@ -26,11 +65,16 @@ include:
  - ambiental_penal_escolha_crime.yml
  - ambiental_penal_composicao_civil_dano_ambiental.yml
  - ambiental_penal_medidas_cautelares_diversas_prisao.yml 
+>>>>>>> 8807a61946a825d83966413b476718e02d56d245
  - ambiental_penal_proposta_prd.yml
  - comum_base_dados_cadastrais.yml
  - comum_dados_orgao.yml
  - comum_dados_proc.yml
  - comum_qualificacao_requerido.yml
+<<<<<<< HEAD
+ - comum_scripts.yml
+=======
+>>>>>>> 8807a61946a825d83966413b476718e02d56d245
 
 ---
 mandatory: True
@@ -41,7 +85,11 @@ subquestion: |
   Sua minuta está pronta, agora é só baixar em PDF ou DOCX.
 attachment:
   name: Sua petição 
+<<<<<<< HEAD
+  filename: ${ato_processual_escolhido + " "+ simp_re}  
+=======
   filename: ato_processual_escolhido
+>>>>>>> 8807a61946a825d83966413b476718e02d56d245
   docx template file: minuta_cabecalho.docx
   pdf/a: True
 buttons:

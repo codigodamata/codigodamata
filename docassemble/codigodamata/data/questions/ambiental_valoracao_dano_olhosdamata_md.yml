@@ -379,7 +379,17 @@ code: |
   resto_pecunia = pecunia_total_serv_amb*(1-percent_conversao_serv_amb)
   conversao_servidao_ambiental = 'Na hipótese de opção por servidão ambiental como meio de pagamento de '+ str(percent_conversao_serv_amb*100) + '% dos danos ambientais, está poderá ser instituída "in situ" em área de ' + str(area_serv_amb) + ' ha, ou em área prístina do mesmo imóvel, em dimensão 10% maior, isto é, ' + str(area_serv_amb_mesmo_imovel) + ' ha, ou em área prístina de outro imóvel no mesmo município em dimensão 20% maior, isto é, ' + str(area_serv_amb_outro_imovel_municipio) + ' ha, ou em área prístina de outro imóvel em outro município na mesma bacia hidrográfica em dimensão 30% maior, isto é, ' + str(area_serv_amb_outro_imovel_mesma_bacia_hidro) + ' ha,  O valor remanescente em pecúnia (' + str(round((1 - percent_conversao_serv_amb)*100)) + '%) será de R$ ' + str(round(resto_pecunia,2)) + '.'
   info_utilizadas =  'Valor da Terra Nua para preservação da fauna e da flora (VTN-PFF): R$ ' + str(preco_avn) + '; VTN-PFF atualizado: R$' + str(preco_avn_atualizado) + '; índice utilizado: INPC; ano da avaliação: ' + str(ano_avaliacao_vtnpff) + '; fonte: ' +  fonte_vtnpff + ' ('+ link_fonte_vtnpff +').'
+<<<<<<< HEAD
+
+
+---
+code: |
+  import re
+  simp_re = new_string = re.sub("[-,/]", "_", simp)
+
+=======
    
+>>>>>>> 8807a61946a825d83966413b476718e02d56d245
 ---
 question: | 
   ![tuiuiu](https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Tuiuiu_-_Ave_Simbolo_do_Pantanal_de_Mato_Grosso.jpg/800px-Tuiuiu_-_Ave_Simbolo_do_Pantanal_de_Mato_Grosso.jpg)
@@ -388,7 +398,11 @@ subquestion: |
   Sua minuta está pronta, agora é só baixar em PDF ou RTF.
 attachment:
   name: Seu relatório está pronto
+<<<<<<< HEAD
+  filename: ${"valoracao_dano_ambiental_"+ simp_re}
+=======
   filename: ${"valoracao_dano_ambiental "+ " " + simp}
+>>>>>>> 8807a61946a825d83966413b476718e02d56d245
   metadata:
     FirstHeaderCenter: |
       [FILE 320px_logo_mpmt.png]
@@ -400,7 +414,11 @@ attachment:
    #  [FILE docassemble.codigodamata:data/static/320px_logo_mpmt.png]  
     FooterLeft: |
       Promotoria de Justiça de Itiquira Rua Mato Grosso, S/N, Itiquira/MT – CEP. 78790-000 Tel. (65) 3491-1144  
+<<<<<<< HEAD
+  content file: 'relatorio_tecnico_valoracao_dano_ambiental_olhosdamata.md'
+=======
   content file: 'relatorio_tecnico_valoracao_dano_ambiental.md'
+>>>>>>> 8807a61946a825d83966413b476718e02d56d245
 
 buttons:
   - Exit: exit

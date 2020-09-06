@@ -10,7 +10,10 @@ code: |
   ano_hoje = agora.year
   data_hoje = (str(dia) + " de " + mes_hoje + " de " + str(ano_hoje))
   data_hoje_curta = str(dia) + "/" + str(mes_hoje) + "/" + str(ano_hoje)
+<<<<<<< HEAD
+=======
   print(data_hoje_curta)
   print(data_hoje)
 
 mandatory: True
+>>>>>>> 8807a61946a825d83966413b476718e02d56d245
