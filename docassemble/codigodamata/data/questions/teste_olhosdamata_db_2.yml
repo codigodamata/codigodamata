@@ -1,0 +1,108 @@
+modules:
+  - .olhosdamata_db
+---
+objects:
+  - requerido: Requerido
+  - processo: Processo
+---
+question: |
+  Qual é o CPF do requerido?
+fields:
+  - CPF: requerido.cpf
+    hint: 000.000.000-00
+validation code: |
+  requerido.db_read()
+---
+question: |
+    Qual é o número do processo?
+fields:
+  - Proc. N.: processo.routing
+    hint: "123"
+validation code: |
+  processo.db_read()
+---
+question: |
+  Qual é o nome da ação?
+fields:
+  - Nome da ação: processo.name.text
+---
+question: |
+  Qual é o nome do requerido?
+fields:
+  - Primeiro Nome: requerido.name.first
+  - Sobrenome: requerido.name.last
+    required: false
+
+---
+question: |
+  Preencha a qualificação completa da parte
+fields:
+  - Address: requerido.address.address
+    address autocomplete: True
+  - Cidade: requerido.address.city
+    required: false
+  - Estado: requerido.address.state
+    required: false
+  - CEP: requerido.address.zip
+    required: False
+  - Município: requerido.address.county
+    required: false
+  - nacionalidade: requerido.address.nacionality
+    required: false
+  #  - capacity: requerido.address.capacity  
+  #  - representante legal: requerido.address.legal_personal_representative 
+  - estado civil: requerido.address.marital_status 
+    required: false
+  - naturalidade: requerido.address.city_of_birth
+    required: false
+  - data de nascimento: requerido.address.birth_date
+    required: false
+  - profession: requerido.address.profession 
+    required: false
+  - identity_document: requerido.address.identity_document 
+    required: false
+  - Filiação (pai): requerido.address.fathers_name  
+    required: false
+  - Filiação (mãe): requerido.address.mothers_name  
+    required: false
+  - telefone: requerido.address.phone_number
+    required: false
+  #  - usa whatsapp: requerido.address.uses_whatsapp
+
+---
+mandatory: True
+code: |
+  requerido.cpf
+  requerido.name.first
+  requerido.address.address
+  requerido.address.nacionality
+  #requerido.address.capacity  
+  #requerido.address.legal_personal_representative 
+  requerido.address.marital_status         
+  requerido.address.city_of_birth 
+  requerido.address.birth_date
+  requerido.address.profession  
+  requerido.address.identity_document          
+  requerido.address.fathers_name      
+  requerido.address.mothers_name         
+  requerido.address.phone_number
+  #requerido.address.uses_whatsapp
+  
+  processo.routing
+  processo.name.text
+  processo.add_requerido(requerido)
+  
+  
+  
+  
+---
+mandatory: True
+question: |
+  O processo é
+  ${ processo }
+  e o requerido é
+  ${ requerido }.
+  
+  
+buttons:
+  - Restart: restart
