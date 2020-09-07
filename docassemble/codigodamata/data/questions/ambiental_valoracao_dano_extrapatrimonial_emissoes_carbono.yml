@@ -7,7 +7,6 @@ include:
  - comum_dados_orgao.yml
  - comum_scripts.yml
 
-
 ---
 mandatory: True
 continue button field: metodo_dano_extrapatrimonial
@@ -70,7 +69,9 @@ question: |
     Valores para precificação do carbono
 fields:
   - note: |
-      Esses são os valores para precificação da tonelada de Carbono (tc) baseadas em Jacoski, et al. (2014). A única variável que você precisa atualizar é <span style="color: green;"> preço do dólar. Para obter o preço do dólar de hoje <a href="https://www.google.com/search?client=firefox-b-d&q=valor+d%C3%B3lar+hoje" target="_blank">  faça uma busca no Google </a> </span> 
+      Esses são os valores para precificação da tonelada de Carbono (tc) baseadas em Jacoski, et al. (2014). A única variável que você precisa atualizar é <span style="color: green;"> preço do dólar. Para obter o preço do dólar de hoje <a href="https://www.google.com/search?client=firefox-b-d&q=valor+d%C3%B3lar+hoje" target="_blank">  faça uma busca no Google </a> </span>. 
+      Outro recurso para a precificação do carbono é a utilização do valor do <a href="https://en.wikipedia.org/wiki/Carbon_credit" target="_blank"> crédito de carbono </a> </span> no <a href="https://ember-climate.org/carbon-price-viewer/" target="_blank"> European Union Emissions Trading System </a> </span>.
+
   - Preço tonelada de carbono (em dólar): preco_tc
     default: 3
     datatype: number
@@ -100,6 +101,10 @@ fields:
       lista_circunstancias_dano
 
 ---
+code: |
+  import re
+  simp_re = new_string = re.sub("[-,/]", "_", simp)
+---
 question: | 
   ![tuiuiu](https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Tuiuiu_-_Ave_Simbolo_do_Pantanal_de_Mato_Grosso.jpg/800px-Tuiuiu_-_Ave_Simbolo_do_Pantanal_de_Mato_Grosso.jpg)
   Deu certo!
@@ -107,7 +112,7 @@ subquestion: |
   Sua minuta está pronta, agora é só baixar em PDF ou DOCX.
 attachment:
   name: Sua minuta 
-  filename: relatorio_valoracao_dano_extrapatrimonial_carbono
+  filename: ${"valoracao_dano_ambiental_emissoes_CO2_"+ simp_re}
   docx template file: 'relatorio_tecnico_valoracao_dano_extrapatrimonial_carbono.docx'
 buttons:
   - Exit: exit

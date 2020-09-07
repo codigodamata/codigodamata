@@ -1,4 +1,3 @@
----
 objects:
   - lista_crimes: DAList
 ---
@@ -14,7 +13,7 @@ fields:
   - Número do processo ou procedimento: simp
     default: "000000-061/2020"
   - Parte Requerida: nome_parte_requerida
-    datatype: text
+    datatype: text    
   - Tipo de procedimento ou processo: tipo_procedimento
     datatype: radio
     default: "Inquérito Civil"
@@ -107,7 +106,7 @@ code: |
   simp_re = new_string = re.sub("[-,/]", "_", simp)
 
 ---
-question: |
+question: | 
   ![tuiuiu](https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Tuiuiu_-_Ave_Simbolo_do_Pantanal_de_Mato_Grosso.jpg/800px-Tuiuiu_-_Ave_Simbolo_do_Pantanal_de_Mato_Grosso.jpg)
   Deu certo!
 subquestion: |
@@ -116,7 +115,7 @@ attachment:
   name: Sua minuta 
   filename: ${"valoracao_dano_ambiental_"+ simp_re}
   docx template file: 'pjedaou_relatorio_tecnico_valoracao_dano.docx'
-  pdf/a: True
+  pdf/a: True  
 buttons:
   - Exit: exit
 mandatory: True

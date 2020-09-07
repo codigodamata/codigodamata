@@ -117,15 +117,18 @@ fields:
       A parte da valoração do dano material foi inspirada em <span style="color: green;"> Roquette (2019) <a href="http://ucs.br/etc/revistas/index.php/direitoambiental/article/view/7981">  (clique aqui para acessar) </a> </span> A Valoração do dano extrapatrimonial é uma proposta inicial de estudo. 
   - Área insuscetível de desmatamento (APP, ARL, uso restrito) e que será recuperada: area_desmate_insuscet_recup
     datatype: number
+    help: "É o caso de desmatamento em área de reserva legal, APP ou outra área protegida por lei. O desmatamento em área de reserva legal é relativamente comum."    
     required: False
   - Área insuscetível de desmatamento (APP, ARL, uso restrito) e que NÃO poderá ser recuperada: area_desmate_insuscet_irrecup
     datatype: number
-    help: "Essa é uma hipótese em que a APP, por exemplo, não poderá ser recuperada em razão de ter sido realizada uma obra (ex: construção) que o requerido irá licenciar (ex: instalação de construção indústria pesqueira)"
+    help: "É uma hipótese mais rara. É o caso em que a APP, por exemplo, não poderá ser recuperada em razão de ter sido realizada uma obra (ex: construção) que o requerido irá licenciar (ex: instalação de construção indústria pesqueira)"
     required: False
   - Área suscetível de desmatamento (mediante autorização) e vegetação primária: area_desmate_suscet_veg_prim
     datatype: number
+    help: "Talvez seja o caso mais comum. É o desmatamento ilegal em área de um imóvel privado que excede a reserva legal."     
     required: False    
   - Área suscetível de desmatamento (área consolidada antes de 22/07/2008) e de vegetação secundária: area_desmate_suscet_veg_sec
+    help: "Esse é um caso especial. É o desmatamento de áreas consolidadas que foram abandonadas por mais de 05 anos (pousio) e já estavam em estágio de regeneração, quando sofreram novo desmatamento, geralmente realizado sob o argumento de realização de 'limpeza de pastagem'."     
     datatype: number
     required: False
     
@@ -146,7 +149,9 @@ question: |
     Valores para precificação do carbono
 fields:
   - note: |
-      Esses são os valores para precificação da tonelada de Carbono (tc) baseadas em Jacoski, et al. (2014). A única variável que você precisa atualizar é <span style="color: green;"> preço do dólar. Para obter o preço do dólar de hoje <a href="https://www.google.com/search?client=firefox-b-d&q=valor+d%C3%B3lar+hoje" target="_blank">  faça uma busca no Google </a> </span> 
+      Esses são os valores para precificação da tonelada de Carbono (tc) baseadas em Jacoski, et al. (2014). A única variável que você precisa atualizar é <span style="color: green;"> preço do dólar. Para obter o preço do dólar de hoje <a href="https://www.google.com/search?client=firefox-b-d&q=valor+d%C3%B3lar+hoje" target="_blank">  faça uma busca no Google </a> </span>. 
+      Outro recurso para a precificação do carbono é a utilização do valor do <a href="https://en.wikipedia.org/wiki/Carbon_credit" target="_blank"> crédito de carbono </a> </span> no <a href="https://ember-climate.org/carbon-price-viewer/" target="_blank"> European Union Emissions Trading System </a> </span>.
+
   - Preço tonelada de carbono (em dólar): preco_tc
     default: 3
     datatype: number
@@ -385,6 +390,7 @@ code: |
 code: |
   import re
   simp_re = new_string = re.sub("[-,/]", "_", simp)
+  
 ---
 question: | 
   ![tuiuiu](https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Tuiuiu_-_Ave_Simbolo_do_Pantanal_de_Mato_Grosso.jpg/800px-Tuiuiu_-_Ave_Simbolo_do_Pantanal_de_Mato_Grosso.jpg)
@@ -393,7 +399,7 @@ subquestion: |
   Sua minuta está pronta, agora é só baixar em PDF ou RTF.
 attachment:
   name: Seu relatório está pronto
-  filename: ${"valoracao_dano_ambiental_"+ simp_re}
+  filename: ${"valoracao_dano_ambiental "+ " " + simp_re}
   metadata:
     FirstHeaderCenter: |
       [FILE 320px_logo_mpmt.png]

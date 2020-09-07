@@ -177,6 +177,10 @@ fields:
       lista_circunstancias_dano
 
 ---
+code: |
+  import re
+  simp_re = new_string = re.sub("[-,/]", "_", simp)
+---
 question: | 
   ![tuiuiu](https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Tuiuiu_-_Ave_Simbolo_do_Pantanal_de_Mato_Grosso.jpg/800px-Tuiuiu_-_Ave_Simbolo_do_Pantanal_de_Mato_Grosso.jpg)
   Deu certo!
@@ -184,7 +188,7 @@ subquestion: |
   Sua minuta está pronta, agora é só baixar em PDF ou DOCX.
 attachment:
   name: Sua minuta 
-  filename: minuta_juridica
+  filename: ${"valoracao_dano_ambiental_"+ simp_re}
   docx template file: 'pjedaou_relatorio_tecnico_valoracao_dano.docx'
 buttons:
   - Exit: exit
