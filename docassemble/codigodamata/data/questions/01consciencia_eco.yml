@@ -1,0 +1,79 @@
+---
+mandatory: True
+question: |
+  ##Introdução
+  O Projeto Olhos da Mata é um projeto extrajudicial do '''[http://mpmt.mp.br Ministério Público do Estado de Mato Grosso]''' de atuação preventiva do Ministério Público, mediante a utilização do sensoriamento remoto para a investigação direta pelo Ministério Público e em tempo em tempo próximo ao real dos desmatamentos ilegais, mediante a notificação aos proprietários dos imóveis rurais pelos Correios, telefone e até mesmo aplicativos eletrônicos (''whatsapp''), assim que a atividade de degradação é iniciada. Nos casos em que a notificação não é possível, são requisitadas diligências "in loco", racionalizando as operações de fiscalização em campo, uma vez que é conhecida a localização precisa do ilícito ambiental e apenas os casos em que a notificação à distância não for possível se desdrobrará em operações de fiscalização.
+  [[Arquivo:Premiacao16innovare.jpg|miniatura|direita|Cerimônia de premiação da XVI edição do Prêmio Innovare no Supremo Tribunal Federal, em 03 dezembro de 2019.]]
+  O Projeto Olhos da Mata foi [https://www.conjur.com.br/2020-jan-22/acao-combate-desmatamento-mp-mt-premiada-innovare vencedor da XVI Edição do Prêmio Innovare (categoria Ministério Público)].
+
+subquestion: |
+
+  ## Justificativa
+
+  Uma das principais ameaças à humanidade no século XXI são as consequências - não inteiramente previsíveis - das mudanças climáticas decorrentes do aquecimento global. Segundo o informe acadêmico do Future of Humanity Institute da Universidade de Oxford denominado [https://www.fhi.ox.ac.uk/wp-content/uploads/Existential-Risks-2017-01-23.pdf ''Existential Risk: Diplomacy and Governance Global Priorities Project 2017'']:
+
+  <blockquote> "É impossível dizer com confiança em que ponto o aquecimento global se tornará suficientemente grave para representar uma ameaça existencial [à Humanidade]. A pesquisa sugeriu que o aquecimento de 11-12°C tornaria a maior parte do planeta inabitável e devastaria completamente a agricultura. Isso representaria uma ameaça extrema à civilização humana como a conhecemos. O aquecimento de cerca de 7°C ou mais poderia potencialmente produzir conflitos e instabilidade em tal escala que os efeitos indiretos poderiam ser um risco existencial (...)." (GLOBAL PRIORITIES PROJECT 2017) </q> </blockquote>
+
+  O desmatamento ilegal no Brasil é, por si só, responsável por 35% das emissões de gases do efeito estufa (GEE) no país, configurando-se como a atividade de maior impacto nas emissões brasileiras (maior, por exemplo, que as emissões decorrentes de toda a frota nacional de veículos automotores). Somada ao uso das áreas ilegalmente desflorestadas para o uso da pecuária na Amazônia Legal, esse percentual atinge 49% das emissões brasileiras [http://arte.folha.uol.com.br/tudo-sobre/desmatamento-zero/ (LEITE, 2015) ].
+
+  Após a adoção de políticas públicas voltadas a coibir o desmatamento ilegal no Brasil, observou-se uma redução na área desmatada de 2005 a 2013 no território nacional (MELLO, 2016, p. 46). No entanto, nos últimos anos o índice tem se elevado novamente a patamares iguais ou superiores àqueles observados nos períodos de maior desmatamento.
+
+  Assim, garantir o cumprimento das normas ambientais brasileiras para proteger as florestas brasileiras é uma das principais contribuições que o Ministério Público pode oferecer para atenuar uma mudança climática abrupta e catastrófica.
+
+  Nesse contexto, o '''[http://mpmt.mp.br Ministério Público do Estado de Mato Grosso]''', por meio da Promotoria de Justiça de [https://pt.wikipedia.org/wiki/Itiquira Itiquira], após um período prévio de experimentação de julho a outubro de 2018, adotou a partir de março de 2019 um procedimento operacional visando combinar as novas tecnologias de sensoriamento remoto que permitem o conhecimento de sinais de alteração da cobertura florestal em tempo próximo ao real (alertas GLADs e VIIRs, da plataforma '''[https://www.globalforestwatch.org/ Global Forest Watch]''', indicando alterações a partir de 0,09 hectare (menos de um décimo de um hectare), com o cruzamento de dados públicos e as prerrogativas jurídicas de que dispõe o Ministério Público na tutela da reparação civil do dano ambiental, visando coibir o desmatamento ilegal. O objetivo principal do referido procedimento é reduzir ao máximo o tempo de reação do Estado diante de indícios do ilícito ambiental.
+
+  É reconhecido que, no processo coletivo, em matéria ambiental, é cabível a inversão do ônus da prova (artigo 6º, VIII, do CDC), posicionamento reforçado pelo STJ (Súmula 618).
+
+  O princípio da precaução encontra-se positivado em documentos internacionais e no ordenamento interno (art. 15 da Declaração do Rio sobre o Meio Ambiente – ECO-92; art. 225 da Constituição Federal; art. 54, § 3º, da Lei Federal nº 9.605/1998). Parte da doutrina ainda encontra no princípio da precaução um fundamento para a inversão do ônus da prova:
+
+  <blockquote> “Assim, a incerteza científica milita em favor do meio ambiente e da saúde (in dubio pro natura ou salute). […] É com base no princípio da precaução que a parte da doutrina sustenta a possibilidade de inversão do ônus da prova nas demandas ambientais, carreando ao réu (suposto poluidor) a obrigação de provar que a sua atividade não é perigosa nem poluidora, […]. Inclusive esta tese foi recepcionada pelo STJ no segundo semestre de 2009 (REsp 972.902-RS, Rel. Min. Eliana Calmon, j. 25.08.2009) (Direito Ambiental Esquematizado, Frederico Amado, Editora Método, 3ª Ed., 2012, p. 54 - grifamos) </blockquote>
+
+  O Superior Tribunal de Justiça também possui precedentes neste mesmo sentido (STJ, AgRg no AREsp 183202/SP, Terceira Turma, Rel. Min. Ricardo Villas Bôas Cueva, 10/11/2015, DJe 13/11/2015).
+
+  Pretende-se, com o presente procedimento, combinar tecnologias jurídicas (princípio da precaução, inversão do ônus da prova) e geotecnologias (notadamente, o sensoriamento remoto por meio dos alertas GLAD e VIIRS disponibilizados pela plataforma GFW) e para uma atuação extrajudicial proativa e autônoma do Ministério Público no processamento destas informações, visando estancar o desmatamento ilegal logo em seu início, bem como isolar (e garantir o isolamento) das áreas de ilícitos ambientais.
+
+  ##Procedimento Operacional Padrão (POP)
+  O Procedimento Operacional Padrão (POP) visa padronizar as ações das equipes do projeto. O [https://docs.google.com/document/d/1DzTWXw7EhjLteo4fkLC9vQsy6ymzNDGwKcg1y4P0lwE/edit# POP do Olhos da Mata] encontra-se [https://docs.google.com/document/d/1DzTWXw7EhjLteo4fkLC9vQsy6ymzNDGwKcg1y4P0lwE/edit# disponível on-line] para consulta e, também, para sugestões (mediante comentários) no texto.
+
+  ##Valoração do Dano Ambiental
+  A metodologia de valoração do dano ambiental desenvolvida no âmbito do Projeto Olhos da Mata, [https://docs.google.com/document/d/122IE4ocq2NJM4mkns9AkgYr9WRG1ZZz10BXNSTX2H_E/edit Roteiro de Valoração do Dano Ambiental] está disponível [https://docs.google.com/document/d/122IE4ocq2NJM4mkns9AkgYr9WRG1ZZz10BXNSTX2H_E/edit disponível on-line] para consulta e para sugestões (mediante comentários) no texto.
+  A metodologia privilegia a reparação do dano ambiental ''in natura'' e ''in situ'' mediante o instituto da servidão ambiental perpétua.
+
+  #Parcerias
+  Uma proposta do [https://www.icv.org.br Instituto Centro de Vida] encontra-se na etapa final de aprovação de uma doação (“Small Grants Fund”) de 40 mil dólares por parte da [https://pt.wikipedia.org/wiki/World_Resources_Institute World Resources Institute] para auxiliar na implementação do uso da ferramenta para Promotorias de Justiça de Bacia Hidrográfica. As oficinas devem começar em agosto de 2020 e possibilitará a disseminação da plataforma online “Global Forest Watch”, utilizada pelo projeto para recebimento e análise dos alertas de desmatamento e incêndio em tempo próximo ao real, junto às Promotorias de Justiça de Bacia Hidrográfica, que reúnem 72 municípios e cobrem 385.000 km².
+
+  De acordo com o ICV, além da capacitação dos técnicos e promotores de Justiça para a utilização da ferramenta, o projeto apoiará a implementação de rotinas de monitoramento e uso de dados pelos integrantes da instituição. Prevê ainda a criação de um banco de dados espacial de áreas sujeitas a notificações e inquéritos e o monitoramento do impacto no controle do desmatamento.
+
+  #Código da Mata
+
+  O [[Projeto Código da Mata]] é um projeto que surgiu a partir do Olhos da Mata. Possui dois objetivos: criar tecnologia open source de informática forense para ajudar o trabalho de operadores do direito e fiscais ambientais, automatizando análises e a montagem de documentos e, principalmente, permitir que cada cidadão possa fazer, por si próprio, a análise de dados de sensoriamento remoto em tempo próximo ao real e uma análise jurídica preliminar automatizada dessa análise para oferecer uma representação (geralmente anônima) aos órgãos ambientais com atribuição (Ministério Público, Ibama e Secretarias de Estado de Meio Ambiente) para adoção de providências legais.
+
+  A inspiração do projeto encontra-se no art. 225 da [http://www.planalto.gov.br/ccivil_03/constituicao/constituicaocompilado.htm Constituição Federal], que dispõe que ''"Todos têm direito ao meio ambiente ecologicamente equilibrado, bem de uso comum do povo e essencial à sadia qualidade de vida, '''impondo-se''' ao Poder Público e '''à coletividade o dever de defendê-lo''' e preservá- lo para as presentes e futuras gerações''."
+
+  O fundamento para o projeto também pode ser encontrado no [https://www.planalto.gov.br/ccivil_03/leis/l9605.htm#art70 art. 70 da Lei 9.695/98] (Lei dos Crimes Ambientais), segundo os quais "'''''Qualquer pessoa, constatando infração ambiental, poderá dirigir representação às autoridades''' relacionadas no parágrafo anterior, para efeito do exercício do seu poder de polícia''." (§ 2º) e "'''''A autoridade ambiental que tiver conhecimento de infração ambiental é obrigada a promover a sua apuração imediata''', mediante processo administrativo próprio, '''sob pena de co-responsabilidade'''''." (§ 3º).
+
+  ##Equipe
+  [[Arquivo:Equipe OM.jpeg|miniaturadaimagem|esquerda|Integrantes da equipe do Projeto Olhos da Mata em Itiquira em Agosto de 2019. Da esquerda para direita: Monalisa Janaya Castelo da Silva Vasconcelos, José Guilherme Roquette, Claudio Angelo Correa Gonzaga, Cleudes Mário Alves da Silva, Chauanne da Cunha Guimarães (geóloga do CAO), Silas da Silva Lima]]
+
+  Atualmente, existem duas equipes de servidores e voluntários trabalhando no Projeto Olhos da Mata, uma em Itiquira e outra em Várzea Grande. Essas equipes contam ainda com apoio do Centro de Apoio Operacional das Promotorias de Justiça em Cuiabá.
+
+  Equipe de Itiquira:
+  - '''Claudio Angelo Correa Gonzaga''' - promotor de Justiça;
+  - ''' Cleudes Mário Alves da Silva''' - Técnico Administrativo;
+  - ''' Monalisa Janaya Castelo da Silva Vasconcelos''' - Engª Agrícola e Ambiental;
+  - '''Lalesca dos Santos Morais''' - auxiliar ministerial
+
+  Equipe Várzea Grande:
+  - '''Maria Fernanda Corrêa da Costa'''- Promotora de Justiça PJBH Rio Cuiabá
+  - '''José Guilherme Roquette''' - Engenheiro Florestal CREA-MT (também auxilia a equipe de Itiquira)
+  - '''Henrique Augusto Schuck''' -  Engenheiro Florestal
+  - '''Luciane Infantino França''' - assistente ministerial
+
+  Equipe PJEDAOU (Procuradoria de Justiça Especializada na Defesa do Meio Ambiente)
+  - '''Luiz Alberto Esteves Scaloppe''' -  Procurador de Justiça
+  - '''Edilene Fernandes Amaral''' -  Assessora Especial
+  - '''Henrique Augusto Schuck''' -  Engenheiro Florestal
+
+  ## Resultados
+
+  ## Repercussão
