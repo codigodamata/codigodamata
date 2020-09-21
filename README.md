@@ -5,7 +5,7 @@ Pacote para [Docassemble](https://docassemble.org/) (usando Python e Markdown).
 Automação da análise jurídica e montagem de documentos ("document assembly") de atos jurídicos relacionados ao desmatamento 
 ilegal (crimes contra a flora e correlatos previstos no art. 38 e seguintes da Lei 9.605/98)
 
-Seu objetivo é facilitar o trabalho de promotores de Justiça no âmbito do [Projeto Olhos da Mata](https://consciencia.eco.br/index.php?title=Projeto_Olhos_da_Mata)
+Seu objetivo é facilitar o trabalho de promotores de Justiça no âmbito do [Projeto Olhos da Mata](https://sites.google.com/view/olhosdamata)
 e, futuramente, de fiscais do Ibama, Semas, bem como de juízes com atribuição ou jurisdição em crimes relacionados ao desmatamento ilegal.
 
 O projeto foi inicialmente idealizado pelo Ministério Público do Estado de Mato Grosso, por iniciativa do Promotor Cláudio Ângelo Correa Gonzaga,

@@ -16,11 +16,11 @@ code: |
                        "unidade_judicial": ["VARA ÚNICA", "JUIZADO ESPECIAL CRIMINAL"],
                        "servidores":["Cleudes Mario da Silva", "Ana Paula Lins Soares"],
                        "comarca":"ITIQUIRA",
-                       "cidade":"ITIQUIRA",                       
+                       "cidade":"ITIQUIRA",
+                       "municipios_abrangencia": ["Itiquira"],
                        "orgao_jur_instancia_2":tjmt,
                        "ramo_mp":mpmt,
                        "orgao_ambiental_fiscalizador": ["Secretaria de Estado de Meio Ambiente", "2a Cia de Polícia Militar de Proteção Ambiental"]
-
                        }, 
                        
                        "4ª Promotoria de Justiça Cível de Várzea Grande":
@@ -31,10 +31,11 @@ code: |
                        "unidade_judicial": ["JUIZADO VOLANTE AMBIENTAL"],
                        "comarca":"VÁRZEA GRANDE",
                        "cidade": "VÁRZEA GRANDE", 
+                       "municipios_abrangencia": ["Várzea Grande", "Poconé"],
                        "orgao_jur_instancia_2":tjmt,
                        "ramo_mp":mpmt,
                        "orgao_ambiental_fiscalizador": ["Secretaria de Estado de Meio Ambiente", "Batalhão de Polícia Militar de Proteção Ambiental"]
-                       },  
+                       },
                      }
                                         
   lista_promotorias = []

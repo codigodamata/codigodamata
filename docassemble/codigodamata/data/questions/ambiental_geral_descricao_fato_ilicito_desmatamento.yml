@@ -143,7 +143,7 @@ fields:
       variable: fatos[i].data_exata
       is: sim
 
-  - Data aproximada do fato: fatos[i].data_fato_aprox
+  - Data aproximada do fato: fatos[i].data_fato
     default: "em data não especificada, mas sabendo ter o fato ocorrido em "
     input type: area
     rows: 2
@@ -151,7 +151,14 @@ fields:
     show if:
       variable: fatos[i].data_exata
       is: não
-      
+
+  - Informe ao menos o ano do fato: fatos[i].ano_fato
+    input type: number
+    required: False
+    show if:
+      variable: fatos[i].data_exata
+      is: não
+
   - Horário do fato é conhecido?: fatos[i].hora_exata
     datatype: radio
     choices:
@@ -163,9 +170,9 @@ fields:
     required: False
     show if:
       variable: fatos[i].hora_exata
-      is: sim    
+      is: sim
 
-  - Hora do fato: fatos[i].hora_fato_aprox
+  - Hora do fato: fatos[i].hora_fato
     datatype: text
     default: "em horário indeterminado"
     required: False
@@ -193,10 +200,9 @@ fields:
       code: |
         crimes_dict[fatos[i].selected_crime]["coordenadas"] == True
 
-
   - Parágrafo sobre como se deu o conhecimento do fato: fatos[i].noticia_crime
     input type: area
-    rows: 4
+    rows: 8
     default: "O conhecimento do fato se deu a partir de análise de alertas em tempo próximo ao real decorrente de sensoriamento remoto realizado pela plataforma Global Forest Watch (GFW)."
     show if:
       code: |
@@ -303,10 +309,7 @@ fields:
     - sim: True
     - não: False
 
-
-
 ---
-mandatory: True
 code: |
   set_language('pt')
   if fatos.there_are_any:    
