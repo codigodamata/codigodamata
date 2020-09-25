@@ -1,6 +1,4 @@
----
-include:
- - comum_base_dados_cadastrais.yml
+
 ---
 question: |
   > Dados dos órgãos

@@ -1,4 +1,3 @@
-
 ${tipo_procedimento} Código: **${simp}**
 
 REQUERIDO:
