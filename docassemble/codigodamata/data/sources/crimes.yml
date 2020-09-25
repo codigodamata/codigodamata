@@ -156,8 +156,8 @@ items:
     AREA_DESTRUIDA: TRUE
     COORDENADAS: TRUE
     COMPLEMENTO_DESCRICAO_TIPO_PENAL: [
-                                      [[["consistente em transportar, sem autorização legal", "consistente em ter em depósito, sem autorização legal"], "sacos", "carvão vegetal"], "transporte ou depósito ilegal de carvão vegetal"],
-                                      [[["consistente em transportar, sem autorização legal", "consistente em ter em depósito, sem autorização legal"], "m3 (metros cúbicos)", "madeira de diversas essências da flora brasileira"], "transporte ou depósito ilegal de madeira"]                                     
+                                      [[["consistente em transportar, sem autorização legal", "consistente em ter em depósito, sem autorização legal"], "sacos", ["carvão vegetal"]], "transporte ou depósito ilegal de carvão vegetal"],
+                                      [[["consistente em transportar, sem autorização legal", "consistente em ter em depósito, sem autorização legal"], "m3 (metros cúbicos)", ["madeira de diversas essências da flora brasileira"]], "transporte ou depósito ilegal de madeira"]                                     
                                       ]        
     
   - TIPIFICACAO: 48 da Lei n. 9.605/1998
@@ -235,7 +235,7 @@ items:
     AREA_DESTRUIDA: TRUE
     COORDENADAS: TRUE
     COMPLEMENTO_DESCRICAO_TIPO_PENAL: [
-                                      [["mediante o corte não autorizado de ", "árvore", "ornamental em logradouro público"], "corte de árvore em logradouro público sem autorização"],
+                                      [["mediante o corte não autorizado de ", "árvore", ["ornamentais em logradouro público"]], "corte de árvore em logradouro público sem autorização"],
                                       ]
 
   - TIPIFICACAO: 50 da Lei n. 9.605/1998
@@ -313,8 +313,8 @@ items:
     AREA_DESTRUIDA: TRUE
     COORDENADAS: TRUE
     COMPLEMENTO_DESCRICAO_TIPO_PENAL: [
-                                      [["consistente em exercer atividade de pecuária, definida como de potencial poluidor no Decreto Estadual 138/2015", "", ""], "atividade pecuária sem autorização"],
-                                      [["consistente em realizar a incineração de resíduos, atividade classificada como de potencial poluidor/degradador alto conforme itens 6.1.12 do Decreto Estadual 138/2015", "", []], "queima de resíduos não autorizadas"],
+                                      [["consistente em exercer atividade de pecuária, definida como de potencial poluidor no Decreto Estadual 138/2015", "hectares", ["área de uso antropizada não licenciada"]], "atividade pecuária sem autorização"],
+                                      [["consistente em realizar a incineração de resíduos, atividade classificada como de potencial poluidor/degradador alto conforme itens 6.1.12 do Decreto Estadual 138/2015", "hectares", ["resíduos sólidos enleirados"]], "queima de resíduos não autorizadas"],
                                       [["consistente em desflorestar ", "hectares", ["vegetação nativa do bioma Cerrado"]], "desmatamento em área não especialmente protegida (ex: Cerrado)"]
                                       ]
                                   

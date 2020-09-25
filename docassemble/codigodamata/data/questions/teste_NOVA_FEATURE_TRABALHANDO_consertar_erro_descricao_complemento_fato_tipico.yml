@@ -3,7 +3,7 @@ objects:
   - fatos: DAList.using(there_are_any=True, object_type=Thing, complete_attribute='complete')
 
 ---
-code: | 
+code: |
   fatos[i].name.text
   fatos[i].selected_crime
   fatos[i].complete = True
@@ -56,11 +56,34 @@ code: |
     object_type = str(type(complemento))
     object_length = str(len(complemento))
     return(complemento_dic, myoptions_complementos)
-  # Obtém o dicionário de complementos a partir da função  list_to_dic()
-  my_dic_complementos = list_to_dic(crimes_dict[fatos[i].selected_crime]["complemento_tipo"])[0]
-  # Obtém a lista de complementos que será exibida como opções em uma questão dropdown (a resposta será usada como chave para o dicionário)  
-  myoptions_complementos = list_to_dic(crimes_dict[fatos[i].selected_crime]["complemento_tipo"])[1]
-  
+
+---
+mandatory: True
+question: |
+  Complete a descrição fática do crime
+subquestion: |
+    ... [FIELD fatos[i].detalhamento_fatico] [FIELD fatos[i].quantificacao] [FIELD fatos[i].unidade_quantidade] e a qualidade é [FIELD fatos[i].qualidade_obj_material].
+fields:
+  - Detalhamento fático: fatos[i].detalhamento_fatico
+    input type: text
+    default: ${list_to_dic(crimes_dict[fatos[i].selected_crime]["complemento_tipo"])[0][fato.lista_detalhamento_preceito_primario]["detalhamento_fatico"]}
+
+  - Quantificação: fatos[i].quantificacao
+    hint: "quantidade (se houver)"
+    datatype: number
+
+  - Unidade: fatos[i].unidade_quantidade
+    hint: "É a unidade (ex: hectares), se houver"
+    input type: text
+    default: ${list_to_dic(crimes_dict[fatos[i].selected_crime]["complemento_tipo"])[0][fato.lista_detalhamento_preceito_primario]["unidade_quantidade"]}
+ 
+  - Qualidade: fatos[i].qualidade_obj_material
+    hint: "É a qualidade, o tipo do objeto material sobre o qual recai o crime (se houver)"  
+    datatype: list
+    input type: dropdown
+    code: |
+      list_to_dic(crimes_dict[fatos[i].selected_crime]["complemento_tipo"])[0][fato.lista_detalhamento_preceito_primario]["qualidade_obj_material"]    
+ 
 ---
 question: |
   Complete a descrição fática do crime

@@ -1,7 +1,6 @@
 ---
 code: |
   import datetime
-
   Meses=('janeiro','fevereiro','março','abril','maio','junho', 'julho','agosto','setembro','outubro','novembro','dezembro')
   agora = datetime.date.today()
   mes_numerico=(agora.month-1)
