@@ -20,16 +20,28 @@ code: |
   import re
   ato_processual_escolhido = "denúncia"
   orgao_execucao
+  cabimento_suspro = False
+  
   if fatos.there_are_any:
     for fato in fatos:
-  #      fato.selected_crime
-  #      fato.name.text
+      fato.selected_crime
+      fato.name.text
       fato.paragrafo_materialidade = fato.materialidade + " " + fato.doc_prova_materialidade + "  N. " + fato.num_doc_prova_materialidade + " elaborado por " + fato.orgao_doc_prova_materialidade + ". "
       # Fato.name.text contém o preceito primário
       descricao_fatica_texto = fato.name.text
+      
       # Criando o atributo local_fato
-      local_fato = fato.address + ", " +  fato.address  + ", " + fato.city + ", " + fato.state + ", "
+      local_fato = fato.address + ", " +  fato.city + ", " + fato.state + ", "      
+      # Acrescenta descrição do imóvel
+      if fato.em_imovel_rural == True and fato.imovel_rural_possui_car == True:
+        local_fato = " no imóvel rural denominado " + fato.imovel_rural_nome + ", registrado no CAR sob o n. " + fato.imovel_rural_car + ", localizado na " + local_fato
+      if fato.em_imovel_rural == True and fato.imovel_rural_possui_car == False:
+        local_fato = " no imóvel rural denominado " + fato.imovel_rural_nome + ", sem registrado no Cadastro Ambiental Rural (CAR) " + ", localizado na " + local_fato   
+      # Acrescenta coordenadas
+      if fato.coordenadas == True:
+        local_fato = local_fato + " nas proximidades das coordenadas " + fato.coordenadas        
       fato.local_fato = local_fato
+
     # Estabelecendo se a data do fato é exata ou não
       if fato.data_e_exata == 'sim':
         fato.intro_data = "No dia "
@@ -42,13 +54,12 @@ code: |
       else:
         fato.hora_fato_texto = fato.hora_fato_aprox
       fato.descricao_fato_tipico_1a_parte = fato.intro_data + fato.data_fato_texto + " " + fato.hora_fato_texto + " no local " + fato.local_fato     
-      # Acrescenta coordenadas
-      if fato.coordenadas == True:
-        fato.descricao_fato_tipico_1a_parte = fato.descricao_fato_tipico_1a_parte + " nas proximidades das coordenadas " + fato.coordenadas
+ 
       fato.preceito_primario = fato.name.text
       fato.descricao_fato_tipico_2a_parte =  fato.preceito_primario  + fato.detalhamento_fatico  + " " + str(fato.quantificacao)+ " " + fato.unidade_quantidade + " " + fato.qualidade_obj_material
-      fato.descricao_fato_tipico = fato.descricao_fato_tipico_1a_parte + ", o denunciado " + fato.descricao_fato_tipico_2a_parte
-  cabimento_suspro = False
+      fato.descricao_fato_tipico = fato.descricao_fato_tipico_1a_parte + ", o denunciado " + fato.descricao_fato_tipico_2a_parte  
+  
+  
   justificativa_nao_cabimento_suspro = "Deixa-se de oferecer a proposta de transação penal e de suspensão condicional do processo (art. 89 da Lei 9.099/95) em razão da recusa do denunciado à prévia composição civil do dano ambiental, fato impeditivo para tais benefícios, 'ex vi' do disposto no art. 27 da Lei 9.605/98 e art. art. 89, § 1º, da Lei 9.099/95."
   insert_template_md = template_denuncia
   # Variável que indica que a minuta será formada pela junção de duas partes (ex: denúncia e cota da denúncia)  

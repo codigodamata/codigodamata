@@ -20,8 +20,9 @@ code: |
                        "municipios_abrangencia": ["Itiquira"],
                        "orgao_jur_instancia_2":tjmt,
                        "ramo_mp":mpmt,
-                       "orgao_ambiental_fiscalizador": ["Secretaria de Estado de Meio Ambiente", "2a Cia de Polícia Militar de Proteção Ambiental"]
-                       }, 
+                       "orgao_ambiental_fiscalizador": ["Secretaria de Estado de Meio Ambiente", "2a Cia de Polícia Militar de Proteção Ambiental"],
+                       "cartorio_ri": ["Cartório de Registro de Imóveis da Comarca de Itiquira"]
+                       },
                        
                        "4ª Promotoria de Justiça Cível de Várzea Grande":
                        {
@@ -34,7 +35,8 @@ code: |
                        "municipios_abrangencia": ["Várzea Grande", "Poconé"],
                        "orgao_jur_instancia_2":tjmt,
                        "ramo_mp":mpmt,
-                       "orgao_ambiental_fiscalizador": ["Secretaria de Estado de Meio Ambiente", "Batalhão de Polícia Militar de Proteção Ambiental"]
+                       "orgao_ambiental_fiscalizador": ["Secretaria de Estado de Meio Ambiente", "Batalhão de Polícia Militar de Proteção Ambiental"],
+                       "cartorio_ri": ["Cartório de Registro de Imóveis da Comarca de Várzea Grande"]                       
                        },
                      }
                                         

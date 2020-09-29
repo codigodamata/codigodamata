@@ -2,25 +2,24 @@
 
 Pacote para [Docassemble](https://docassemble.org/) (usando Python e Markdown).
  
-Automação da análise jurídica e montagem de documentos ("document assembly") de atos jurídicos relacionados ao desmatamento 
+Automação da análise jurídica e montagem automatizada de documentos ("document assembly") de atos jurídicos relacionados ao desmatamento 
 ilegal (crimes contra a flora e correlatos previstos no art. 38 e seguintes da Lei 9.605/98)
 
 Seu objetivo é facilitar o trabalho de promotores de Justiça no âmbito do [Projeto Olhos da Mata](https://sites.google.com/view/olhosdamata)
 e, futuramente, de fiscais do Ibama, Semas, bem como de juízes com atribuição ou jurisdição em crimes relacionados ao desmatamento ilegal.
 
-O projeto foi inicialmente idealizado pelo Ministério Público do Estado de Mato Grosso, por iniciativa do Promotor Cláudio Ângelo Correa Gonzaga,
-que elaborou e automatizou os primeiros documentos e é responsável pelo conteúdo jurídico-processual.
+O projeto foi inicialmente idealizado pelo Ministério Público do Estado de Mato Grosso, por iniciativa do Promotor Cláudio Ângelo Correa Gonzaga, que codificou as minutas das peças jurídicas (como a denúncia criminal ambiental) e os relatórios de valoração do dano ambeintal utilizados no âmbito do projeto Olhos da Mata, sob orientação do Prof. Dr. Roberto Vasconcellos Novaes, responsável pelo controle de versões, design do banco de dados, bem como adaptação do pacote para instalação e uso em máquinas físicas por meio do docker.
 
 Hoje é desenvolvido em parceria com a [Faculdade de Direito da UFMG](https://www.direito.ufmg.br/) por meio do projeto de 
 extensão e grupo de pesquisa [Código da Mata](https://www.robertonovaes.com.br/index.php/codigo-da-mata-the-forest-code/),
 sob coordenação do Prof. Roberto Vasconcelos Novaes. O grupo de pesquisa/extensão tem o objetivo de desenvolver e pesquisar
 o direito ambiental relacionado à proteção florestal, tecnologias de automatização e geração de documentos e a robotização
-do processo de proteção ambiental.
+do processo de proteção ambiental com vistas a facilitar o trabalho de órgãos de fiscalização ambiental e órgãos do sistema de Justiça (Ministério Público e, futuramente, Poder Judiciário) com vistas a contribuir para uma prestação jurisdicional mais célere.
 
 [Servidor da Aplicação](http://codigodamata.consciencia.eco.br)
 
 # Autores
-* CLAUDIO ANGELO CORREA GONZAGA, gabinetepromotor@gmail.com
+* CLAUDIO ANGELO CORREA GONZAGA, claudioacgonzaga@gmail.com
 * ROBERTO VASCONCELOS NOVAES, rnovaes@ufmg.br
 
 # Instalação em desenvolvimento
