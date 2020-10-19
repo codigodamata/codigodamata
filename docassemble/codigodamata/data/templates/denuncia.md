@@ -52,7 +52,7 @@ pela prática, em tese, dos seguintes fatos delituosos:
 % for  fato in fatos:
 **DA INFRAÇÃO PENAL PREVISTA NO ${fato.fundamento_normativo.upper()}**
 
-${indentation} ${fato.descricao_fato_tipico_1a_parte} o requerido **${todos_requeridos}** ${fato.descricao_fato_tipico_2a_parte};
+${indentation} ${fato.descricao_fato_tipico_1a_parte} o requerido **${todos_requeridos}** ${fato.descricao_fato_tipico_2a_parte}.
 
 &nbsp;
 &nbsp;
@@ -72,7 +72,7 @@ ${indentation} ${fato.paragrafo_materialidade}
 &nbsp;
 &nbsp;
 
-${indentation} ${fato.representacao}.
+${indentation} ${fato.representacao}
 
 &nbsp;
 &nbsp;
