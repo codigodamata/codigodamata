@@ -3,7 +3,7 @@ question: |
   > Dados do processo
 fields: 
   - Unidade Judicial: unidade_judicial
-    datatype: radio
+    datatype: combobox
     required: True
     code: |
       dic_promotorias[orgao_execucao]["unidade_judicial"]

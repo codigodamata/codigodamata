@@ -70,7 +70,7 @@ fields:
       is: sim
 
   - Data aproximada do fato: fatos[i].data_fato_aprox
-    default: "em data não especificada, mas sabendo ter o fato ocorrido em "
+    default: "em data não especificada, mas sabendo ter o fato ocorrido "
     input type: area
     rows: 2
     required: False
@@ -187,15 +187,17 @@ fields:
         crimes_dict[fatos[i].selected_crime]["coordenadas"] == True
 
   - Parágrafo sobre como se deu o conhecimento do fato: fatos[i].noticia_crime
-    input type: area
-    rows: 8
-    default: "O conhecimento do fato se deu a partir de análise de alertas em tempo próximo ao real decorrente de sensoriamento remoto realizado pela plataforma Global Forest Watch (GFW)."
+    datatype: combobox
+    help: O conhecimento do fato se deu a partir de análise de alertas em tempo próximo ao real decorrente de sensoriamento remoto realizado pela plataforma Global Forest Watch (GFW).
+    default: O conhecimento do fato se deu a partir de análise de alertas em tempo próximo ao real decorrente de sensoriamento remoto realizado pela plataforma Global Forest Watch (GFW).
+    choices:
+      - O conhecimento do fato se deu a partir de análise de alertas em tempo próximo ao real decorrente de sensoriamento remoto realizado pela plataforma Global Forest Watch (GFW).
     show if:
       code: |
         ato_processual_escolhido == "denúncia" or ato_processual_escolhido == 'denúncia com proposta de suspensão condicional do processo'
 
   - Parágrafo sobre como se deu a confirmação do fato: fatos[i].diligencia_realizada
-    input type: radio
+    datatype: combobox
     required: False
     choices:
     - Realizou-se análise técnica por imagenamento remoto para aferição das circunstâncias em que o fato ocorreu mediante a utilização de imagens de satélite de alta resolução.
@@ -213,7 +215,7 @@ fields:
         ato_processual_escolhido == "denúncia" or ato_processual_escolhido == 'denúncia com proposta de suspensão condicional do processo'
 
   - Parágrafo da materialidade: fatos[i].materialidade
-    help: "Não precisa mecher nesse texto, se a infração penal deixa vestígios materiais."
+    help: "Não precisa mexer nesse texto, se a infração penal deixa vestígios materiais."
     input type: area
     rows: 3
     default: "A prova materialidade encontra-se demonstrada pelo "
@@ -223,12 +225,17 @@ fields:
     required: False
 
   - Tipo de documento que comprova a materialidade: fatos[i].doc_prova_materialidade
-    help: "Geralmente será um auto de infração e termo de embargo ou relatório técnico."
+    help: "Geralmente será um auto de infração e termo de embargo ou relatório técnico."    
     default: "Auto de Infração "
+    datatype: combobox
+    required: False    
+    choices:
+      - Auto de Infração
+      - Relatório Técnico
+      - Boletim de Ocorrência
     show if:
       code: |
         crimes_dict[fatos[i].selected_crime]["materialidade"] == True
-    required: False
 
   - Número do documento que comprova materialidade: fatos[i].num_doc_prova_materialidade
     required: False
@@ -291,8 +298,7 @@ fields:
     datatype: list
     input type: dropdown
     code: |
-      my_dic_complementos[fatos[i].lista_detalhamento_preceito_primario]["qualidade_obj_material"] 
-  
+      my_dic_complementos[fatos[i].lista_detalhamento_preceito_primario]["qualidade_obj_material"]  
 
 ---
 question: |
@@ -376,4 +382,3 @@ code: |
   # Obtém a lista de complementos que será exibida como opções em uma questão dropdown (a resposta será usada como chave para o dicionário)  
   myoptions_complementos = list_to_dic(crimes_dict[fatos[i].selected_crime]["complemento_tipo"])[1]
 reconsider: True
-
