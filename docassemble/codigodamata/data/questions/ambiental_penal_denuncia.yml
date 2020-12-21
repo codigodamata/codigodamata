@@ -131,7 +131,6 @@ include:
  - comum_dados_orgao.yml 
  - comum_qualificacao_requerido.yml
  - comum_scripts.yml
-
 ---
 mandatory: True
 question: |
