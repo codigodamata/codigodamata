@@ -90,96 +90,10 @@ fields:
     - Corte raso com queimada em período proibitivo ou sem autorização (1,2)
 
 ---
-mandatory: True
-question: |
- Método de cálculo do dano extrapatrimonial
-fields:
-  - note: |
-      A utilização da precificação (circunstanciada, como adiante se verá) de emissões de carbono como critério objetivo para a valoração do dano ambiental é uma proposta inicial de estudo, baseada em precedentes do STJ de fixação dos danos extrapatrimoniais, principalmente o <span style="color: green;"> AgRESP 1323104/GO <a href="https://consciencia.eco.br/index.php?title=AgRESP_1323104/GO">  (clique aqui para acessar) </a> </span> em que se fundamentou que “...não é necessário ser um cientista e especialista no tema para afirmar que a queimada da cana-de-açúcar causa poluição atmosférica e contribui para o famigerado efeito estufa e aquecimento global...”. Além disso, outros precedentes fazem expressa menção à questão climática, tais como RESP 1.000.731/RO e RESP 650.728/SC.
-      Para a precificação das emissões de carbono, utilizou-se o método descrito em <span style="color: green;"> Jacoski et al. (2014)  <a href="https://periodicos.pucpr.br/index.php/estudosdebiologia/article/view/22972">  (clique aqui para acessar) </a> </span>
-
-  - Método de estimativa do dano extrapatrimonial: metodo_dano_extrapatrimonial
-    input type: radio
-    required: False
-    default: tc
-    choices:
-    - estimativa de mercado da tonelada de carbono: tc
-    - percentual sobre o dano material: percentual 
-
----
-question: |
-  > Escolha um percentual
-fields: 
-  - Percentual do dano extrapatrimonial: percentual_extra
-    datatype: number
-    required: False
-
----
-question: |
-    Valores para precificação do carbono
-fields:
-  - note: |
-      Esses são os valores para precificação da tonelada de Carbono (tc) baseadas em Jacoski, et al. (2014). A única variável que você precisa atualizar é <span style="color: green;"> preço do dólar. Para obter o preço do dólar de hoje <a href="https://www.google.com/search?client=firefox-b-d&q=valor+d%C3%B3lar+hoje" target="_blank">  faça uma busca no Google </a> </span> 
-  - Preço tonelada de carbono (em dólar): preco_tc
-    default: 3
-    datatype: number
-    required: False
-  - Quantidade estimada de toneladas/ha: tc_ha
-    default: 75
-    datatype: number
-    required: False
-  - Valor do dólar : dolar_hoje
-    default: 5.48
-    datatype: number
-    required: True
-
----
-question: |
-    Conversão de pecunia em mata nativa (opcional)
-fields:
-  - note: |
-      Esses são os critérios para conversão do pagamento de parte dos valores "in pecunia" em valores "in natura" por meio da instituição de servidão ambiental permanente (art. 9º-A da Lei n. 6.938/81). As informações do <span style="color: green;"> valor da terra nua (VTN) para preservação da flora e da fauna nos municípios do Estado de Mato Grosso <a href="http://sistemafamato.org.br/portal/famato/arquivos/VTN_PREFEITURAS_MT_2018_E_SIC.pdf" target="_blank"> estão disponíveis aqui </a></span>
-
-  - Preço médio do hectare de Área de Vegetação Nativa: preco_avn
-    default: 1203.01
-    datatype: number
-    required: False
-  - Ano da avaliação (ele será corrigido pelo INPC): ano_avaliacao_vtnpff
-    default: 2018
-    datatype: number
-    required: False    
-  - Fonte: fonte_vtnpff
-    default: "Ministério da Fazenda"
-    datatype: text
-    required: False
-    
-  - Link da fonte: link_fonte_vtnpff
-    default: "http://sistemafamato.org.br/portal/famato/arquivos/VTN_PREFEITURAS_MT_2018_E_SIC.pdf"
-    datatype: text
-    required: False
-  - Percentual da conversão de pecúnia em área de servidão ambiental: percent_conversao_serv_amb
-    default: 0.75
-    datatype: number
-    required: False
- 
----
-mandatory: True
-question: |
- Circunstâncias que podem majorar o dano extrapatrimonial
-fields:
-  - note: |
-      Cada circunstância (que deve dizer respeito ao fato e suas consequências e não ao autor) majora o dano ambiental extrapatrimonial em 1/6. Escolha dentre as circunstâncias que agravam as consequências do dano ambiental extrapatrimonial.
-  - Circunstâncias: circunstancias_dano_escolhidas
-    datatype: checkboxes
-    required: False  
-    none of the above: False
-    code: |
-      lista_circunstancias_dano
-
----
 code: |
   import re
   simp_re = new_string = re.sub("[-,/]", "_", simp)
+  
 ---
 question: | 
   ![tuiuiu](https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Tuiuiu_-_Ave_Simbolo_do_Pantanal_de_Mato_Grosso.jpg/800px-Tuiuiu_-_Ave_Simbolo_do_Pantanal_de_Mato_Grosso.jpg)
@@ -197,9 +111,6 @@ mandatory: True
 --- 
 mandatory: True
 code: |
-  
-  lista_circunstancias_dano = ["houve o uso de fogo no período proibitivo de queimadas", "houve destruição de APP hídrica", "ilícito afetou ou expôs a perigo, de maneira grave, a saúde pública ou o meio ambiente", "fato concorreu para danos à propriedade alheia", "fato atingiu áreas de unidades de conservação ou áreas sujeitas, por ato do Poder Público, a regime especial de uso", "fato atingiu áreas urbanas ou quaisquer assentamentos humanos", "fato ocorreu em período de defeso à fauna", "fato ocorreu em épocas de seca ou inundações", "fato ocorreu interior do espaço territorial especialmente protegido", "houve emprego de métodos cruéis para abate ou captura de animais", "houve abuso do direito de licença, permissão ou autorização ambiental", "fato praticado no interesse de pessoa jurídica mantida, total ou parcialmente, por verbas públicas ou beneficiada por incentivos fiscais", "fato atingiu espécies ameaçadas, listadas em relatórios oficiais das autoridades competentes", "outras circunstâncias que impactaram negativamente a coletividade"]
-
 
   dic_estagio_sucessional = {
                        "Intervenção em florestas secundárias no estágio inicial ou em transição do estágio inicial para o médio de regeneração":
