@@ -18,6 +18,7 @@ mandatory: True
 continue button field: metodo_dano_extrapatrimonial
 question: |
   Sobre o método de cálculo do dano extrapatrimonial
+  [OBS: Verificar se este (ou o arquivo com final olhos da mata) é o mais recente nas alteraçÕes/atualizações]
 fields:
   - note: |
       A utilização da precificação (circunstanciada, como adiante se verá) de emissões de carbono como critério objetivo para a valoração do dano ambiental é uma proposta inicial de estudo, baseada em precedentes do STJ de fixação dos danos extrapatrimoniais, principalmente o <span style="color: green;"> AgRESP 1323104/GO <a href="https://consciencia.eco.br/index.php?title=AgRESP_1323104/GO">  (clique aqui para acessar) </a> </span> em que se fundamentou que “...não é necessário ser um cientista e especialista no tema para afirmar que a queimada da cana-de-açúcar causa poluição atmosférica e contribui para o famigerado efeito estufa e aquecimento global...”. Além disso, outros precedentes fazem expressa menção à questão climática, tais como RESP 1.000.731/RO e RESP 650.728/SC.
