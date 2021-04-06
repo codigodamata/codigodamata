@@ -109,11 +109,7 @@ code: |
       if value == True:
         just_nao_cabimento_suspro.append(key)
         cabimento_subjetivo_suspro = False
-<<<<<<< HEAD
   justificativa_nao_cabimento_suspro = "Incabível a suspensão condicional do processo no caso porque "
-=======
-
->>>>>>> 0cfabb3a8702507b645ff7498b0e508aac0d953f
   if len(just_nao_cabimento_suspro)>0:
     for just in just_nao_cabimento_suspro:
       conector = "; "
