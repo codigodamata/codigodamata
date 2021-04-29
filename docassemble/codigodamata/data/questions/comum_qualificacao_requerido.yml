@@ -9,7 +9,8 @@ objects:
   - requeridos: DAList.using(object_type=Individual)
 
 ---
-question: Nomear o requerido? (representado, réu, suspeito da ação ilícita)
+question: Nomear o requerido? 
+subquestion: Representado, réu, suspeito da ação ilícita
 yesno: requeridos.there_are_any
 default: yes
 
