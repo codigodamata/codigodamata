@@ -100,7 +100,7 @@ fields:
         ato_processual_escolhido == "denúncia" or ato_processual_escolhido == 'denúncia com proposta de suspensão condicional do processo'
         
   - Parágrafo da materialidade: materialidade
-    help: "Não precisa mecher nesse texto, se a infração penal deixa vestígios materiais."
+    help: "Não precisa mexer nesse texto, se a infração penal deixa vestígios materiais."
     input type: area
     rows: 3  
     default: "A prova materialidade encontra-se demonstrada pelo "
