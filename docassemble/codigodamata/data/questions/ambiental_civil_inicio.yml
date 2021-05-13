@@ -72,7 +72,7 @@ fields:
 
 
   - Esclarecimentos requerido: esclarecimentos_requerido
-    help: "Não precisa mecher nesse texto, se a infração penal deixa vestígios materiais."
+    help: "Não precisa mexer nesse texto, se a infração penal deixa vestígios materiais."
     input type: area
     rows: 10  
     required: False
