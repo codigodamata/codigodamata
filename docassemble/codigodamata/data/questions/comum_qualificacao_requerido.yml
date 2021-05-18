@@ -13,11 +13,13 @@ question: Nomear o requerido?
 subquestion: Representado, réu, suspeito da ação ilícita
 yesno: requeridos.there_are_any
 default: yes
-
+back button: |
+  'Voltar'
 ---
 question: Adicionar mais um requerido?
 yesno: requeridos.there_is_another
-
+back button: |
+  'Voltar'
 ---
 code: |
   pessoas = requeridos.complete_elements()
@@ -81,7 +83,7 @@ fields:
     required: False
     show if:
       variable: requeridos[i].existing_or_new
-      is: New   
+      is: New
   - Cidade: requeridos[i].address.city
     required: False
     default: "Itiquira/MT"
@@ -90,10 +92,10 @@ fields:
       is: New
   - Estado: requeridos[i].address.state
     required: False
-    default: "Mato Grosso"  
+    default: "Mato Grosso"
     show if:
       variable: requeridos[i].existing_or_new
-      is: New 
+      is: New
   - CEP: requeridos[i].address.postal_code
     show if:
       variable: requeridos[i].existing_or_new
@@ -115,7 +117,7 @@ fields:
     required: False
     show if:
       variable: requeridos[i].existing_or_new
-      is: New      
+      is: New
   - Usa whatsapp: requeridos[i].uses_whatsapp
     required: False
     datatype: yesno
@@ -128,6 +130,8 @@ fields:
     show if:
       code: |
         False
+back button: |
+  'Voltar'
 ---
 mandatory: True
 code: |
