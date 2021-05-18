@@ -176,7 +176,8 @@ fields:
     show if:
       code: |
         ato_processual_escolhido == "denúncia" or ato_processual_escolhido == 'denúncia com proposta de suspensão condicional do processo'
-
+back button: |
+  'Voltar'
 ---
 code: |
   PARAGRAFO_MATERIALIDADE = MATERIALIDADE + " " + DOC_PROVA_MATERIALIDADE + " " + NUM_DOC_PROVA_MATERIALIDADE + " elaborado por " + ORGAO_DOC_PROVA_MATERIALIDADE + ". "
