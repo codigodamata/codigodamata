@@ -1,5 +1,4 @@
 ---
-mandatory: True
 code: | 
   unidade_judicial = "VARA ÚNICA"
   comarca = "COMARCA DE ITIQUIRA"
