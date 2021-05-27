@@ -108,7 +108,7 @@ fields:
   - País: requeridos[i].address.country
     code: |
       countries_list()
-    default: "Brazil"
+    default: "Brasil"
     required: False
     show if:
       variable: requeridos[i].existing_or_new

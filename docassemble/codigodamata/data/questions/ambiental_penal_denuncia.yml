@@ -1,3 +1,6 @@
+initial: True
+code: |
+  set_language('pt')
 ---
 template: denuncia
 content file:
