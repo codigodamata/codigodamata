@@ -83,7 +83,7 @@ como incurso nas sanções previstas no **${fundamento_normativo}** requerendo q
 &nbsp;
 &nbsp;
 
-${cidade}, ${data_hoje}.
+${cidade}, ${data_minuta}.
 
 
 &nbsp;
@@ -222,7 +222,7 @@ ${proposta_suspro}
 ${justificativa_nao_cabimento_suspro}
 % endif
 
-${cidade}, ${data_hoje}
+${cidade}, ${data_minuta}
 
 &nbsp;
 &nbsp;
