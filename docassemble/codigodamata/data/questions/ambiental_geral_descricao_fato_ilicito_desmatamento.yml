@@ -27,7 +27,8 @@ fields:
       - sim
       - não
   - Data do fato: data_fato
-    default: 15/06/2020
+    datatype: date
+    default: ${ today(format='d/M/YYYY') }
     required: False
     show if:
       variable: data_exata
