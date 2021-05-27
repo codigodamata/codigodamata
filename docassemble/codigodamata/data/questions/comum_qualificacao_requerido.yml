@@ -76,22 +76,26 @@ fields:
       is: New
   - Endereço: requeridos[i].address.address
     required: False
+    hint: "Rua Mato Grosso"
     show if:
       variable: requeridos[i].existing_or_new
       is: New
   - Número: requeridos[i].address.unit
     required: False
+    hint: "10"
     show if:
       variable: requeridos[i].existing_or_new
       is: New
   - Cidade: requeridos[i].address.city
     required: False
-    default: "Itiquira/MT"
+    hint: "Itiquira"
+    default: "Itiquira"
     show if:
       variable: requeridos[i].existing_or_new
       is: New
   - Estado: requeridos[i].address.state
     required: False
+    hint: "MT"
     default: "Mato Grosso"
     show if:
       variable: requeridos[i].existing_or_new
