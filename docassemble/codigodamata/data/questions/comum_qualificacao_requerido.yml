@@ -81,6 +81,7 @@ fields:
       variable: requeridos[i].existing_or_new
       is: New
   - Número: requeridos[i].address.unit
+    datatype: integer
     required: False
     hint: "10"
     show if:
