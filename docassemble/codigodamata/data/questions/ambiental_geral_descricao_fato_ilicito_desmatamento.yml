@@ -35,9 +35,8 @@ fields:
       is: sim
       
   - Data aproximada do fato: data_fato
-    default: "de maneira permanente, sendo o fato constatado na data da fiscalização ocorrida em "
-    input type: area
-    rows: 2 
+    default: ${ today(format='d/M/YYYY') }
+    datatype: date
     required: False
     show if:
       variable: data_exata
