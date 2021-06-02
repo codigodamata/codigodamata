@@ -307,6 +307,6 @@ class ProcessoRequerido(DAObject, SQLObjectRelationship):
 #Correção do data_exata para evitar erros de digitação do usuário
 def teste_data():
     if data_exata == "sim":
-        return(data_fato)
+        print(data_fato)
     else:
-        return("de maneira permanente, sendo o fato constatado na data da fiscalização ocorrida em", data_fato)
+        print("de maneira permanente, sendo o fato constatado na data da fiscalização ocorrida em", data_fato)
