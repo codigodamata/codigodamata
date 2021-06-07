@@ -80,7 +80,6 @@ fields:
       variable: requeridos[i].existing_or_new
       is: New
   - Número: requeridos[i].address.unit
-    datatype: integer
     required: False
     hint: "10"
     show if:
@@ -141,6 +140,6 @@ back button: |
 mandatory: True
 code: |
   if requeridos.there_are_any:
-    for requerido in requeridos:
-      qualificacao_texto = requerido.nacionalidade + ", "+ requerido.estadocivil + ", " + requerido.ocupacao + ", nascido aos " + requerido.birthdate + ", filho de " + requerido.nome_mae +  ", residente e domiciliado na " + requerido.address.address + " " + str(requerido.address.unit) +  ", "+ requerido.address.city + ", " + requerido.address.state +  ", telefone: " + requerido.mobile_number +";"
+    for i in requeridos:
+      qualificacao_texto = i.nacionalidade + ", "+ requerido.estadocivil + ", " + requerido.ocupacao + ", nascido aos " + requerido.birthdate + ", filho de " + requerido.nome_mae +  ", residente e domiciliado na " + requerido.address.address + " " + requerido.address.unit +  ", "+ requerido.address.city + ", " + requerido.address.state +  ", telefone: " + requerido.mobile_number +";"
       requerido.qualificacao = qualificacao_texto
