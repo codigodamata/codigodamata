@@ -14,7 +14,6 @@ code: |
   justificativa_nao_cabimento_suspro = "Deixa-se de oferecer a proposta de transação penal e de suspensão condicional do processo (art. 89 da Lei 9.099/95) em razão da recusa do denunciado à prévia composição civil do dano ambiental, fato impeditivo para tais benefícios, 'ex vi' do disposto no art. 27 da Lei 9.605/98 e art. art. 89, § 1º, da Lei 9.099/95."
   templates_md = denuncia
   ato_processual_escolhido = "denúncia"
-
 ---
 include:
  - comum_scripts.yml
