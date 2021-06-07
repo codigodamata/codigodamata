@@ -7,7 +7,7 @@ modules:
 objects:
   - requeridos: DAList.using(object_type=Individual)
 ---
-mandatory: True
+mandatory: False
 code: | 
   medida_cautelar_escolhida = " "
   AREA_DESTRUIDA = 10

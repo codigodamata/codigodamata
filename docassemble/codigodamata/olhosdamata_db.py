@@ -304,3 +304,9 @@ class ProcessoRequerido(DAObject, SQLObjectRelationship):
             return self._session.query(ProcessoRequeridoModel).filter(ProcessoRequeridoModel.processo_id == self.processo.id, ProcessoRequeridoModel.requerido_id == self.requerido.id).first()
         except:
             return None
+#Correção do data_exata para evitar erros de digitação do usuário
+def teste_data():
+    if data_exata == "sim":
+        print(data_fato)
+    else:
+        print("de maneira permanente, sendo o fato constatado na data da fiscalização ocorrida em", data_fato)

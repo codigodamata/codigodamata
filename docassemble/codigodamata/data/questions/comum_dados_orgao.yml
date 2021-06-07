@@ -16,7 +16,8 @@ fields:
     show if:
       variable: orgao_execucao
       is: outro
-
+back button: |
+  'Voltar'
 
 ---
 question: |
@@ -35,4 +36,5 @@ fields:
     datatype: area
     rows: 2  
     default: ${ dic_promotorias[orgao_execucao]["endereco"] }
-      
+back button: |
+  'Voltar'

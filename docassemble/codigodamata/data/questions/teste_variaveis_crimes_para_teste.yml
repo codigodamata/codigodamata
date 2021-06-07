@@ -1,5 +1,4 @@
 ---
-mandatory: True
 code: | 
   unidade_judicial = "VARA ÚNICA"
   comarca = "COMARCA DE ITIQUIRA"
@@ -11,8 +10,7 @@ code: |
   qualificacao_requerido = "brasileiro, estado civil, profissão, inscrito no CPF, RG , nascido aos , residente na "
   cargo_subscritor = "Promotor de Justiça"
   cidade = "Itiquira"
-  data_fato = "10/01/2020"
-  data_hoje = data_fato
+
 
   ato_processual_escolhido = "denúncia" 
   selected_crime = "50 da Lei n. 9.605/1998"  

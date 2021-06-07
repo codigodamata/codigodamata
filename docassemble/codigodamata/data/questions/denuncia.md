@@ -10,7 +10,7 @@ EXCELENTÍSSIMO SENHOR DOUTOR JUIZ DE DIREITO DA UNIDADE JUDICIAL **${unidade_ju
 
 &nbsp;
 
-${tipo_procedimento} N. **${simp}**
+${tipo_procedimento} N. **${num_processo}**
 
 REQUERIDO:
 % for  requerido in requeridos:
@@ -74,7 +74,7 @@ ${representacao}.
 &nbsp;
 &nbsp;
 
-Ante o exposto, o **${parte_autora}**, por seu promotor de Justiça signatário, **DENUNCIA** 
+Ante o exposto, o **${parte_autora}**, por seu promotor de Justiça signatário, **DENUNCIA**  
 % for  requerido in requeridos:
   **${requerido.name}**,
 % endfor
@@ -83,7 +83,7 @@ como incurso nas sanções previstas no **${fundamento_normativo}** requerendo q
 &nbsp;
 &nbsp;
 
-${cidade}, ${data_minuta}.
+${cidade}, ${data_hoje}.
 
 
 &nbsp;
@@ -118,7 +118,7 @@ ${testemunhas}
 
 &nbsp;
 
-${tipo_procedimento} Código: **${simp}**
+${tipo_procedimento} Código: **${num_processo}**
 
 REQUERIDO: **${requeridos}**
 
@@ -159,26 +159,7 @@ nos termos da denúncia anexa, ocasião em que se requer:
 expedidas pelo cartório judicial desta Comarca e, ainda, dos cartórios judiciais em que conste registro de antecedentes criminais apontados pelo sistema SIAP do E. Tribunal de Justiça do Estado de Mato Grosso, inclusive com informações acerca do trâmite de inquéritos policiais em andamento, bem como eventual certidão de trânsito em julgado;
 2. seja oficiado ao Instituto Nacional de Identificação Criminal e ao Instituto de Identificação Criminal do Estado de Mato Grosso requisitando certidões de antecedentes criminais em nome do denunciado;
 3. que, após o recebimento da denúncia, seja comunicado ao Distribuidor, ao Instituto de Identificação, bem como alimentado o banco de dados do Sistema Nacional de Informação Criminal (SINIC), conforme PROVIMENTO Nº. 41/2011 – CGJ;
-
-% if pedido_reparacao_dano:
-
-&nbsp;
-
-**DA REPARAÇÃO DO DANO AMBIENTAL**
-
-O art. 20 da Lei 9.605/98 (Lei dos Crimes Ambientais) dispõe que:
-
-&nbsp;
-
-> "Art. 20. A sentença penal condenatória, sempre que possível, fixará o valor mínimo para reparação dos danos causados pela infração, considerando os prejuízos sofridos pelo ofendido ou pelo meio ambiente."
-
-&nbsp;
-
-Com base neste preceito legal, o *Parquet* requer fixação de valor mínimo à reparação do dano ambiental em questão nos seguintes termos:
-
-${pedido_reparacao_dano}
-
-% endif
+4. ${pedido_reparacao_dano}
 
 % if pedir_medida_cautelar_diversa_prisao:
 
@@ -222,12 +203,11 @@ ${proposta_suspro}
 ${justificativa_nao_cabimento_suspro}
 % endif
 
-${cidade}, ${data_minuta}
+${cidade}, ${data_hoje}
 
 &nbsp;
 &nbsp;
 &nbsp;
 
 **${subscritor}**
-
 ${cargo_subscritor}

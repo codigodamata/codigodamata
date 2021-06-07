@@ -17,7 +17,7 @@ fields:
     default: ${ dic_promotorias[orgao_execucao]["orgao_jur_instancia_2"] }  
     
   - Número do processo: num_processo
-    default: "0000000-00.2020.8.11.0027"  
+    hint: "0000000-00.2020.8.11.0027"
   - Número SIMP: simp
     default: "000000-061/2020"
   - Tipo de procedimento ou processo: tipo_procedimento
@@ -34,10 +34,13 @@ fields:
     datatype: text
     default: ${ dic_promotorias[orgao_execucao]["ramo_mp"] } 
     
-  - Data da minuta (data de hoje): data_hoje
-    default: ${ data_hoje }
+  - Data da minuta (data de hoje): data_minuta
+    datatype: date
+    default: ${ today(format='d/M/YYYY') }
 
   - Subscritor da minuta: subscritor
     default: ${ dic_promotorias[orgao_execucao]["membro"] }
   - Cargo subscritor: cargo_subscritor
     default: ${ dic_promotorias[orgao_execucao]["cargo"] }
+back button: |
+  'Voltar'

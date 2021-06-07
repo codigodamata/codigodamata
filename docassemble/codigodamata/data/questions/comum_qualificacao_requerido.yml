@@ -1,4 +1,10 @@
 ---
+include:
+ - teste_variaveis_crimes_para_teste.yml
+ - comum_base_dados_cadastrais.yml
+ - comum_dados_orgao.yml
+ 
+---
 objects:
   - requeridos: DAList.using(object_type=Individual)
 
@@ -7,11 +13,13 @@ question: Nomear o requerido?
 subquestion: Representado, réu, suspeito da ação ilícita
 yesno: requeridos.there_are_any
 default: yes
-
+back button: |
+  'Voltar'
 ---
 question: Adicionar mais um requerido?
 yesno: requeridos.there_is_another
-
+back button: |
+  'Voltar'
 ---
 code: |
   pessoas = requeridos.complete_elements()
@@ -45,7 +53,6 @@ fields:
       is: New
   - Estado Civil: requeridos[i].estadocivil
     required: False
-    default: ignorado
     datatype: radio
     choices:
       - solteiro(a)
@@ -53,26 +60,14 @@ fields:
       - divorciado(a)
       - viúvo(a)
       - convivente em união estável
-      - ignorado
     show if:
       variable: requeridos[i].existing_or_new
       is: New
-      
   - Ocupação: requeridos[i].ocupacao
     required: False
-    hint: "Selecione uma ou escreva uma resposta"    
-    datatype: combobox
-    choices:
-      - produtor rural
-      - pecuarista
-      - lavrador
-      - serviços gerais
-      - do lar
-      - de ocupação ignorada
     show if:
       variable: requeridos[i].existing_or_new
       is: New
-
   - Data de Nascimento: requeridos[i].birthdate
     required: False
     datatype: date
@@ -81,29 +76,31 @@ fields:
       is: New
   - Endereço: requeridos[i].address.address
     required: False
+    hint: "Rua Mato Grosso"
     show if:
       variable: requeridos[i].existing_or_new
       is: New
   - Número: requeridos[i].address.unit
+    datatype: integer
     required: False
+    hint: "10"
     show if:
       variable: requeridos[i].existing_or_new
-      is: New   
+      is: New
   - Cidade: requeridos[i].address.city
     required: False
-    datatype: combobox
-    hint: "Selecione uma ou escreva uma resposta"
-    code: |
-      dic_promotorias[orgao_execucao]["municipios_abrangencia"]
+    hint: "Itiquira"
+    default: "Itiquira"
     show if:
       variable: requeridos[i].existing_or_new
       is: New
   - Estado: requeridos[i].address.state
     required: False
-    default: "Mato Grosso"  
+    hint: "MT"
+    default: "Mato Grosso"
     show if:
       variable: requeridos[i].existing_or_new
-      is: New 
+      is: New
   - CEP: requeridos[i].address.postal_code
     show if:
       variable: requeridos[i].existing_or_new
@@ -112,7 +109,7 @@ fields:
   - País: requeridos[i].address.country
     code: |
       countries_list()
-    default: "Brazil"
+    default: "Brasil"
     required: False
     show if:
       variable: requeridos[i].existing_or_new
@@ -124,10 +121,9 @@ fields:
       is: New
   - Nome da mãe: requeridos[i].nome_mae
     required: False
-    default: "de filiação ignorada"
     show if:
       variable: requeridos[i].existing_or_new
-      is: New      
+      is: New
   - Usa whatsapp: requeridos[i].uses_whatsapp
     required: False
     datatype: yesno
@@ -140,15 +136,12 @@ fields:
     show if:
       code: |
         False
+back button: |
+  'Voltar'
 ---
 mandatory: True
 code: |
   if requeridos.there_are_any:
-    todos_requeridos = ''
     for requerido in requeridos:
-      todos_requeridos = '' + requerido.name.full().upper() + ', '
       qualificacao_texto = requerido.nacionalidade + ", "+ requerido.estadocivil + ", " + requerido.ocupacao + ", nascido aos " + requerido.birthdate + ", filho de " + requerido.nome_mae +  ", residente e domiciliado na " + requerido.address.address + " " + requerido.address.unit +  ", "+ requerido.address.city + ", " + requerido.address.state +  ", telefone: " + requerido.mobile_number +";"
       requerido.qualificacao = qualificacao_texto
-    for requerido in requeridos:
-      requerido.name.first = requerido.name.first.upper()
-      
