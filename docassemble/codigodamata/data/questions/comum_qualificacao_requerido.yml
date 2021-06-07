@@ -140,6 +140,6 @@ back button: |
 mandatory: True
 code: |
   if requeridos.there_are_any:
-    for i in requeridos:
-      qualificacao_texto = i.nacionalidade + ", "+ requerido.estadocivil + ", " + requerido.ocupacao + ", nascido aos " + requerido.birthdate + ", filho de " + requerido.nome_mae +  ", residente e domiciliado na " + requerido.address.address + " " + requerido.address.unit +  ", "+ requerido.address.city + ", " + requerido.address.state +  ", telefone: " + requerido.mobile_number +";"
+    for requerido in requeridos:
+      qualificacao_texto = requerido.nacionalidade + ", "+ requerido.estadocivil + ", " + requerido.ocupacao + ", nascido aos " + requerido.birthdate + ", filho de " + requerido.nome_mae +  ", residente e domiciliado na " + requerido.address.address + " " + requerido.address.unit +  ", "+ requerido.address.city + ", " + requerido.address.state +  ", telefone: " + requerido.mobile_number +";"
       requerido.qualificacao = qualificacao_texto
