@@ -222,9 +222,9 @@ code: |
   lista_circunstancias_dano = ["houve o uso de fogo no período proibitivo de queimadas", "houve destruição de APP hídrica", "ilícito afetou ou expôs a perigo, de maneira grave, a saúde pública ou o meio ambiente", "fato concorreu para danos à propriedade alheia", "fato atingiu áreas de unidades de conservação ou áreas sujeitas, por ato do Poder Público, a regime especial de uso", "fato atingiu áreas urbanas ou quaisquer assentamentos humanos", "fato ocorreu em período de defeso à fauna", "fato ocorreu em épocas de seca ou inundações", "fato ocorreu interior do espaço territorial especialmente protegido", "houve emprego de métodos cruéis para abate ou captura de animais", "houve abuso do direito de licença, permissão ou autorização ambiental", "fato praticado no interesse de pessoa jurídica mantida, total ou parcialmente, por verbas públicas ou beneficiada por incentivos fiscais", "fato atingiu espécies ameaçadas, listadas em relatórios oficiais das autoridades competentes", "outras circunstâncias que impactaram negativamente a coletividade"]
 
   # Série histórica do Índice INPC
-  indice_INPC = {2017: 1.0207,
-                 2018: 1.0343,
-                 2019: 1.0343,
+  indice_INPC = {2017: 2.7,
+                 2018: 3.43,
+                 2019: 4.48,
                 }
                 
   def correcao_monetaria(valor_inicial, serie_historica, ano_inicio):

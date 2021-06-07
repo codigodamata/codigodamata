@@ -1,7 +1,6 @@
 ---
 objects:
   - fatos: DAList.using(there_are_any=True, object_type=Thing, complete_attribute='complete')
-  - imovel_rural: DAList.using(there_are_any=True, object_type=Thing, complete_attribute='complete')
 
 ---
 code: |
@@ -10,14 +9,111 @@ code: |
   fatos[i].complete = True
 
 ---
-question: Descrever o fato?
-yesno: fatos.there_are_any
-default: yes
+code: |
+  myoptions = []
+  crimes_dict = {}
+  crimes = objects_from_file("crimes.yml")
+  for crime_obj in crimes:
+    myoptions.append([crime_obj.TIPIFICACAO, crime_obj.TIPIFICACAO, None, crime_obj.TIPO_PENAL])
+    crime = {"tipificacao": crime_obj.TIPIFICACAO,
+      "nome_crime": crime_obj.NOME_CRIME,
+      "artigo": crime_obj.ARTIGO,
+      "caput_ou_paragrafo": crime_obj.CAPUT_OU_PARAGRAFO,
+      "inciso": crime_obj.INCISO,
+      "lei": crime_obj.LEI,
+      "preceito_primario": crime_obj.PRECEITO_PRIMARIO,
+      "tipo_penal": crime_obj.TIPO_PENAL,
+      "pena_minima": crime_obj.PENA_MINIMA,
+      "pena_maxima": crime_obj.PENA_MAXIMA,
+      "sujeito_representacao": crime_obj.SUJEITO_REPRESENTACAO,
+      "necessidade_reparacao_dano": crime_obj.NECESSIDADE_REPARACAO_DANO,
+      "materialidade": crime_obj.MATERIALIDADE,
+      "coordenadas": crime_obj.COORDENADAS,
+      "area_destruida": crime_obj.AREA_DESTRUIDA,
+      "doc_prova_materialidade": crime_obj.DOC_PROVA_MATERIALIDADE,
+      "violencia_domestica": crime_obj.VIOLENCIA_DOMESTICA,
+      "violencia_grave_ameaca": crime_obj.VIOLENCIA_GRAVE_AMEACA,
+      "lei_crimes_hediondos": crime_obj.LEI_CRIMES_HEDIONDOS,
+      "classificacao_quanto_bem_juridico": crime_obj.CLASSIFICACAO_QUANTO_BEM_JURIDICO,      
+      "complemento_tipo": crime_obj.COMPLEMENTO_DESCRICAO_TIPO_PENAL}      
+    crimes_dict[crime_obj.TIPIFICACAO] = crime
+  object_type = str(type(crimes))
+  object_length = str(len(crimes))
+    
+---
+code: |
+  # Transforma as listas de complementos dos tipos penais (do arquivo crimes.yml, em "Sources") em um dicionário
+  def list_to_dic(complementos):
+    myoptions_complementos = []
+    complemento_dic = {}
+    for compl in complementos:
+      myoptions_complementos.append(compl[1])
+      complemento = {"detalhamento_fatico": compl[0][0],
+                     "unidade_quantidade": compl[0][1],
+                     "qualidade_obj_material": compl[0][2]
+                    }
+      complemento_dic[compl[1]] = complemento
+    object_type = str(type(complemento))
+    object_length = str(len(complemento))
+    return(complemento_dic, myoptions_complementos)
 
+---
+mandatory: True
+question: |
+  Complete a descrição fática do crime
+subquestion: |
+    ... [FIELD fatos[i].detalhamento_fatico] [FIELD fatos[i].quantificacao] [FIELD fatos[i].unidade_quantidade] e a qualidade é [FIELD fatos[i].qualidade_obj_material].
+fields:
+  - Detalhamento fático: fatos[i].detalhamento_fatico
+    input type: text
+    default: ${list_to_dic(crimes_dict[fatos[i].selected_crime]["complemento_tipo"])[0][fato.lista_detalhamento_preceito_primario]["detalhamento_fatico"]}
+
+  - Quantificação: fatos[i].quantificacao
+    hint: "quantidade (se houver)"
+    datatype: number
+
+  - Unidade: fatos[i].unidade_quantidade
+    hint: "É a unidade (ex: hectares), se houver"
+    input type: text
+    default: ${list_to_dic(crimes_dict[fatos[i].selected_crime]["complemento_tipo"])[0][fato.lista_detalhamento_preceito_primario]["unidade_quantidade"]}
+ 
+  - Qualidade: fatos[i].qualidade_obj_material
+    hint: "É a qualidade, o tipo do objeto material sobre o qual recai o crime (se houver)"  
+    datatype: list
+    input type: dropdown
+    code: |
+      list_to_dic(crimes_dict[fatos[i].selected_crime]["complemento_tipo"])[0][fato.lista_detalhamento_preceito_primario]["qualidade_obj_material"]    
+ 
+---
+question: |
+  Complete a descrição fática do crime
+subquestion: |
+    ... [FIELD fatos[i].detalhamento_fatico] [FIELD fatos[i].quantificacao] [FIELD fatos[i].unidade_quantidade] e a qualidade é [FIELD fatos[i].qualidade_obj_material].
+fields:
+
+  - Detalhamento fático: fatos[i].detalhamento_fatico
+    input type: text
+    default: ${my_dic_complementos[fatos[i].lista_detalhamento_preceito_primario]["detalhamento_fatico"]}
+
+  - Quantificação: fatos[i].quantificacao
+    hint: "quantidade (se houver)"
+    datatype: number
+
+  - Unidade: fatos[i].unidade_quantidade
+    hint: "É a unidade (ex: hectares), se houver"
+    input type: text
+    default: ${my_dic_complementos[fatos[i].lista_detalhamento_preceito_primario]["unidade_quantidade"]}
+ 
+  - Qualidade: fatos[i].qualidade_obj_material
+    hint: "É a qualidade, o tipo do objeto material sobre o qual recai o crime (se houver)"  
+    datatype: list
+    input type: dropdown
+    code: |
+      my_dic_complementos[fatos[i].lista_detalhamento_preceito_primario]["qualidade_obj_material"] 
+  
 ---
 question: Adicionar mais um fato?
 yesno: fatos.there_is_another
-
 
 ---
 question: |
@@ -61,16 +157,16 @@ fields:
     choices:
       - sim
       - não
-
+      
   - Data do fato: fatos[i].data_fato_exata
-    datatype: date
+    datatype: date    
     required: False
     show if:
       variable: fatos[i].data_e_exata
       is: sim
 
   - Data aproximada do fato: fatos[i].data_fato_aprox
-    default: "em data não especificada, mas sabendo ter o fato ocorrido "
+    default: "em data não especificada, mas sabendo ter o fato ocorrido em "
     input type: area
     rows: 2
     required: False
@@ -89,8 +185,8 @@ fields:
     datatype: radio
     choices:
       - sim
-      - não
-
+      - não      
+      
   - Hora do fato: fatos[i].hora_fato_exata
     datatype: time
     required: False
@@ -100,71 +196,16 @@ fields:
 
   - Hora do fato: fatos[i].hora_fato_aprox
     datatype: combobox
-    required: False
+    required: False    
     choices:
       - em horário indeterminado
-      - em horário indeterminado, sabendo-se ter ocorrido no período da manhã
-      - em horário indeterminado, sabendo-se ter ocorrido no período vespertino
-      - em horário indeterminado, sabendo-se ter ocorrido no período noturno
+      - em horário indeterminado, sabendo-se ter ocorrido no período da manhã  
+      - em horário indeterminado, sabendo-se ter ocorrido no período vespertino    
+      - em horário indeterminado, sabendo-se ter ocorrido no período noturno    
+      
     show if:
       variable: fatos[i].hora_e_exata
       is: não
-
-  - Fato ocorrido em imóvel rural?: fatos[i].em_imovel_rural
-    datatype: radio
-    choices:
-      - sim: True
-      - não: False
-
-  - Nome do Imóvel Rural: fatos[i].imovel_rural_nome
-    required: False
-    input type: text
-    hint: "ex: Fazenda Renascer"
-    show if:
-      variable: fatos[i].em_imovel_rural
-      is: True
-
-  - Imóvel possui CAR?: fatos[i].imovel_rural_possui_car
-    datatype: radio
-    choices:
-      - sim: True
-      - não: False
-    show if:
-      variable: fatos[i].em_imovel_rural
-      is: True
-
-  - Car do Imóvel Rural: fatos[i].imovel_rural_car
-    required: False
-    input type: text
-    hint: "insira o número do CAR "
-    show if:
-      variable: fatos[i].imovel_rural_possui_car
-      is: True
-
-  - Imóvel possui matrícula conhecida no Registro de Imóveis?: fatos[i].imovel_rural_possui_matricula
-    datatype: radio
-    choices:
-      - sim: True
-      - não: False
-    show if:
-      variable: fatos[i].em_imovel_rural
-      is: True
-
-  - Número da matrícula do Imóvel Rural: fatos[i].imovel_rural_matricula
-    required: False
-    input type: text
-    show if:
-      variable: fatos[i].imovel_rural_possui_matricula
-      is: True
-
-  - Cartório em que o imóvel está registrado: fatos[i].imovel_rural_cartorio
-    datatype: radio
-    required: False
-    code: |
-      dic_promotorias[orgao_execucao]["cartorio_ri"]
-    show if:
-      variable: fatos[i].imovel_rural_possui_matricula
-      is: True
 
   - Endereço: fatos[i].address
     required: False
@@ -187,17 +228,15 @@ fields:
         crimes_dict[fatos[i].selected_crime]["coordenadas"] == True
 
   - Parágrafo sobre como se deu o conhecimento do fato: fatos[i].noticia_crime
-    datatype: combobox
-    help: O conhecimento do fato se deu a partir de análise de alertas em tempo próximo ao real decorrente de sensoriamento remoto realizado pela plataforma Global Forest Watch (GFW).
-    default: O conhecimento do fato se deu a partir de análise de alertas em tempo próximo ao real decorrente de sensoriamento remoto realizado pela plataforma Global Forest Watch (GFW).
-    choices:
-      - O conhecimento do fato se deu a partir de análise de alertas em tempo próximo ao real decorrente de sensoriamento remoto realizado pela plataforma Global Forest Watch (GFW).
+    input type: area
+    rows: 8
+    default: "O conhecimento do fato se deu a partir de análise de alertas em tempo próximo ao real decorrente de sensoriamento remoto realizado pela plataforma Global Forest Watch (GFW)."
     show if:
       code: |
         ato_processual_escolhido == "denúncia" or ato_processual_escolhido == 'denúncia com proposta de suspensão condicional do processo'
 
   - Parágrafo sobre como se deu a confirmação do fato: fatos[i].diligencia_realizada
-    datatype: combobox
+    input type: radio
     required: False
     choices:
     - Realizou-se análise técnica por imagenamento remoto para aferição das circunstâncias em que o fato ocorreu mediante a utilização de imagens de satélite de alta resolução.
@@ -215,7 +254,7 @@ fields:
         ato_processual_escolhido == "denúncia" or ato_processual_escolhido == 'denúncia com proposta de suspensão condicional do processo'
 
   - Parágrafo da materialidade: fatos[i].materialidade
-    help: "Não precisa mexer nesse texto, se a infração penal deixa vestígios materiais."
+    help: "Não precisa mecher nesse texto, se a infração penal deixa vestígios materiais."
     input type: area
     rows: 3
     default: "A prova materialidade encontra-se demonstrada pelo "
@@ -227,15 +266,10 @@ fields:
   - Tipo de documento que comprova a materialidade: fatos[i].doc_prova_materialidade
     help: "Geralmente será um auto de infração e termo de embargo ou relatório técnico."
     default: "Auto de Infração "
-    datatype: combobox
-    required: False
-    choices:
-      - Auto de Infração
-      - Relatório Técnico
-      - Boletim de Ocorrência
     show if:
       code: |
         crimes_dict[fatos[i].selected_crime]["materialidade"] == True
+    required: False
 
   - Número do documento que comprova materialidade: fatos[i].num_doc_prova_materialidade
     required: False
@@ -273,33 +307,6 @@ fields:
       code: |
         ato_processual_escolhido == "denúncia" or ato_processual_escolhido == 'denúncia com proposta de suspensão condicional do processo'
 
-
----
-question: |
-  Complete a descrição fática do crime
-subquestion: |
-    ... [FIELD fatos[i].detalhamento_fatico] [FIELD fatos[i].quantificacao] [FIELD fatos[i].unidade_quantidade] e a qualidade é [FIELD fatos[i].qualidade_obj_material].
-fields:
-  - Detalhamento fático: fatos[i].detalhamento_fatico
-    input type: text
-    default: ${my_dic_complementos[fatos[i].lista_detalhamento_preceito_primario]["detalhamento_fatico"]}
-
-  - Quantificação: fatos[i].quantificacao
-    hint: "quantidade (se houver)"
-    datatype: number
-
-  - Unidade: fatos[i].unidade_quantidade
-    hint: "É a unidade (ex: hectares), se houver"
-    input type: text
-    default: ${my_dic_complementos[fatos[i].lista_detalhamento_preceito_primario]["unidade_quantidade"]}
-
-  - Qualidade: fatos[i].qualidade_obj_material
-    hint: "É a qualidade, o tipo do objeto material sobre o qual recai o crime (se houver)"
-    datatype: list
-    input type: dropdown
-    code: |
-      my_dic_complementos[fatos[i].lista_detalhamento_preceito_primario]["qualidade_obj_material"]
-
 ---
 question: |
  Reparação do dano
@@ -328,57 +335,3 @@ fields:
     choices:
     - sim: True
     - não: False
-
----
-code: |
-  myoptions = []
-  crimes_dict = {}
-  crimes = objects_from_file("crimes.yml")
-  for crime_obj in crimes:
-    myoptions.append([crime_obj.TIPIFICACAO, crime_obj.TIPIFICACAO, None, crime_obj.TIPO_PENAL])
-    crime = {"tipificacao": crime_obj.TIPIFICACAO,
-      "nome_crime": crime_obj.NOME_CRIME,
-      "artigo": crime_obj.ARTIGO,
-      "caput_ou_paragrafo": crime_obj.CAPUT_OU_PARAGRAFO,
-      "inciso": crime_obj.INCISO,
-      "lei": crime_obj.LEI,
-      "preceito_primario": crime_obj.PRECEITO_PRIMARIO,
-      "tipo_penal": crime_obj.TIPO_PENAL,
-      "pena_minima": crime_obj.PENA_MINIMA,
-      "pena_maxima": crime_obj.PENA_MAXIMA,
-      "sujeito_representacao": crime_obj.SUJEITO_REPRESENTACAO,
-      "necessidade_reparacao_dano": crime_obj.NECESSIDADE_REPARACAO_DANO,
-      "materialidade": crime_obj.MATERIALIDADE,
-      "coordenadas": crime_obj.COORDENADAS,
-      "area_destruida": crime_obj.AREA_DESTRUIDA,
-      "doc_prova_materialidade": crime_obj.DOC_PROVA_MATERIALIDADE,
-      "violencia_domestica": crime_obj.VIOLENCIA_DOMESTICA,
-      "violencia_grave_ameaca": crime_obj.VIOLENCIA_GRAVE_AMEACA,
-      "lei_crimes_hediondos": crime_obj.LEI_CRIMES_HEDIONDOS,
-      "classificacao_quanto_bem_juridico": crime_obj.CLASSIFICACAO_QUANTO_BEM_JURIDICO,
-      "complemento_tipo": crime_obj.COMPLEMENTO_DESCRICAO_TIPO_PENAL}
-    crimes_dict[crime_obj.TIPIFICACAO] = crime
-  object_type = str(type(crimes))
-  object_length = str(len(crimes))
-
----
-code: |
-  # Transforma as listas de complementos dos tipos penais (do arquivo crimes.yml, em "Sources") em um dicionário
-  def list_to_dic(complementos):
-    myoptions_complementos = []
-    complemento_dic = {}
-    for compl in complementos:
-      myoptions_complementos.append(compl[1])
-      complemento = {"detalhamento_fatico": compl[0][0],
-                     "unidade_quantidade": compl[0][1],
-                     "qualidade_obj_material": compl[0][2]
-                    }
-      complemento_dic[compl[1]] = complemento
-    object_type = str(type(complemento))
-    object_length = str(len(complemento))
-    return(complemento_dic, myoptions_complementos)
-  # Obtém o dicionário de complementos a partir da função  list_to_dic()
-  my_dic_complementos = list_to_dic(crimes_dict[fatos[i].selected_crime]["complemento_tipo"])[0]
-  # Obtém a lista de complementos que será exibida como opções em uma questão dropdown (a resposta será usada como chave para o dicionário)
-  myoptions_complementos = list_to_dic(crimes_dict[fatos[i].selected_crime]["complemento_tipo"])[1]
-reconsider: True

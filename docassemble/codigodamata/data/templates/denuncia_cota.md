@@ -1,4 +1,3 @@
-
 ${tipo_procedimento} Código: **${simp}**
 
 REQUERIDO:
@@ -59,7 +58,7 @@ ${indentation} O art. 20 da Lei 9.605/98 (Lei dos Crimes Ambientais) dispõe que
 
 ${indentation} Com base neste preceito legal, o *Parquet* requer fixação de valor mínimo à reparação do dano ambiental em questão nos seguintes termos:
 
-${indentation} ${pedido_reparacao_dano}
+> ${indentation} ${pedido_reparacao_dano}
 
 % endif
 
@@ -104,6 +103,9 @@ ${indentation} ${proposta_suspro}
 
 ${indentation} ${justificativa_nao_cabimento_suspro}
 % endif
+
+&nbsp;
+&nbsp;
 
 ${indentation} ${cidade}, ${data_hoje}
 
