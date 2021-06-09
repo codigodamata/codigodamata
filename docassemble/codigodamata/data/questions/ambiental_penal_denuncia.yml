@@ -2,11 +2,9 @@
 template: denuncia
 content file:
   code: conteudo_denuncia
-
 ---
 code: |
   conteudo_denuncia = "denuncia.md"
-
 ---
 mandatory: True
 code: |
@@ -38,7 +36,6 @@ subquestion: |
 attachment:
   name: Sua petição
   filename: ${ato_processual_escolhido + " "+ simp_re}
-
   docx template file: minuta_cabecalho.docx
   pdf/a: True
 buttons:
