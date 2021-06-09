@@ -49,7 +49,7 @@ pela prática, em tese, dos seguintes fatos delituosos:
 &nbsp;
 &nbsp;
 
-Segundo apurado no ${tipo_procedimento} N.**${num_processo}** em **${teste_data()}**, **${hora_fato}** no local **${local_fato}**, nas proximidades das coordenadas **${coordenadas}**, o requerido **${requerido.name}** **${preceito_primario}** em uma área total de **${area_destruida}** hectares de ${tipo_vegetacao}, conforme constatado no ${doc_prova_materialidade} N. ${num_doc_prova_materialidade}, da ${orgao_doc_prova_materialidade}.
+Segundo apurado no ${tipo_procedimento} N.**${num_processo}** em , **${hora_fato}** no local **${local_fato}**, nas proximidades das coordenadas **${coordenadas}**, o requerido **${requerido.name}** **${preceito_primario}** em uma área total de **${area_destruida}** hectares de ${tipo_vegetacao}, conforme constatado no ${doc_prova_materialidade} N. ${num_doc_prova_materialidade}, da ${orgao_doc_prova_materialidade}.
 
 &nbsp;
 &nbsp;
