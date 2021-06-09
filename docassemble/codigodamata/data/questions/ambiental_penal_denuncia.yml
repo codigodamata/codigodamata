@@ -25,7 +25,7 @@ include:
 ---
 code: |
   import re
-  simp_re = new_string = re.sub("[-,/]", "_", simp)
+  simp_re = re.sub("[-,/]", "_", simp)
 ---
 mandatory: True
 question: |
