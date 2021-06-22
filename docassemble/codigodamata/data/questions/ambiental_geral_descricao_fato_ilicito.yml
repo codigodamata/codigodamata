@@ -100,7 +100,7 @@ fields:
         ato_processual_escolhido == "denúncia" or ato_processual_escolhido == 'denúncia com proposta de suspensão condicional do processo'
         
   - Parágrafo da materialidade: MATERIALIDADE
-    help: "Não precisa mexer nesse texto, se a infração penal deixa vestígios materiais."
+    help: "Não precisa mecher nesse texto, se a infração penal deixa vestígios materiais."
     input type: area
     rows: 3  
     default: "A prova materialidade encontra-se demonstrada pelo "
@@ -176,8 +176,7 @@ fields:
     show if:
       code: |
         ato_processual_escolhido == "denúncia" or ato_processual_escolhido == 'denúncia com proposta de suspensão condicional do processo'
-back button: |
-  'Voltar'
+
 ---
 code: |
   PARAGRAFO_MATERIALIDADE = MATERIALIDADE + " " + DOC_PROVA_MATERIALIDADE + " " + NUM_DOC_PROVA_MATERIALIDADE + " elaborado por " + ORGAO_DOC_PROVA_MATERIALIDADE + ". "

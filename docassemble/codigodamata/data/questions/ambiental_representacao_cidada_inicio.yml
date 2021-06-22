@@ -37,7 +37,6 @@ code: |
 ---
 include:
  - ambiental_representacao_cidada_descricao_fato.yml 
- - comum_scripts.yml
 
 ---
 mandatory: True
@@ -53,3 +52,22 @@ attachment:
     pdf/a: True
 buttons:
   - Exit: exit
+
+---
+code: |    
+  import datetime
+  Meses=('janeiro','fevereiro','março','abril','maio','junho', 'julho','agosto','setembro','outubro','novembro','dezembro')
+  agora = datetime.date.today()
+  mes_numerico =(agora.month)
+  dia = agora.day
+  mes = Meses[mes_numerico]
+  ano = agora.year
+  data_hoje = (str(dia) + " de " + mes + " de " + str(ano))
+  data_hoje_curta = (str(dia) + "/" + str(mes_numerico) + "/" + str(ano))
+mandatory: True
+
+
+
+
+
+
