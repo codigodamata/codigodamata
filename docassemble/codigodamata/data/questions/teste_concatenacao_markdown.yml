@@ -1,0 +1,20 @@
+---
+code: |
+  template_file_to_use = "desmatamento_vegetacao_secundaria.md"
+
+---
+question: |
+  Documento
+subquestion: |
+  Esse é um teste
+attachment:
+  name: Documento
+  language: pt
+  filename: Documento
+  content file:
+    code: template_file_to_use  
+  valid formats:
+    - rtf
+    - pdf
+    - docx
+mandatory: True

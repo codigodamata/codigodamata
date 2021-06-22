@@ -1,0 +1,71 @@
+modules:
+  - docassemble.base.core
+  - docassemble.base.util
+  - docassemble.base.legal
+
+---
+objects:
+  - requeridos: DAList.using(object_type=Individual)
+---
+mandatory: True
+code: | 
+  medida_cautelar_escolhida = " "
+  AREA_DESTRUIDA = 10
+  CARGO_SUBSCRITOR = "Promotor de Justiça"
+  CIDADE = "Itiquira"
+  COMARCA = "Comarca de Itiquira"
+  COORDENADAS = "-57, -67"
+  DATA_FATO = "10/01/2010"
+  DATA_HOJE = DATA_FATO
+  HORA_FATO = "13:00h"
+  requeridos.there_are_any = False
+  DILIGENCIA_REALIZADA = "recebimento de alertas GLAD"
+  DOC_PROVA_MATERIALIDADE = "Autor de Infração 123 Ibama"
+  FLS_REPRESENTACAO = "110"
+  FUNDAMENTO_NORMATIVO = "art. 50 da Lei 9605/98"
+  LOCAL_FATO = "Fazenda Santo Antônio"
+  MEDIDA_CAUTELAR_DESMATAMENTO = " "
+  NOTICIA_CRIME = "decorrente de alertas da plataforma Global Forest Watch do tipo GLAD"
+  NUM_PROCESSO = "12345"
+  ORGAO_DOC_PROVA_MATERIALIDADE = "SEMA"
+  PARAGRAFO_MATERIALIDADE = "Os indícios de autoria e a prova da materialidade do crime estão demonstrados através do auto de infração n° 012345/SEMA (fl. 10), autos de inspeção n° 6789 e 111213 (fls. 15 e 16), relatório técnico n° 08/2ªCiaPMPA/BPMPA/22/01/2020 (fls. 18/22) e demais documentos produzidos pela Polícia Judiciária Civil."
+  PARTE_AUTORA = "MINISTÉRIO PÚBLICO DO ESTADO DE MATO GROSSO"
+  PEDIDO_REPARACAO_DANO = "reparação do dano ambiental, conforme art. Art. 20 da Lei 9.605/98."
+  PRECEITO_PRIMARIO = "destruiu ou danificou florestas nativas ou plantadas, objeto de especial preservação, consistente em"
+  PROPOSTA_SUSPRO = "Não se aplica"
+  QUALIFICACAO_REQUERIDO = "brasileiro, solteiro, lavrador, inscrito no CPF nº 001.223.334-55, RG 678912 SSP/MT, nascido aos 19/07/1992, residente na Avenida dos Ipês, nº 456, centro, Rondonópolis/MT"
+  REPRESENTACAO = "Desnecessidade, modelo antigo"
+  REQUERIDOS = "TÍCIO DE SOUZA SILVA"
+  SUBSCRITOR = "CLÁUDIO ANGELO CORREA GONZAGA"
+  TESTEMUNHAS = "José Santos Costa, Policial Militar Ambiental, fl. 20"
+  TIPO_PROCEDIMENTO = "TCO"
+  TIPO_VEGETACAO = "floresta considerada de preservação permanente"
+  UNIDADE_JUDICIAL = "VARA ÚNICA"
+  cabimento_suspro = False
+  justificativa_nao_cabimento_suspro = "Deixa-se de oferecer a suspensão condicional do processo (art. 89 da Lei 9.099/95) em razão de elementos de informação constantes dos autos apontarem que os antecedentes, o comportamento e a conduta social do denunciado demonstrarem não ser a medida suficiente ou adequada (fls.19/20)."
+  pedir_medida_cautelar_diversa_prisao = False
+  proposta_composicao_dano_extra = "Posteriormente"
+  proposta_composicao_dano_material_desmate = "Posteriormente"
+
+---
+mandatory: True
+question: |
+  Deu certo!
+subquestion: |
+  Sua minuta está pronta, agora é só baixar em PDF ou DOCX.
+attachment:
+  name: Sua petição 
+  filename: minuta_juridica
+  metadata:
+    FirstHeaderCenter: |
+      [FILE https://consciencia.eco.br/images/1/12/Logo_mpmt.png, 200px]  
+    HeaderRight: |
+      Page [PAGENUM] of [TOTALPAGES]
+    HeaderCenter: |
+      [FILE https://consciencia.eco.br/images/1/12/Logo_mpmt.png, 200px]       
+    FooterLeft: |
+      Promotoria de Justiça de Itiquira Rua Mato Grosso, S/N, Itiquira/MT – CEP. 78790-000 Tel. (65) 3491-1144
+  content file: "denuncia.md"
+  pdf/a: True
+buttons:
+  - Exit: exit
