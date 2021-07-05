@@ -94,7 +94,7 @@ fields:
     required: False
 ---
 code: |
-  if fatos.there_are_any:
+    if fatos.there_are_any:
     pena_minima = 0.0
     for fato in fatos:
       pena_minima = pena_minima + float(crimes_dict[fato.selected_crime]["pena_minima"])
