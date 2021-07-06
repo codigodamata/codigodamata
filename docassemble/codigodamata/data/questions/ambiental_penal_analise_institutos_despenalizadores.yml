@@ -81,16 +81,16 @@ fields:
 mandatory: True
 code: |
   just_nao_cabimento_objetivo_transacao = ''
-  cabimento_objetivo_transacao = ((float(crimes_dict[representacao.selected_crime]["pena_maxima"]) <= 730) and (float(crimes_dict[representacao.selected_crime]["pena_minima"]) <= 365) and (violencia_domestica == "não"))
+  cabimento_objetivo_transacao = ((float(crimes_dict[selected_crime]["pena_maxima"]) <= 730) and (float(crimes_dict[selected_crime]["pena_minima"]) <= 365) and (violencia_domestica == "não"))
   cabimento_subjetivo_transacao = ((elementos_subjetivos['ja_beneficiado_transacao_5anos'] == False) and (elementos_subjetivos['antecedentes_conduta_social_desfavoraveis'] == False) and (elementos_subjetivos['condenacao_anterior_ppl']  == False ))
   cabimento_transacao = cabimento_objetivo_transacao and cabimento_subjetivo_transacao
 
-  cabimento_objetivo_anpp = ( (cabimento_transacao == False) and (float(crimes_dict[representacao.selected_crime]["pena_minima"]) <= 1460) and (violencia_domestica == "não") )
+  cabimento_objetivo_anpp = ( (cabimento_transacao == False) and (float(crimes_dict[selected_crime]["pena_minima"]) <= 1460) and (violencia_domestica == "não") )
   cabimento_subjetivo_anpp = ((elementos_subjetivos['ja_beneficiado_ANPP_5anos'] == False) and (elementos_subjetivos['reincidente'] == False) and (elementos_subjetivos['antecedentes_conduta_social_desfavoraveis'] == False) and (elementos_subjetivos['ausencia_confissao']  == False ) and (elementos_subjetivos['habitualidade_criminosa']  == False ) )  
   cabimento_anpp = cabimento_objetivo_anpp and cabimento_subjetivo_anpp
 
   #SUSPRO
-  cabimento_objetivo_suspro = ( (cabimento_transacao == False) and  (cabimento_anpp == False) and (float(crimes_dict[representacao.selected_crime]["pena_minima"]) <= 730) )
+  cabimento_objetivo_suspro = ( (cabimento_transacao == False) and  (cabimento_anpp == False) and (float(crimes_dict[selected_crime]["pena_minima"]) <= 730) )
   cabimento_subjetivo_suspro = ( (elementos_subjetivos['antecedentes_conduta_social_desfavoraveis'] == False) and (elementos_subjetivos['responde_outro_processo']  == False ) and (elementos_subjetivos['habitualidade_criminosa']  == False ) )    
   
   cabimento_suspro = cabimento_objetivo_suspro and cabimento_subjetivo_suspro
@@ -157,4 +157,4 @@ code: |
     
 ---
 code: |
-  TIPO_PENAL = crimes_dict[representacao.selected_crime]["tipo_penal"]
+  TIPO_PENAL = crimes_dict[selected_crime]["tipo_penal"]
