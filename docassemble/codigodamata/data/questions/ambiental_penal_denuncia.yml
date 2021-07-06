@@ -124,7 +124,7 @@ code: |
 include:
  - ambiental_geral_descricao_fato_ilicito_desmatamento.yml
  - ambiental_penal_proposta_prd.yml
- - ambiental_penal_inicio
+ - ambiental_penal_inicio.yml
  - ambiental_penal_composicao_civil_dano_ambiental.yml
  - ambiental_penal_medidas_cautelares_diversas_prisao.yml
  - comum_minhas_configuracoes.yml
