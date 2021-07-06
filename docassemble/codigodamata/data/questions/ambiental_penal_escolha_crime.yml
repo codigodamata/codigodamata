@@ -10,10 +10,10 @@ fields:
       myoptions
   - Violência doméstica contra a mulher?: violencia_domestica
     datatype: radio
-    default: Não
+    default: não
     choices:
-      - Sim
-      - Não
+      - sim
+      - não
     help: |
       Embora de ocorrência rara, em situações excepcionalíssimas um crime ambiental poderia ser praticado no contexto da violência doméstica contra a mulher. Ex: art. 49 da Lei 9.605/98 (destruição de plantas ornamentais em propriedade privada), como uma forma de violência patrimonial contra a mulher. 
 mandatory: True

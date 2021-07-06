@@ -6,7 +6,7 @@ objects:
 include:
  - comum_base_dados_cadastrais.yml
  - comum_dados_orgao.yml
- - comum_scripts.yml
+
 ---
  modules:
   - docassemble.base.core
@@ -55,6 +55,18 @@ fields:
 
   - Subscritor da minuta: SUBSCRITOR
   - Cargo subscritor: CARGO_SUBSCRITOR
+
+---
+code: |    
+  import datetime
+  Meses=('janeiro','fevereiro','março','abril','maio','junho', 'julho','agosto','setembro','outubro','novembro','dezembro')
+  agora = datetime.date.today()
+  mes=(agora.month-1)
+  dia = agora.day
+  mes = Meses[mes]
+  ano = agora.year
+  data_hoje = (str(dia) + " de " + mes + " de " + str(ano))
+mandatory: True
 
 ---
 mandatory: True

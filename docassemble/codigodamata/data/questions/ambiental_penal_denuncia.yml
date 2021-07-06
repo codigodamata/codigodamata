@@ -1,34 +1,137 @@
 ---
-template: denuncia
+template: template_denuncia
 content file:
   code: conteudo_denuncia
 
 ---
+template: template_denuncia_cota
+content file:  
+  code: conteudo_denuncia_cota
+
+---
 code: |
   conteudo_denuncia = "denuncia.md"
+  conteudo_denuncia_cota = "denuncia_cota.md"
 
 ---
 mandatory: True
 code: |
-  cabimento_suspro = False
-  justificativa_nao_cabimento_suspro = "Deixa-se de oferecer a proposta de transação penal e de suspensão condicional do processo (art. 89 da Lei 9.099/95) em razão da recusa do denunciado à prévia composição civil do dano ambiental, fato impeditivo para tais benefícios, 'ex vi' do disposto no art. 27 da Lei 9.605/98 e art. art. 89, § 1º, da Lei 9.099/95."
-  templates_md = denuncia
+  set_language('pt')
+  import re
   ato_processual_escolhido = "denúncia"
+  cabimento_suspro = False
+  if fatos.there_are_any:
+    for fato in fatos:
+      fato.selected_crime
+      fato.name.text
+      fato.paragrafo_materialidade = fato.materialidade + " " + fato.doc_prova_materialidade + "  N. " + fato.num_doc_prova_materialidade + " elaborado por " + fato.orgao_doc_prova_materialidade + ". "
+      # Fato.name.text contém o preceito primário
+      descricao_fatica_texto = fato.name.text
+
+      # Criando o atributo local_fato
+      local_fato = fato.address + ", " +  fato.city + ", " + fato.state + ", "
+      # Acrescenta descrição do imóvel
+      if fato.em_imovel_rural == True and fato.imovel_rural_possui_car == True:
+        local_fato = " no imóvel rural denominado " + fato.imovel_rural_nome + ", registrado no CAR sob o n. " + fato.imovel_rural_car + ", localizado na " + local_fato
+      if fato.em_imovel_rural == True and fato.imovel_rural_possui_car == False:
+        local_fato = " no imóvel rural denominado " + fato.imovel_rural_nome + ", sem registrado no Cadastro Ambiental Rural (CAR) " + ", localizado na " + local_fato
+      # Acrescenta coordenadas
+      if fato.coordenadas == True:
+        local_fato = local_fato + " nas proximidades das coordenadas " + fato.coordenadas
+      fato.local_fato = local_fato
+
+    # Estabelecendo se a data do fato é exata ou não
+      if fato.data_e_exata == 'sim':
+        fato.intro_data = "No dia "
+        fato.data_fato_texto = format_date(fato.data_fato_exata)
+      else:
+        fato.intro_data = ""
+        fato.data_fato_texto = fato.data_fato_aprox
+      if fato.hora_e_exata == 'sim':
+        fato.hora_fato_texto = str(fato.hora_fato_exata)
+      else:
+        fato.hora_fato_texto = fato.hora_fato_aprox
+      fato.descricao_fato_tipico_1a_parte = fato.intro_data + fato.data_fato_texto + " " + fato.hora_fato_texto + " no local " + fato.local_fato
+      fato.descricao_fato_tipico_1a_parte = fato.descricao_fato_tipico_1a_parte[0].upper() + fato.descricao_fato_tipico_1a_parte[1:]
+      fato.preceito_primario = fato.name.text
+      fato.descricao_fato_tipico_2a_parte =  fato.preceito_primario + " "  + fato.detalhamento_fatico  + " " + str(fato.quantificacao)+ " " + fato.unidade_quantidade + " " + fato.qualidade_obj_material
+      fato.descricao_fato_tipico = fato.descricao_fato_tipico_1a_parte + ", o denunciado " + fato.descricao_fato_tipico_2a_parte
+  if dic_promotorias[orgao_execucao] != "Outra Promotoria de Justiça":
+    cidade = dic_promotorias[orgao_execucao]["cidade"]
+    instituicao = dic_promotorias[orgao_execucao]["ramo_mp"]
+    orgao_endereco = dic_promotorias[orgao_execucao]["endereco"]
+
+  justificativa_nao_cabimento_suspro
+  insert_template_md = template_denuncia
+  # Variável que indica que a minuta será formada pela junção de duas partes (ex: denúncia e cota da denúncia)
+  minuta_com_duas_partes = True
+  # Recuo (indentação) na minuta
+  insert_template_md_2 = template_denuncia_cota
+  indent_num = 12
+  indentation = indent_num*"&nbsp;"
+  # gera nome do arquivo excluindo caracteres não aceitos
+  simp_re = new_string = re.sub("[-,/]", "_", simp)
+
+
+---
+question: |
+  Requisitos suspensão condicional do processo
+fields:
+  - Quanto aos elementos subjetivos, escolha o que se aplicar: elementos_subjetivos
+    datatype: checkboxes
+    required: False
+    choices:
+      - os antecedentes e a conduta social do requerido indicam não ser a medida despenalizadora suficiente ou recomendável
+      - o requerido foi condenado anteriormente, por sentença definitiva, por outro crime
+      - o requerido é reincidente
+      - o agente possui antecedentes que denotem conduta criminosa habitual
+      - o agente não realizou a composição civil do dano ambiental (art. 27 e 28 da Lei 9.605/98)
+      - o requerido já está respondendo a outro processo penal (com denúncia oferecida)
+    none of the above: False
+  - Indique as folhas, documentos ou ID que comprove o alegado não cabimento: explicacao_fundamentos_elementos_subjetivos
+    datatype: area
+    default: conforme comprova a certidão de ID. [insira o número de fls. ou id], o requerido
+    required: False
+---
+code: |
+  if fatos.there_are_any:
+    pena_minima = 0.0
+    for fato in fatos:
+      pena_minima = pena_minima + float(crimes_dict[fato.selected_crime]["pena_minima"])
+  # Início da justificativa do não cabimento da SUSPRO
+  just_nao_cabimento_suspro = []
+  cabimento_objetivo_suspro = pena_minima <= 730
+  if cabimento_objetivo_suspro == False:
+      just_nao_cabimento_suspro.append(" O requisito objetivo não permite a suspensão condicional do processo (pena mínima superior a um ano).")
+  else:
+    cabimento_subjetivo_suspro = True
+    for key, value in elementos_subjetivos.items():
+      if value == True:
+        just_nao_cabimento_suspro.append(key)
+        cabimento_subjetivo_suspro = False
+
+  if len(just_nao_cabimento_suspro)>0:
+    justificativa_nao_cabimento_suspro = "Incabível a suspensão condicional do processo no caso porque "
+    for just in just_nao_cabimento_suspro:
+      conector = "; "
+      if just == just_nao_cabimento_suspro[-1]:
+        conector = ". "
+      justificativa_nao_cabimento_suspro = justificativa_nao_cabimento_suspro + just + conector
+  else:
+    pass
 
 ---
 include:
- - comum_scripts.yml
  - ambiental_geral_descricao_fato_ilicito_desmatamento.yml
- - ambiental_penal_escolha_crime.yml
- - ambiental_penal_medidas_cautelares_diversas_prisao.yml 
- - comum_base_dados_cadastrais.yml
- - comum_dados_orgao.yml
+ - ambiental_penal_proposta_prd.yml
+ - ambiental_penal_composicao_civil_dano_ambiental.yml
+ - ambiental_penal_medidas_cautelares_diversas_prisao.yml
+ - comum_minhas_configuracoes.yml
  - comum_dados_proc.yml
+ - comum_dados_orgao.yml
  - comum_qualificacao_requerido.yml
----
-code: |
-  import re
-  simp_re = new_string = re.sub("[-,/]", "_", simp)
+ - comum_scripts.yml
+
 ---
 mandatory: True
 question: |
@@ -38,8 +141,7 @@ subquestion: |
   Sua minuta está pronta, agora é só baixar em PDF ou DOCX.
 attachment:
   name: Sua petição 
-  filename: ${ato_processual_escolhido + " "+ simp_re}
-  
+  filename: ${ato_processual_escolhido + " "+ simp_re}  
   docx template file: minuta_cabecalho.docx
   pdf/a: True
 buttons:
