@@ -99,22 +99,22 @@ code: |
     for fato in fatos:
       pena_minima = pena_minima + float(crimes_dict[fato.selected_crime]["pena_minima"])
   # Início da justificativa do não cabimento da SUSPRO
-  just_nao_cabimento_suspro = []
+  justificativa_nao_cabimento_suspro = []
   cabimento_objetivo_suspro = pena_minima <= 730
   if cabimento_objetivo_suspro == False:
-      just_nao_cabimento_suspro.append(" O requisito objetivo não permite a suspensão condicional do processo (pena mínima superior a um ano).")
+      justificativa_nao_cabimento_suspro.append(" O requisito objetivo não permite a suspensão condicional do processo (pena mínima superior a um ano).")
   else:
     cabimento_subjetivo_suspro = True
     for key, value in elementos_subjetivos.items():
       if value == True:
-        just_nao_cabimento_suspro.append(key)
+        justificativa_nao_cabimento_suspro.append(key)
         cabimento_subjetivo_suspro = False
 
-  if len(just_nao_cabimento_suspro)>0:
+  if len(justificativa_nao_cabimento_suspro)>0:
     justificativa_nao_cabimento_suspro = "Incabível a suspensão condicional do processo no caso porque "
-    for just in just_nao_cabimento_suspro:
+    for just in justificativa_nao_cabimento_suspro:
       conector = "; "
-      if just == just_nao_cabimento_suspro[-1]:
+      if just == justificativa_nao_cabimento_suspro[-1]:
         conector = ". "
       justificativa_nao_cabimento_suspro = justificativa_nao_cabimento_suspro + just + conector
   else:
