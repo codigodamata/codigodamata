@@ -1,7 +1,6 @@
 ---
 include: 
  - ambiental_geral_composicao_civil_dano_ambiental_var.yml
- - ambiental_penal_proposta_PRD.yml
  
 ---
 mandatory: True
