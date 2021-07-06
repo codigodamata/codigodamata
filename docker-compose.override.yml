@@ -1,0 +1,16 @@
+version: '3.7'
+
+services:  
+  db:
+    container_name: db_codigo_da_mata
+    image: postgres:11-alpine
+    volumes:
+      - /opt/codigodamata/docker_volumes/postgres_db:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: codigodamata
+      POSTGRES_USER: codigodamata
+      POSTGRES_PASSWORD: codigodamata
+    ports:
+      - "5432:5432"
+    expose:
+      - "5432"
