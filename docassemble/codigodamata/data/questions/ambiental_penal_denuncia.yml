@@ -45,7 +45,7 @@ code: |
         fato.intro_data = "No dia "
         fato.data_fato_texto = format_date(fato.data_fato_exata)
       else:
-        fato.intro_data = "em data não especificada, mas sabendo ter o fato ocorrido "
+        fato.intro_data = "em data não especificada, mas sabendo ter o fato ocorrido, "
         fato.data_fato_texto = fato.data_fato_aprox
       if fato.hora_e_exata == 'sim':
         fato.hora_fato_texto = str(fato.hora_fato_exata)
