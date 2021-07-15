@@ -70,9 +70,7 @@ fields:
       is: sim
 
   - Data aproximada do fato: fatos[i].data_fato_aprox
-    default: "em data não especificada, mas sabendo ter o fato ocorrido "
-    input type: area
-    rows: 2
+    input type: date
     required: False
     show if:
       variable: fatos[i].data_e_exata
