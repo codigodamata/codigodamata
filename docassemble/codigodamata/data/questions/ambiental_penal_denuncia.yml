@@ -20,9 +20,12 @@ code: |
   import re
   ato_processual_escolhido = "denúncia"
   cabimento_suspro = False
+  # try_var valida
   def try_var(x):
       if x != None:
           var = x + ', '
+      else:
+          var = ''
       return var
   if fatos.there_are_any:
     for fato in fatos:
