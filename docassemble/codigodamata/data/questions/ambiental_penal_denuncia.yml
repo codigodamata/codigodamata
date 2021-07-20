@@ -20,6 +20,10 @@ code: |
   import re
   ato_processual_escolhido = "denúncia"
   cabimento_suspro = False
+  def try_var(x):
+      if x != None:
+          var = x + ', '
+      return var
   if fatos.there_are_any:
     for fato in fatos:
       fato.selected_crime
@@ -29,7 +33,7 @@ code: |
       descricao_fatica_texto = fato.name.text
 
       # Criando o atributo local_fato
-      local_fato = fato.address + ", " +  fato.city + ", " + fato.state + ", "
+      local_fato = try_var(fato.address) + try_var(fato.city) + try_var(fato.state)
       # Acrescenta descrição do imóvel
       if fato.em_imovel_rural == True and fato.imovel_rural_possui_car == True:
         local_fato = " no imóvel rural denominado " + fato.imovel_rural_nome + ", registrado no CAR sob o n. " + fato.imovel_rural_car + ", localizado na " + local_fato
