@@ -103,9 +103,9 @@ fields:
     required: False    
     choices:
       - em horário indeterminado
-      - em horário indeterminado, sabendo-se ter ocorrido no período da manhã  
-      - em horário indeterminado, sabendo-se ter ocorrido no período vespertino    
-      - em horário indeterminado, sabendo-se ter ocorrido no período noturno         
+      - em horário indeterminado, sabendo-se ter ocorrido no período da manhã
+      - em horário indeterminado, sabendo-se ter ocorrido no período vespertino
+      - em horário indeterminado, sabendo-se ter ocorrido no período noturno
     show if:
       variable: fatos[i].hora_e_exata
       is: não
