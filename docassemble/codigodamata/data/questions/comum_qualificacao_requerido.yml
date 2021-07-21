@@ -128,7 +128,7 @@ fields:
       'SP': 'São Paulo',
       'SE': 'Sergipe',
       'TO': 'Tocantins'
-      }
+    }
     default: "Mato Grosso"  
     show if:
       variable: requeridos[i].existing_or_new
