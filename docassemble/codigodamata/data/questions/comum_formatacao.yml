@@ -1,0 +1,7 @@
+code: |
+  # teste_virgula valida existência da varíavel e adiciona uma vírgula
+  def teste_virgula(x):
+    if x != None:
+      return x + ', '
+    else:
+      return = ''
