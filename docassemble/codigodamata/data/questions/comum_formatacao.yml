@@ -4,4 +4,4 @@ code: |
     if x != None:
       return x + ', '
     else:
-      return = ''
+      return ''
