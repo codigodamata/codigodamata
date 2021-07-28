@@ -81,7 +81,7 @@ ${indentation} ${fato.representacao}
 
 
 
-${indentation} Ante o exposto, o **${parte_autora}**, por seu promotor de Justiça signatário, **DENUNCIA** 
+${indentation} Ante o exposto, o **${parte_autora}**, por seu promotor de Justiça signatário, **DENUNCIA**  
 % for  requerido in requeridos:
   **${" " + requerido.name.full()}**,
 % endfor
