@@ -144,6 +144,11 @@ fields:
     show if:
       variable: requeridos[i].existing_or_new
       is: New
+  - CPF: requeridos[i].cpf
+    required: False
+    show if:
+      variable: requeridos[i].existing_or_new
+      is: New
   - Telefone celular: requeridos[i].mobile_number
     required: False
     show if:
@@ -174,7 +179,7 @@ code: |
     todos_requeridos = ''
     for requerido in requeridos:
       todos_requeridos = '' + requerido.name.full().upper() + ', '
-      qualificacao_texto = requerido.nacionalidade + ", "+ requerido.estadocivil + ", " + requerido.ocupacao + ", nascido aos " + requerido.birthdate + ", filho de " + requerido.nome_mae +  ", residente e domiciliado na " + requerido.address.address + " " + requerido.address.unit +  ", "+ requerido.address.city + ", " + requerido.address.state +  ", telefone: " + requerido.mobile_number +";"
+      qualificacao_texto = "inscrito no CPF de número " + requerido.cpf + ", " + requerido.nacionalidade + ", "+ requerido.estadocivil + ", " + requerido.ocupacao + ", nascido aos " + requerido.birthdate + ", filho de " + requerido.nome_mae +  ", residente e domiciliado na " + requerido.address.address + " " + requerido.address.unit +  ", "+ requerido.address.city + ", " + requerido.address.state +  ", telefone: " + requerido.mobile_number +";"
       requerido.qualificacao = qualificacao_texto
     for requerido in requeridos:
       requerido.name.first = requerido.name.first.upper()
