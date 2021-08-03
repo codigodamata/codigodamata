@@ -145,6 +145,15 @@ fields:
       variable: requeridos[i].existing_or_new
       is: New
   - CPF: requeridos[i].cpf
+    help: "Escreva o CPF com pontos e o traço antes dos dois números finais como mostrado: xxx.xxx.xxx-xx"
+    minlength: 14
+    maxlength: 14
+    validation messages:
+      maxlength: |
+        Formato inválido!
+      minlength: |
+        Formato inválido!
+    hint: "123.456.789-10"
     required: False
     show if:
       variable: requeridos[i].existing_or_new
