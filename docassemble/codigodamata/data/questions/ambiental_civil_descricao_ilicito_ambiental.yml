@@ -95,7 +95,7 @@ fields:
         ato_processual_escolhido == "acp"
         
   - Parágrafo da materialidade: MATERIALIDADE
-    help: "Não precisa mexer nesse texto, se a infração penal deixa vestígios materiais."
+    help: "Não precisa mecher nesse texto, se a infração penal deixa vestígios materiais."
     input type: area
     rows: 3  
     default: "A prova materialidade encontra-se demonstrada pelo "
@@ -156,7 +156,7 @@ fields:
     - promover o isolamento da área e proibição de exercer atividades econômica, sob pena de multa
 
   - Esclarecimentos requerido: ESCLARECIMENTOS_REQUERIDO
-    help: "Não precisa mexer nesse texto, se a infração penal deixa vestígios materiais."
+    help: "Não precisa mecher nesse texto, se a infração penal deixa vestígios materiais."
     input type: area
     rows: 10  
     required: False

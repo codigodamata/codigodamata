@@ -1,88 +1,203 @@
 ---
 objects:
-  - lista_crimes: DAList
+  - fatos: DAList.using(there_are_any=True, object_type=Thing, complete_attribute='complete')
+  - imovel_rural: DAList.using(there_are_any=True, object_type=Thing, complete_attribute='complete')
+  
 ---
-include: 
- - comum_dados_orgao.yml
- - comum_base_dados_cadastrais.yml
- - ambiental_penal_teses.yml
+code: | 
+  fatos[i].name.text
+  fatos[i].selected_crime
+  fatos[i].complete = True
+
+---
+question: Descrever o fato?
+yesno: fatos.there_are_any
+default: yes
+
+---
+question: Adicionar mais um fato?
+yesno: fatos.there_is_another
+
 
 ---
 question: |
- Descrição do caso (descrição fática)
+  Escolha o tipo penal do crime
 fields:
-  - note: |
-      O ato processual escolhido foi ${ ato_processual_escolhido } .
-  - fundamento normativo: fundamento_normativo
-    default: ${ selected_crime }
-    required: False
-  - Preceito primário: preceito_primario
-    default: ${ crimes_dict[selected_crime]["preceito_primario"] }   
-    required: False
-    
-  - Data do fato é exata?: data_exata
+  - html: |
+      <span style="color: green;"> Escolha dentre os crimes relacionados ao desmatamento ilegal previstos na Lei dos Crimes Ambientais, principalmente dentre os <a href="https://www.planalto.gov.br/ccivil_03/leis/l9605.htm#art38" target="_blank">  Crimes Contra a Flora</a>, aplicável ao caso. </span>
+  - Crime: fatos[i].selected_crime
     datatype: radio
-    default: sim
+    code: |
+      myoptions
+  - Violência doméstica contra a mulher?: fatos[i].violencia_domestica
+    datatype: radio
+    default: não
     choices:
       - sim
       - não
-  - Data do fato: data_fato
-    datatype: date
-    default: ${ today(format='d/M/YYYY') }
+    help: |
+      Embora de ocorrência rara, em situações excepcionalíssimas um crime ambiental poderia ser praticado no contexto da violência doméstica contra a mulher. Ex: art. 49 da Lei 9.605/98 (destruição de plantas ornamentais em propriedade privada), como uma forma de violência patrimonial contra a mulher.
+
+---
+question: |
+ Complete a descrição fática
+fields:
+  # O nome do fato (atributo obrigatório de Thing) é o preceito primário
+  - Preceito primário: fatos[i].name.text
+    default: ${ crimes_dict[fatos[i].selected_crime]["preceito_primario"] }
+    required: True
+
+  - fundamento normativo: fatos[i].fundamento_normativo
+    default: ${ fatos[i].selected_crime }
     required: False
-    show if:
-      variable: data_exata
-      is: sim
+
+  - Complemento: fatos[i].lista_detalhamento_preceito_primario
+    input type: dropdown
+    code: |
+      myoptions_complementos
+
+  - Data do fato é exata?: fatos[i].data_e_exata
+    datatype: radio
+    choices:
+      - sim
+      - não
       
-  - Data aproximada do fato: data_fato
-    default: ${ today(format='d/M/YYYY') }
-    datatype: date
+  - Data do fato: fatos[i].data_fato_exata
+    datatype: date    
     required: False
     show if:
-      variable: data_exata
-      is: não        
-  - Hora do fato: hora_fato
-    default: "em horário indeterminado"    
-    required: False
-  - Local do fato: local_fato
-    help: "Se for uma fazenda, informar o nome do imóvel"
+      variable: fatos[i].data_e_exata
+      is: sim
+
+  - Data aproximada do fato: fatos[i].data_fato_aprox
+    default: "em data não especificada, mas sabendo ter o fato ocorrido "
     input type: area
-    rows: 2    
-    default: "imóvel rural localizado na Zona Rural deste município de Itiquira/MT"
-    required: False
-  - Coordenadas geográficas do fato: coordenadas
+    rows: 2
     required: False
     show if:
-      code: |
-        crimes_dict[selected_crime]["coordenadas"] == True     
-  - Área destruída ou degradada (em hectares): area_destruida
-    datatype: number
+      variable: fatos[i].data_e_exata
+      is: não
+
+  - Informe ao menos o ano do fato: fatos[i].ano_fato
+    input type: number
     required: False
     show if:
-      code: |
-        crimes_dict[selected_crime]["area_destruida"] == True
-  - Tipo de vegetação: tipo_vegetacao
-    input type: radio
-    default: vegetação nativa do bioma Cerrado
+      variable: fatos[i].data_e_exata
+      is: não
+
+  - Horário do fato é conhecido?: fatos[i].hora_e_exata
+    datatype: radio
+    choices:
+      - sim
+      - não      
+      
+  - Hora do fato: fatos[i].hora_fato_exata
+    datatype: time
+    required: False
+    show if:
+      variable: fatos[i].hora_e_exata
+      is: sim
+
+  - Hora do fato: fatos[i].hora_fato_aprox
+    datatype: combobox
     required: False    
     choices:
-    - vegetação nativa do bioma Pantanal Mato-grossense, patrimônio natural objeto de especial proteção (art. 225, § 4º, CF/1988)
-    - vegetação nativa do bioma Floresta Amazônica, patrimônio natural objeto de especial proteção (art. 225, § 4º, CF/1988) 
-    - vegetação nativa do bioma Cerrado    
+      - em horário indeterminado
+      - em horário indeterminado, sabendo-se ter ocorrido no período da manhã
+      - em horário indeterminado, sabendo-se ter ocorrido no período vespertino
+      - em horário indeterminado, sabendo-se ter ocorrido no período noturno
+    show if:
+      variable: fatos[i].hora_e_exata
+      is: não
+
+  - Fato ocorrido em imóvel rural?: fatos[i].em_imovel_rural
+    datatype: radio
+    choices:
+      - sim: True
+      - não: False
+      
+  - Nome do Imóvel Rural: fatos[i].imovel_rural_nome
+    required: False
+    input type: text
+    hint: "ex: Fazenda Renascer"
+    show if:
+      variable: fatos[i].em_imovel_rural
+      is: True
+
+  - Imóvel possui CAR?: fatos[i].imovel_rural_possui_car
+    datatype: radio
+    choices:
+      - sim: True
+      - não: False
+    show if:
+      variable: fatos[i].em_imovel_rural
+      is: True      
+
+  - Car do Imóvel Rural: fatos[i].imovel_rural_car
+    required: False
+    input type: text
+    hint: "insira o número do CAR "
+    show if:
+      variable: fatos[i].imovel_rural_possui_car
+      is: True
+
+  - Imóvel possui matrícula conhecida no Registro de Imóveis?: fatos[i].imovel_rural_possui_matricula
+    datatype: radio
+    choices:
+      - sim: True
+      - não: False
+    show if:
+      variable: fatos[i].em_imovel_rural
+      is: True      
+
+  - Número da matrícula do Imóvel Rural: fatos[i].imovel_rural_matricula
+    required: False
+    input type: text
+    show if:
+      variable: fatos[i].imovel_rural_possui_matricula
+      is: True
+
+  - Cartório em que o imóvel está registrado: fatos[i].imovel_rural_cartorio
+    datatype: radio
+    required: False
+    code: |
+      dic_promotorias[orgao_execucao]["cartorio_ri"]  
+    show if:
+      variable: fatos[i].imovel_rural_possui_matricula
+      is: True
+
+  - Endereço: fatos[i].address
+    required: False
+
+  - Cidade: fatos[i].city
+    required: False
+    default: "Itiquira/MT"
+
+  - Estado: fatos[i].state
+    required: False
+    default: "Mato Grosso"
+
+  - CEP: fatos[i].cep
+    required: False
+
+  - Coordenadas: fatos[i].coordenadas
+    required: False
     show if:
       code: |
-        crimes_dict[selected_crime]["area_destruida"] == True  
+        crimes_dict[fatos[i].selected_crime]["coordenadas"] == True
 
-  - Parágrafo sobre como se deu o conhecimento do fato: noticia_crime
-    input type: area
-    rows: 4
-    default: "O conhecimento do fato se deu a partir de análise de alertas em tempo próximo ao real decorrente de sensoriamento remoto realizado pela plataforma Global Forest Watch (GFW)."
+  - Parágrafo sobre como se deu o conhecimento do fato: fatos[i].noticia_crime
+    datatype: combobox
+    help: O conhecimento do fato se deu a partir de análise de alertas em tempo próximo ao real decorrente de sensoriamento remoto realizado pela plataforma Global Forest Watch (GFW).
+    default: O conhecimento do fato se deu a partir de análise de alertas em tempo próximo ao real decorrente de sensoriamento remoto realizado pela plataforma Global Forest Watch (GFW).
+    choices:
+      - O conhecimento do fato se deu a partir de análise de alertas em tempo próximo ao real decorrente de sensoriamento remoto realizado pela plataforma Global Forest Watch (GFW).
     show if:
       code: |
         ato_processual_escolhido == "denúncia" or ato_processual_escolhido == 'denúncia com proposta de suspensão condicional do processo'
 
-  - Parágrafo sobre como se deu a confirmação do fato: diligencia_realizada
-    input type: radio
+  - Parágrafo sobre como se deu a confirmação do fato: fatos[i].diligencia_realizada
+    datatype: combobox
     required: False
     choices:
     - Realizou-se análise técnica por imagenamento remoto para aferição das circunstâncias em que o fato ocorreu mediante a utilização de imagens de satélite de alta resolução.
@@ -90,72 +205,118 @@ fields:
     show if:
       code: |
         ato_processual_escolhido == "denúncia" or ato_processual_escolhido == 'denúncia com proposta de suspensão condicional do processo'
-        
-  - Se a confirmação do fato se deu de outra maneira, descreva-a aqui: diligencia_realizada
-    required: False  
+
+  - Se a confirmação do fato se deu de outra maneira, descreva-a aqui: fatos[i].diligencia_realizada
+    required: False
     input type: area
     rows: 5
     show if:
       code: |
         ato_processual_escolhido == "denúncia" or ato_processual_escolhido == 'denúncia com proposta de suspensão condicional do processo'
-        
-  - Parágrafo da materialidade: materialidade
+
+  - Parágrafo da materialidade: fatos[i].materialidade
     help: "Não precisa mexer nesse texto, se a infração penal deixa vestígios materiais."
     input type: area
-    rows: 3  
+    rows: 3
     default: "A prova materialidade encontra-se demonstrada pelo "
     show if:
       code: |
-        crimes_dict[selected_crime]["materialidade"] == True 
-    required: False
-    
-  - Tipo de documento que comprova a materialidade: doc_prova_materialidade
-    help: "Geralmente será um auto de infração e termo de embargo ou relatório técnico."
-    default: "Auto de Infração "  
-    show if:
-      code: |    
-        crimes_dict[selected_crime]["materialidade"] == True 
+        crimes_dict[fatos[i].selected_crime]["materialidade"] == True
     required: False
 
-  - Número do documento que comprova materialidade: num_doc_prova_materialidade  
+  - Tipo de documento que comprova a materialidade: fatos[i].doc_prova_materialidade
+    help: "Geralmente será um auto de infração e termo de embargo ou relatório técnico."    
+    default: "Auto de Infração "
+    datatype: combobox
+    required: False    
+    choices:
+      - Auto de Infração
+      - Relatório Técnico
+      - Boletim de Ocorrência
+    show if:
+      code: |
+        crimes_dict[fatos[i].selected_crime]["materialidade"] == True
+
+  - Número do documento que comprova materialidade: fatos[i].num_doc_prova_materialidade
     required: False
     show if:
-       code: |  
-         crimes_dict[selected_crime]["materialidade"] == True
+       code: |
+         crimes_dict[fatos[i].selected_crime]["materialidade"] == True
 
-  - Orgão responsável pela diligência "in loco"(se houver): orgao_doc_prova_materialidade
+  - Orgão responsável pela diligência "in loco"(se houver): fatos[i].orgao_doc_prova_materialidade
     datatype: radio
+    required: False
     code: |
-      dic_promotorias[orgao_execucao]["orgao_ambiental_fiscalizador"]   
+      dic_promotorias[orgao_execucao]["orgao_ambiental_fiscalizador"]
     show if:
-       code: |  
-         crimes_dict[selected_crime]["materialidade"] == True         
-         
-  - Crime sujeito a representação?: representacao
+       code: |
+         crimes_dict[fatos[i].selected_crime]["materialidade"] == True
+
+  - Crime sujeito a representação?: fatos[i].representacao
     input type: area
-    rows: 2    
+    rows: 2
     default: "O crime em questão procede-se mediante ação penal pública incondicionada."
     required: False
-    
-  - Folhas ou ID do Termo de Representação?: fls_representacao
+
+  - Folhas ou ID do Termo de Representação?: fatos[i].fls_representacao
     required: False
     show if:
-       code: |  
-         crimes_dict[selected_crime]["sujeito_representacao"] == True
-    
-  - Pedido de reparação do dano: pedido_reparacao_dano  
-    input type: area
-    default: ${requerimento_reparacao_dano_desmate}
-    rows: 7
+       code: |
+         crimes_dict[fatos[i].selected_crime]["sujeito_representacao"] == True
+
+  - Testemunhas do fato: testemunhas
+    datatype: area
+    rows: 10
+    default: "Testemunha: , CPF n. , endereço à fl.  ;"
     required: False
     show if:
       code: |
         ato_processual_escolhido == "denúncia" or ato_processual_escolhido == 'denúncia com proposta de suspensão condicional do processo'
-        
-  - Se seu requerimento não se encontra aí, descreva-o: pedido_reparacao_dano
-    required: False  
+
+
+---
+question: |
+  Complete a descrição fática do crime
+subquestion: |
+    ... [FIELD fatos[i].detalhamento_fatico] [FIELD fatos[i].quantificacao] [FIELD fatos[i].unidade_quantidade] e a qualidade é [FIELD fatos[i].qualidade_obj_material].
+fields:
+  - Detalhamento fático: fatos[i].detalhamento_fatico
+    input type: text
+    default: ${my_dic_complementos[fatos[i].lista_detalhamento_preceito_primario]["detalhamento_fatico"]}
+
+  - Quantificação: fatos[i].quantificacao
+    hint: "quantidade (se houver)"
+    datatype: number
+
+  - Unidade: fatos[i].unidade_quantidade
+    hint: "É a unidade (ex: hectares), se houver"
+    input type: text
+    default: ${my_dic_complementos[fatos[i].lista_detalhamento_preceito_primario]["unidade_quantidade"]}
+ 
+  - Qualidade: fatos[i].qualidade_obj_material
+    hint: "É a qualidade, o tipo do objeto material sobre o qual recai o crime (se houver)"  
+    datatype: list
+    input type: dropdown
+    code: |
+      my_dic_complementos[fatos[i].lista_detalhamento_preceito_primario]["qualidade_obj_material"]  
+
+---
+question: |
+ Reparação do dano
+fields:
+  - Pedido de reparação do dano: pedido_reparacao_dano
     input type: area
-    rows: 5
+    default: ${requerimento_reparacao_dano_desmate}
+    rows: 10
+    required: False
+    show if:
+      code: |
+        ato_processual_escolhido == "denúncia" or ato_processual_escolhido == 'denúncia com proposta de suspensão condicional do processo'
+
+  - Se seu requerimento não se encontra aí, descreva-o: pedido_reparacao_dano
+    required: False
+    input type: area
+    rows: 10
     show if:
       code: |
         ato_processual_escolhido == "denúncia" or ato_processual_escolhido == 'denúncia com proposta de suspensão condicional do processo'
@@ -168,18 +329,56 @@ fields:
     - sim: True
     - não: False
 
-  - Testemunhas do fato: testemunhas
-    datatype: area
-    rows: 5    
-    default: "Testemunha: , CPF n. , endereço à fl.  ;"
-    required: False
-    show if:
-      code: |
-        ato_processual_escolhido == "denúncia" or ato_processual_escolhido == 'denúncia com proposta de suspensão condicional do processo'
-back button: |
-  'Voltar'
 ---
 code: |
-  paragrafo_materialidade = materialidade + " " + doc_prova_materialidade + " " + num_doc_prova_materialidade + " elaborado por " + orgao_doc_prova_materialidade + ". "
-  if pedir_medida_cautelar_diversa_prisao:
-      medida_cautelar_desmatamento
+  myoptions = []
+  crimes_dict = {}
+  crimes = objects_from_file("crimes.yml")
+  for crime_obj in crimes:
+    myoptions.append([crime_obj.TIPIFICACAO, crime_obj.TIPIFICACAO, None, crime_obj.TIPO_PENAL])
+    crime = {"tipificacao": crime_obj.TIPIFICACAO,
+      "nome_crime": crime_obj.NOME_CRIME,
+      "artigo": crime_obj.ARTIGO,
+      "caput_ou_paragrafo": crime_obj.CAPUT_OU_PARAGRAFO,
+      "inciso": crime_obj.INCISO,
+      "lei": crime_obj.LEI,
+      "preceito_primario": crime_obj.PRECEITO_PRIMARIO,
+      "tipo_penal": crime_obj.TIPO_PENAL,
+      "pena_minima": crime_obj.PENA_MINIMA,
+      "pena_maxima": crime_obj.PENA_MAXIMA,
+      "sujeito_representacao": crime_obj.SUJEITO_REPRESENTACAO,
+      "necessidade_reparacao_dano": crime_obj.NECESSIDADE_REPARACAO_DANO,
+      "materialidade": crime_obj.MATERIALIDADE,
+      "coordenadas": crime_obj.COORDENADAS,
+      "area_destruida": crime_obj.AREA_DESTRUIDA,
+      "doc_prova_materialidade": crime_obj.DOC_PROVA_MATERIALIDADE,
+      "violencia_domestica": crime_obj.VIOLENCIA_DOMESTICA,
+      "violencia_grave_ameaca": crime_obj.VIOLENCIA_GRAVE_AMEACA,
+      "lei_crimes_hediondos": crime_obj.LEI_CRIMES_HEDIONDOS,
+      "classificacao_quanto_bem_juridico": crime_obj.CLASSIFICACAO_QUANTO_BEM_JURIDICO,      
+      "complemento_tipo": crime_obj.COMPLEMENTO_DESCRICAO_TIPO_PENAL}      
+    crimes_dict[crime_obj.TIPIFICACAO] = crime
+  object_type = str(type(crimes))
+  object_length = str(len(crimes))
+
+---
+code: |
+  # Transforma as listas de complementos dos tipos penais (do arquivo crimes.yml, em "Sources") em um dicionário
+  def list_to_dic(complementos):
+    myoptions_complementos = []
+    complemento_dic = {}
+    for compl in complementos:
+      myoptions_complementos.append(compl[1])
+      complemento = {"detalhamento_fatico": compl[0][0],
+                     "unidade_quantidade": compl[0][1],
+                     "qualidade_obj_material": compl[0][2]
+                    }
+      complemento_dic[compl[1]] = complemento
+    object_type = str(type(complemento))
+    object_length = str(len(complemento))
+    return(complemento_dic, myoptions_complementos)
+  # Obtém o dicionário de complementos a partir da função  list_to_dic()
+  my_dic_complementos = list_to_dic(crimes_dict[fatos[i].selected_crime]["complemento_tipo"])[0]
+  # Obtém a lista de complementos que será exibida como opções em uma questão dropdown (a resposta será usada como chave para o dicionário)  
+  myoptions_complementos = list_to_dic(crimes_dict[fatos[i].selected_crime]["complemento_tipo"])[1]
+reconsider: True

@@ -1,0 +1,15 @@
+version: '3.7'
+
+services:
+  docassemble:
+    container_name: codigo_da_mata
+    image: jhpyle/docassemble:latest
+    environment:
+      - DAPYTHONVERSION=3
+      - TIMEZONE=America/Sao_Paulo
+      - LANGUAGE=pt
+      - LOCALE=pt_BR.utf8
+      - DAWEBSERVER=nginx
+      - PYTHONPACKAGES=docassemble-wrappers,num2words,validator-collection-br,retry-requests
+    ports:
+      - 80:80
