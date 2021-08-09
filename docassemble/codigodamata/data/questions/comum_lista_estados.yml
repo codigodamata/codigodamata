@@ -1,5 +1,7 @@
-def lista_estados ()
-  estados = [
+code: |
+
+  def lista_estados ():
+    estados = [
     "Acre",
     "Alagoas",
     "Amapá",
@@ -27,4 +29,4 @@ def lista_estados ()
     "São Paulo",
     "Sergipe",
     "Tocantins"]
-  return estados
+    return estados
