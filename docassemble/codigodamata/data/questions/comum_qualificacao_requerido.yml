@@ -168,6 +168,8 @@ fields:
       code: |
         False
 ---
+include:
+  - comum_lista_estados.yml
 mandatory: True
 code: |
   if requeridos.there_are_any:
