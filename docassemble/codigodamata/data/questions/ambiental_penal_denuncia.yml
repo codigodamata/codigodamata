@@ -45,13 +45,13 @@ code: |
         fato.intro_data = "No dia "
         fato.data_fato_texto = format_date(fato.data_fato_exata)
       else:
-        fato.intro_data = "em data não especificada, mas sabendo ter o fato ocorrido por volta de "
+        fato.intro_data = "em data não especificada, mas sabendo ter o fato ocorrido por volta do dia "
         fato.data_fato_texto = fato.data_fato_aprox
       if fato.hora_e_exata == 'sim':
         fato.hora_fato_texto = str(fato.hora_fato_exata)
       else:
         fato.hora_fato_texto = fato.hora_fato_aprox
-      fato.descricao_fato_tipico_1a_parte = fato.intro_data + fato.data_fato_texto + " " + fato.hora_fato_texto + " no local " + fato.local_fato
+      fato.descricao_fato_tipico_1a_parte = fato.intro_data + fato.data_fato_texto + ", " + fato.hora_fato_texto + " no local " + fato.local_fato
       fato.descricao_fato_tipico_1a_parte = fato.descricao_fato_tipico_1a_parte[0].upper() + fato.descricao_fato_tipico_1a_parte[1:]
       fato.preceito_primario = fato.name.text
       fato.descricao_fato_tipico_2a_parte =  fato.preceito_primario + " "  + fato.detalhamento_fatico  + " " + str(fato.quantificacao)+ " " + fato.unidade_quantidade + " " + fato.qualidade_obj_material

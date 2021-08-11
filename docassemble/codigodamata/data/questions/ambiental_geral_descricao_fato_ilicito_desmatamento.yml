@@ -71,7 +71,7 @@ fields:
 
   - Data aproximada do fato: fatos[i].data_fato_aprox
     datatype: date
-    required: False
+    required: True
     show if:
       variable: fatos[i].data_e_exata
       is: não
