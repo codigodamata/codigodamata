@@ -1,7 +1,10 @@
 ---
+features:
+  javascript:
+    - https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js
+---
 objects:
   - requeridos: DAList.using(object_type=Individual)
-
 ---
 question: Nomear o requerido? (representado, réu, suspeito da ação ilícita)
 yesno: requeridos.there_are_any
@@ -56,7 +59,6 @@ fields:
     show if:
       variable: requeridos[i].existing_or_new
       is: New
-      
   - Ocupação: requeridos[i].ocupacao
     required: False
     hint: "Selecione uma ou escreva uma resposta"    
@@ -71,7 +73,6 @@ fields:
     show if:
       variable: requeridos[i].existing_or_new
       is: New
-
   - Data de Nascimento: requeridos[i].birthdate
     required: False
     datatype: date
@@ -181,6 +182,12 @@ fields:
     show if:
       code: |
         False
+script: |
+  <script type="text/javascript">
+    $(document).ready(function(){
+        $('#X2ZpZWxkXzc').mask('000.000.000-00', {reverse: true});
+    });
+  </script>
 ---
 mandatory: True
 code: |
