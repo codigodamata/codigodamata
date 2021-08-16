@@ -146,11 +146,11 @@ fields:
       code: |
         False
 script: |
-<script type="text/javascript">
+  <script type="text/javascript">
     $(document).ready(function(){
-          $('#X2ZpZWxkXzE0').mask('(00)00000-0000', {reverse: true});
+      $('#X2ZpZWxkXzE0').mask('(00)00000-0000', {reverse: true});
     });
-</script>
+  </script>
 
 ---
 mandatory: True
