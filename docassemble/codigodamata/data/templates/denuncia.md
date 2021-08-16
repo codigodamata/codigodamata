@@ -112,7 +112,7 @@ ${indentation} ${cargo_subscritor}
 
 &nbsp;
 
-% if testemunhas != None
+% if testemunhas != None:
 **ROL DE TESTEMUNHAS**
 
 ${testemunhas}
