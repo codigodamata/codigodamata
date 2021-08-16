@@ -123,7 +123,7 @@ fields:
       variable: requeridos[i].existing_or_new
       is: New
   - Telefone celular: requeridos[i].mobile_number
-    minlength: 15
+    minlength: 13
     maxlength: 15
     validation messages:
       maxlength: |
@@ -156,7 +156,7 @@ fields:
 script: |
   <script type="text/javascript">
     $(document).ready(function(){
-      $('#X2ZpZWxkXzE0').mask('(00)00000-0000', {reverse: true});
+      $('#X2ZpZWxkXzEz').mask('(99)99999-9999');
     });
   </script>
 
