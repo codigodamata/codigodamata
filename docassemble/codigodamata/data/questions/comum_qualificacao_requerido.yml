@@ -123,6 +123,14 @@ fields:
       variable: requeridos[i].existing_or_new
       is: New
   - Telefone celular: requeridos[i].mobile_number
+    minlength: 15
+    maxlength: 15
+    validation messages:
+      maxlength: |
+        Formato inválido!
+      minlength: |
+        Formato inválido!
+    hint: "(99)99999-9999"
     required: False
     show if:
       variable: requeridos[i].existing_or_new
