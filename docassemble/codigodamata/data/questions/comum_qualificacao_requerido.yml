@@ -1,4 +1,10 @@
 ---
+features:
+  javascript:
+    - https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js
+---
+
+
 objects:
   - requeridos: DAList.using(object_type=Individual)
 
@@ -139,6 +145,13 @@ fields:
     show if:
       code: |
         False
+script: |
+<script type="text/javascript">
+    $(document).ready(function(){
+          $('#X2ZpZWxkXzE0').mask('(00)00000-0000', {reverse: true});
+    });
+</script>
+
 ---
 mandatory: True
 code: |
