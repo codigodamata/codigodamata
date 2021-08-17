@@ -156,8 +156,8 @@ items:
     AREA_DESTRUIDA: TRUE
     COORDENADAS: TRUE
     COMPLEMENTO_DESCRICAO_TIPO_PENAL: [
-                                      [["consistente em transportar, sem autorização legal", "consistente em ter em depósito, sem autorização legal",[ "sacos", "carvão vegetal"]], "transporte ou depósito ilegal de carvão vegetal"],
-                                      [[["consistente em transportar, sem autorização legal", "consistente em ter em depósito, sem autorização legal"], "m3 (metros cúbicos)", ["madeira de diversas essências da flora brasileira"]], "transporte ou depósito ilegal de madeira"]                                     
+                                      [[["consistente em transportar, sem autorização legal", "consistente em ter em depósito, sem autorização legal"],[ "sacos", ["carvão vegetal"]], "transporte ou depósito ilegal de carvão vegetal"],
+                                      [[["consistente em transportar, sem autorização legal", "consistente em ter em depósito, sem autorização legal"], ["m3 (metros cúbicos)"], ["madeira de diversas essências da flora brasileira"]], "transporte ou depósito ilegal de madeira"]
                                       ]        
     
   - TIPIFICACAO: 48 da Lei n. 9.605/1998
