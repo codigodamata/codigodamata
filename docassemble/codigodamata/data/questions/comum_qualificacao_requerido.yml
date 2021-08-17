@@ -171,12 +171,12 @@ fields:
     show if:
       code: |
         False
-  script: |
-    <script type="text/javascript">
-      $(document).ready(function(){
-          $('#X2ZpZWxkXzEx').mask('99999-999');
-      });
-    </script>
+script: |
+   <script type="text/javascript">
+     $(document).ready(function(){
+         $('#X2ZpZWxkXzEx').mask('99999-999');
+     });
+   </script>
 ---
 mandatory: True
 code: |
