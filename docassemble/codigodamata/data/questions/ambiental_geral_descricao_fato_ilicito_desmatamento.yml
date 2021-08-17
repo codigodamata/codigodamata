@@ -282,9 +282,9 @@ subquestion: |
 fields:
   - Detalhamento fático: fatos[i].detalhamento_fatico
     datatype: list
-      input type: dropdown
-      code: |
-        my_dic_complementos[fatos[i].lista_detalhamento_preceito_primario]["detalhamento_fatico"]
+    input type: dropdown
+    code: |
+      my_dic_complementos[fatos[i].lista_detalhamento_preceito_primario]["detalhamento_fatico"]
 
   - Quantificação: fatos[i].quantificacao
     hint: "quantidade (se houver)"
@@ -293,9 +293,9 @@ fields:
   - Unidade: fatos[i].unidade_quantidade
     hint: "É a unidade (ex: hectares), se houver"
     datatype: list
-      input type: dropdown
-      code: |
-        my_dic_complementos[fatos[i].lista_detalhamento_preceito_primario]["unidade_quantidade"]
+    input type: dropdown
+    code: |
+      my_dic_complementos[fatos[i].lista_detalhamento_preceito_primario]["unidade_quantidade"]
 
   - Qualidade: fatos[i].qualidade_obj_material
     hint: "É a qualidade, o tipo do objeto material sobre o qual recai o crime (se houver)"
