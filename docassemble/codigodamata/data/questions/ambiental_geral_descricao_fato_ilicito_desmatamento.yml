@@ -282,19 +282,20 @@ subquestion: |
 fields:
   - Detalhamento fático: fatos[i].detalhamento_fatico
     datatype: list
-    input type: dropdow
-    code: |
-      my_dic_complementos[fatos[i].lista_detalhamento_preceito_primario]["detalhamento_fatico"]
+      input type: dropdown
+      code: |
+        my_dic_complementos[fatos[i].lista_detalhamento_preceito_primario]["detalhamento_fatico"]
 
   - Quantificação: fatos[i].quantificacao
     hint: "quantidade (se houver)"
     datatype: number
 
   - Unidade: fatos[i].unidade_quantidade
+    hint: "É a unidade (ex: hectares), se houver"
     datatype: list
-    input type: dropdown
-    code: |
-      my_dic_complementos[fatos[i].lista_detalhamento_preceito_primario]["unidade_quantidade"]
+      input type: dropdown
+      code: |
+        my_dic_complementos[fatos[i].lista_detalhamento_preceito_primario]["unidade_quantidade"]
 
   - Qualidade: fatos[i].qualidade_obj_material
     hint: "É a qualidade, o tipo do objeto material sobre o qual recai o crime (se houver)"
@@ -302,6 +303,7 @@ fields:
     input type: dropdown
     code: |
       my_dic_complementos[fatos[i].lista_detalhamento_preceito_primario]["qualidade_obj_material"]
+
 ---
 question: |
  Reparação do dano
@@ -357,8 +359,8 @@ code: |
       "violencia_domestica": crime_obj.VIOLENCIA_DOMESTICA,
       "violencia_grave_ameaca": crime_obj.VIOLENCIA_GRAVE_AMEACA,
       "lei_crimes_hediondos": crime_obj.LEI_CRIMES_HEDIONDOS,
-      "classificacao_quanto_bem_juridico": crime_obj.CLASSIFICACAO_QUANTO_BEM_JURIDICO,      
-      "complemento_tipo": crime_obj.COMPLEMENTO_DESCRICAO_TIPO_PENAL}      
+      "classificacao_quanto_bem_juridico": crime_obj.CLASSIFICACAO_QUANTO_BEM_JURIDICO,
+      "complemento_tipo": crime_obj.COMPLEMENTO_DESCRICAO_TIPO_PENAL}
     crimes_dict[crime_obj.TIPIFICACAO] = crime
   object_type = str(type(crimes))
   object_length = str(len(crimes))
@@ -373,14 +375,14 @@ code: |
       myoptions_complementos.append(compl[1])
       if crime_obj.ARTIGO == 46:
         complemento = {"detalhamento_fatico": compl[0][0][0],
-                       "unidade_quantidade": compl[0][0][1],
-                       "qualidade_obj_material": compl[0][0][2]
-                      }
+                             "unidade_quantidade": compl[0][0][1],
+                             "qualidade_obj_material": compl[0][0][2]
+                            }
       else:
         complemento = {"detalhamento_fatico": compl[0][0],
-                        "unidade_quantidade": compl[0][1],
-                        "qualidade_obj_material": compl[0][2]
-                       }
+                             "unidade_quantidade": compl[0][1],
+                             "qualidade_obj_material": compl[0][2]
+                            }
       complemento_dic[compl[1]] = complemento
     object_type = str(type(complemento))
     object_length = str(len(complemento))
