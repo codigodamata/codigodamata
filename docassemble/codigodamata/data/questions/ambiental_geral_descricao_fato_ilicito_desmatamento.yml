@@ -281,25 +281,27 @@ subquestion: |
     ... [FIELD fatos[i].detalhamento_fatico] [FIELD fatos[i].quantificacao] [FIELD fatos[i].unidade_quantidade] e a qualidade é [FIELD fatos[i].qualidade_obj_material].
 fields:
   - Detalhamento fático: fatos[i].detalhamento_fatico
-    input type: text
-    default: ${my_dic_complementos[fatos[i].lista_detalhamento_preceito_primario]["detalhamento_fatico"]}
+    datatype: list
+    input type: dropdow
+    code: |
+      my_dic_complementos[fatos[i].lista_detalhamento_preceito_primario]["detalhamento_fatico"]
 
   - Quantificação: fatos[i].quantificacao
     hint: "quantidade (se houver)"
     datatype: number
 
   - Unidade: fatos[i].unidade_quantidade
-    hint: "É a unidade (ex: hectares), se houver"
-    input type: text
-    default: ${my_dic_complementos[fatos[i].lista_detalhamento_preceito_primario]["unidade_quantidade"]}
- 
-  - Qualidade: fatos[i].qualidade_obj_material
-    hint: "É a qualidade, o tipo do objeto material sobre o qual recai o crime (se houver)"  
     datatype: list
     input type: dropdown
     code: |
-      my_dic_complementos[fatos[i].lista_detalhamento_preceito_primario]["qualidade_obj_material"]  
+      my_dic_complementos[fatos[i].lista_detalhamento_preceito_primario]["unidade_quantidade"]
 
+  - Qualidade: fatos[i].qualidade_obj_material
+    hint: "É a qualidade, o tipo do objeto material sobre o qual recai o crime (se houver)"
+    datatype: list
+    input type: dropdown
+    code: |
+      my_dic_complementos[fatos[i].lista_detalhamento_preceito_primario]["qualidade_obj_material"]
 ---
 question: |
  Reparação do dano
