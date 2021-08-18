@@ -22,26 +22,11 @@ reconsider:
 question: |
   Quem é o ${ ordinal(i) } requerido?
 fields:
-  - Existing or New: requeridos[i].existing_or_new
-    datatype: radio
-    default: New
-    choices:
-      - Existing
-      - New
-  - Person: requeridos[i]
-    show if:
-      variable: requeridos[i].existing_or_new
-      is: Existing
-    datatype: object
-    choices: pessoas
   - Nome: requeridos[i].name.first
     help: "Se não for uma petição inicial ou denúncia, não é necessário qualificar o requerido por inteiro."
   - Nacionalidade: requeridos[i].nacionalidade
     default: "de nacionalidade brasileira"
     required: False
-    show if:
-      variable: requeridos[i].existing_or_new
-      is: New
   - Estado Civil: requeridos[i].estadocivil
     required: False
     default: ignorado
@@ -53,9 +38,6 @@ fields:
       - viúvo(a)
       - convivente em união estável
       - ignorado
-    show if:
-      variable: requeridos[i].existing_or_new
-      is: New
       
   - Ocupação: requeridos[i].ocupacao
     required: False
@@ -68,35 +50,20 @@ fields:
       - serviços gerais
       - do lar
       - de ocupação ignorada
-    show if:
-      variable: requeridos[i].existing_or_new
-      is: New
 
   - Data de Nascimento: requeridos[i].birthdate
     required: False
     datatype: date
-    show if:
-      variable: requeridos[i].existing_or_new
-      is: New
   - Endereço: requeridos[i].address.address
     required: False
-    show if:
-      variable: requeridos[i].existing_or_new
-      is: New
   - Número: requeridos[i].address.unit
     required: False
-    show if:
-      variable: requeridos[i].existing_or_new
-      is: New   
   - Cidade: requeridos[i].address.city
     required: False
     datatype: combobox
     hint: "Selecione uma ou escreva uma resposta"
     code: |
       dic_promotorias[orgao_execucao]["municipios_abrangencia"]
-    show if:
-      variable: requeridos[i].existing_or_new
-      is: New
   - Estado: requeridos[i].address.state
     required: False
     choices:
@@ -127,45 +94,24 @@ fields:
       - São Paulo
       - Sergipe
       - Tocantins
-    default: "Mato Grosso"  
-    show if:
-      variable: requeridos[i].existing_or_new
-      is: New 
+    default: "Mato Grosso"
   - CEP: requeridos[i].address.postal_code
-    show if:
-      variable: requeridos[i].existing_or_new
-      is: New
     required: False
   - País: requeridos[i].address.country
     code: |
       countries_list()
     default: "Brazil"
     required: False
-    show if:
-      variable: requeridos[i].existing_or_new
-      is: New
   - CPF: requeridos[i].cpf
     required: False
-    show if:
-      variable: requeridos[i].existing_or_new
-      is: New
   - Telefone celular: requeridos[i].mobile_number
     required: False
-    show if:
-      variable: requeridos[i].existing_or_new
-      is: New
   - Nome da mãe: requeridos[i].nome_mae
     required: False
     default: "de filiação ignorada"
-    show if:
-      variable: requeridos[i].existing_or_new
-      is: New      
   - Usa whatsapp: requeridos[i].uses_whatsapp
     required: False
     datatype: yesno
-    show if:
-      variable: requeridos[i].existing_or_new
-      is: New
   - qualificação em texto: requeridos[i].qualificacao
     required: False
     datatype: area
