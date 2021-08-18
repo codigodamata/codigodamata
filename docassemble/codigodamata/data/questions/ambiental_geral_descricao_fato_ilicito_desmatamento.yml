@@ -373,13 +373,7 @@ code: |
     complemento_dic = {}
     for compl in complementos:
       myoptions_complementos.append(compl[1])
-      if crime_obj.ARTIGO == 46:
-        complemento = {"detalhamento_fatico": compl[0][0][0],
-                             "unidade_quantidade": compl[0][0][1],
-                             "qualidade_obj_material": compl[0][0][2]
-                            }
-      else:
-        complemento = {"detalhamento_fatico": compl[0][0],
+      complemento = {"detalhamento_fatico": compl[0][0],
                              "unidade_quantidade": compl[0][1],
                              "qualidade_obj_material": compl[0][2]
                             }
