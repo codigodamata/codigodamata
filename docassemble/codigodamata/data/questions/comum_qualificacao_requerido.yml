@@ -185,7 +185,7 @@ fields:
 script: |
   <script type="text/javascript">
     $(document).ready(function(){
-        $('#X2ZpZWxkXzc').mask('000.000.000-00', {reverse: true});
+        $('#X2ZpZWxkXzEz').mask('000.000.000-00', {reverse: true});
     });
   </script>
 ---
