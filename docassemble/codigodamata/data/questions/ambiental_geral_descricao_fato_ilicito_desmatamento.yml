@@ -63,7 +63,9 @@ fields:
       - não
       
   - Data do fato: fatos[i].data_fato_exata
-    datatype: date    
+    datatype: date
+    default:
+      ${ today(format='M/d/YYYY') }
     required: False
     show if:
       variable: fatos[i].data_e_exata

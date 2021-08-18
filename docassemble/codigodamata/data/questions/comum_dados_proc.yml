@@ -36,8 +36,8 @@ fields:
     
   - Data da minuta (data de hoje): data_hoje
     datatype: date
-    default: |
-      ${ today(format='yyyy-MM-dd') }
+    default:
+      ${ today(format='M/d/YYYY') }
 
   - Subscritor da minuta: subscritor
     default: ${ dic_promotorias[orgao_execucao]["membro"] }
