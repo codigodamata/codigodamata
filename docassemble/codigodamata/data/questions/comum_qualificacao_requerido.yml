@@ -100,34 +100,6 @@ fields:
       is: New
   - Estado: requeridos[i].address.state
     required: False
-    choices:
-      - Acre
-      - Alagoas
-      - Amapá
-      - Amazonas
-      - Bahia
-      - Ceará
-      - Distrito Federal
-      - Espírito Santo
-      - Goiás
-      - Maranhão
-      - Mato Grosso
-      - Mato Grosso do Sul
-      - Minas Gerais
-      - Pará
-      - Paraíba
-      - Paraná
-      - Pernambuco
-      - Piauí
-      - Rio de Janeiro
-      - Rio Grande do Norte
-      - Rio Grande do Sul
-      - Rondônia
-      - Roraima
-      - Santa Catarina
-      - São Paulo
-      - Sergipe
-      - Tocantins
     default: "Mato Grosso"  
     show if:
       variable: requeridos[i].existing_or_new
@@ -146,6 +118,14 @@ fields:
       variable: requeridos[i].existing_or_new
       is: New
   - Telefone celular: requeridos[i].mobile_number
+    minlength: 13
+    maxlength: 14
+    validation messages:
+      maxlength: |
+        Formato inválido!
+      minlength: |
+        Formato inválido!
+    hint: "(99)99999-9999"
     required: False
     show if:
       variable: requeridos[i].existing_or_new
@@ -173,8 +153,10 @@ script: |
     $(document).ready(function(){
         $('#X2ZpZWxkXzEz').mask('000.000.000-00', {reverse: true});
         $('#X2ZpZWxkXzEx').mask('99999-999');
-     });
-   </script>
+        $('#X2ZpZWxkXzEz').mask('(99)99999-9999');
+    });
+  </script>
+
 ---
 mandatory: True
 code: |

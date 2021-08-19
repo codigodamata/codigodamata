@@ -1,6 +1,6 @@
 # Código da Mata
 
-Pacote para [Docassemble](https://docassemble.org/) (usando Python e Markdown).
+Pacote para [Docassemble](https://docassemble.org/) (usando Python, YAML e Markdown).
  
 Automação da análise jurídica e montagem automatizada de documentos ("document assembly") de atos jurídicos relacionados ao desmatamento 
 ilegal (crimes contra a flora e correlatos previstos no art. 38 e seguintes da Lei 9.605/98)
