@@ -58,7 +58,7 @@ code: |
         fato.hora_fato_texto = str(fato.hora_fato_exata)
       else:
         fato.hora_fato_texto = fato.hora_fato_aprox
-      fato.descricao_fato_tipico_1a_parte = fato.intro_data + fato.data_fato_texto + " " + fato.hora_fato_texto + " no local " + fato.local_fato
+      fato.descricao_fato_tipico_1a_parte = fato.intro_data + fato.data_fato_texto + ", às " + fato.hora_fato_texto + " no local " + fato.local_fato
       fato.descricao_fato_tipico_1a_parte = fato.descricao_fato_tipico_1a_parte[0].upper() + fato.descricao_fato_tipico_1a_parte[1:]
       fato.preceito_primario = fato.name.text
       fato.descricao_fato_tipico_2a_parte =  fato.preceito_primario + " "  + fato.detalhamento_fatico  + " " + str(fato.quantificacao)+ " " + fato.unidade_quantidade + " " + fato.qualidade_obj_material
@@ -137,7 +137,6 @@ include:
  - comum_dados_proc.yml
  - comum_dados_orgao.yml
  - comum_qualificacao_requerido.yml
- - comum_scripts.yml
 
 ---
 mandatory: True
