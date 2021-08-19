@@ -145,20 +145,6 @@ fields:
     show if:
       variable: requeridos[i].existing_or_new
       is: New
-  - CPF: requeridos[i].cpf
-    help: "Escreva o CPF com pontos e o traço antes dos dois números finais como mostrado: xxx.xxx.xxx-xx"
-    minlength: 14
-    maxlength: 14
-    validation messages:
-      maxlength: |
-        Formato inválido!
-      minlength: |
-        Formato inválido!
-    hint: "123.456.789-10"
-    required: False
-    show if:
-      variable: requeridos[i].existing_or_new
-      is: New
   - Telefone celular: requeridos[i].mobile_number
     required: False
     show if:
@@ -186,8 +172,9 @@ script: |
   <script type="text/javascript">
     $(document).ready(function(){
         $('#X2ZpZWxkXzEz').mask('000.000.000-00', {reverse: true});
-    });
-  </script>
+        $('#X2ZpZWxkXzEx').mask('99999-999');
+     });
+   </script>
 ---
 mandatory: True
 code: |
