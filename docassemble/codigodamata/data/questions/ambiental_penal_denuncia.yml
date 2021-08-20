@@ -99,6 +99,7 @@ fields:
     datatype: area
     default: conforme comprova a certidão de ID. [insira o número de fls. ou id], o requerido
     required: False
+back button: True
 ---
 code: |
   if fatos.there_are_any:
