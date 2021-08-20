@@ -278,7 +278,7 @@ back button: True
 question: |
   Complete a descrição fática do crime
 subquestion: |
-    ... [FIELD fatos[i].detalhamento_fatico] [FIELD fatos[i].quantificacao] [FIELD fatos[i].unidade_quantidade] e a qualidade é [FIELD fatos[i].qualidade_obj_material].
+    ... [FIELD fatos[i].detalhamento_fatico] [FIELD fatos[i].quantificacao] [FIELD fatos[i].unidade_quantidade] e a qualidade é [FIELD fatos[i].qualidade_obj_material]
 fields:
   - Detalhamento fático: fatos[i].detalhamento_fatico
     input type: text
