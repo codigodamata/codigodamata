@@ -152,5 +152,4 @@ attachment:
   filename: ${ato_processual_escolhido + " "+ simp_re}  
   docx template file: minuta_cabecalho.docx
   pdf/a: True
-buttons:
-  - Exit: exit
+back button: True
