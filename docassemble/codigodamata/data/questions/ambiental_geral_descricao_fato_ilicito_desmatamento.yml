@@ -13,12 +13,12 @@ code: |
 question: Descrever o fato?
 yesno: fatos.there_are_any
 default: yes
-
+back button: True
 ---
 question: Adicionar mais um fato?
 yesno: fatos.there_is_another
 
-
+back button: True
 ---
 question: |
   Escolha o tipo penal do crime
@@ -37,7 +37,7 @@ fields:
       - não
     help: |
       Embora de ocorrência rara, em situações excepcionalíssimas um crime ambiental poderia ser praticado no contexto da violência doméstica contra a mulher. Ex: art. 49 da Lei 9.605/98 (destruição de plantas ornamentais em propriedade privada), como uma forma de violência patrimonial contra a mulher.
-
+back button: True
 ---
 question: |
  Complete a descrição fática
@@ -61,9 +61,9 @@ fields:
     choices:
       - sim
       - não
-      
+
   - Data do fato: fatos[i].data_fato_exata
-    datatype: date    
+    datatype: date
     required: False
     show if:
       variable: fatos[i].data_e_exata
@@ -89,8 +89,8 @@ fields:
     datatype: radio
     choices:
       - sim
-      - não      
-      
+      - não
+
   - Hora do fato: fatos[i].hora_fato_exata
     datatype: time
     required: False
@@ -100,7 +100,7 @@ fields:
 
   - Hora do fato: fatos[i].hora_fato_aprox
     datatype: combobox
-    required: False    
+    required: False
     choices:
       - em horário indeterminado
       - em horário indeterminado, sabendo-se ter ocorrido no período da manhã
@@ -115,7 +115,7 @@ fields:
     choices:
       - sim: True
       - não: False
-      
+
   - Nome do Imóvel Rural: fatos[i].imovel_rural_nome
     required: False
     input type: text
@@ -131,7 +131,7 @@ fields:
       - não: False
     show if:
       variable: fatos[i].em_imovel_rural
-      is: True      
+      is: True
 
   - Car do Imóvel Rural: fatos[i].imovel_rural_car
     required: False
@@ -148,7 +148,7 @@ fields:
       - não: False
     show if:
       variable: fatos[i].em_imovel_rural
-      is: True      
+      is: True
 
   - Número da matrícula do Imóvel Rural: fatos[i].imovel_rural_matricula
     required: False
@@ -161,7 +161,7 @@ fields:
     datatype: radio
     required: False
     code: |
-      dic_promotorias[orgao_execucao]["cartorio_ri"]  
+      dic_promotorias[orgao_execucao]["cartorio_ri"]
     show if:
       variable: fatos[i].imovel_rural_possui_matricula
       is: True
@@ -225,10 +225,10 @@ fields:
     required: False
 
   - Tipo de documento que comprova a materialidade: fatos[i].doc_prova_materialidade
-    help: "Geralmente será um auto de infração e termo de embargo ou relatório técnico."    
+    help: "Geralmente será um auto de infração e termo de embargo ou relatório técnico."
     default: "Auto de Infração "
     datatype: combobox
-    required: False    
+    required: False
     choices:
       - Auto de Infração
       - Relatório Técnico
@@ -273,12 +273,12 @@ fields:
       code: |
         ato_processual_escolhido == "denúncia" or ato_processual_escolhido == 'denúncia com proposta de suspensão condicional do processo'
 
-
+back button: True
 ---
 question: |
   Complete a descrição fática do crime
 subquestion: |
-    ... [FIELD fatos[i].detalhamento_fatico] [FIELD fatos[i].quantificacao] [FIELD fatos[i].unidade_quantidade] e a qualidade é [FIELD fatos[i].qualidade_obj_material].
+    ... [FIELD fatos[i].detalhamento_fatico] [FIELD fatos[i].quantificacao] [FIELD fatos[i].unidade_quantidade] e a qualidade é [FIELD fatos[i].qualidade_obj_material]
 fields:
   - Detalhamento fático: fatos[i].detalhamento_fatico
     input type: text
@@ -292,14 +292,14 @@ fields:
     hint: "É a unidade (ex: hectares), se houver"
     input type: text
     default: ${my_dic_complementos[fatos[i].lista_detalhamento_preceito_primario]["unidade_quantidade"]}
- 
+
   - Qualidade: fatos[i].qualidade_obj_material
-    hint: "É a qualidade, o tipo do objeto material sobre o qual recai o crime (se houver)"  
+    hint: "É a qualidade, o tipo do objeto material sobre o qual recai o crime (se houver)"
     datatype: list
     input type: dropdown
     code: |
-      my_dic_complementos[fatos[i].lista_detalhamento_preceito_primario]["qualidade_obj_material"]  
-
+      my_dic_complementos[fatos[i].lista_detalhamento_preceito_primario]["qualidade_obj_material"]
+back button: True
 ---
 question: |
  Reparação do dano
@@ -328,7 +328,7 @@ fields:
     choices:
     - sim: True
     - não: False
-
+back button: True
 ---
 code: |
   myoptions = []

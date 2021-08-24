@@ -6,11 +6,11 @@ objects:
 question: Nomear o requerido? (representado, réu, suspeito da ação ilícita)
 yesno: requeridos.there_are_any
 default: yes
-
+back button: True
 ---
 question: Adicionar mais um requerido?
 yesno: requeridos.there_is_another
-
+back button: True
 ---
 code: |
   pessoas = requeridos.complete_elements()
@@ -167,6 +167,7 @@ fields:
     show if:
       code: |
         False
+back button: True
 ---
 mandatory: True
 code: |
