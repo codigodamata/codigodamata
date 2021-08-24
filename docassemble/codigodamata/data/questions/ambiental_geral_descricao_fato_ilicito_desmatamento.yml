@@ -64,6 +64,8 @@ fields:
 
   - Data do fato: fatos[i].data_fato_exata
     datatype: date
+    default:
+      ${ today(format='M/d/YYYY') }
     required: False
     show if:
       variable: fatos[i].data_e_exata
@@ -292,7 +294,7 @@ fields:
     hint: "É a unidade (ex: hectares), se houver"
     input type: text
     default: ${my_dic_complementos[fatos[i].lista_detalhamento_preceito_primario]["unidade_quantidade"]}
-
+ 
   - Qualidade: fatos[i].qualidade_obj_material
     hint: "É a qualidade, o tipo do objeto material sobre o qual recai o crime (se houver)"
     datatype: list

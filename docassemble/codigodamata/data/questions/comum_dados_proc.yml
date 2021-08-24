@@ -35,7 +35,9 @@ fields:
     default: ${ dic_promotorias[orgao_execucao]["ramo_mp"] } 
     
   - Data da minuta (data de hoje): data_hoje
-    default: ${ data_hoje }
+    datatype: date
+    default:
+      ${ today(format='M/d/YYYY') }
 
   - Subscritor da minuta: subscritor
     default: ${ dic_promotorias[orgao_execucao]["membro"] }
