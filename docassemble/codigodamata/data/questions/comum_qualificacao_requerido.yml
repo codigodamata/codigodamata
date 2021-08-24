@@ -175,7 +175,7 @@ code: |
     todos_requeridos = ''
     for requerido in requeridos:
       todos_requeridos = '' + requerido.name.full().upper() + ', '
-      qualificacao_texto = requerido.nacionalidade + ", "+ requerido.estadocivil + ", " + requerido.ocupacao + ", nascido aos " + requerido.birthdate + ", filho de " + requerido.nome_mae +  ", residente e domiciliado na " + requerido.address.address + " " + requerido.address.unit +  ", "+ requerido.address.city + ", " + requerido.address.state +  ", telefone: " + requerido.mobile_number +";"
+      qualificacao_texto = teste_virgula(requerido.nacionalidade) + teste_virgula(requerido.estadocivil) + teste_virgula(requerido.ocupacao) + teste_virgula_duplo(", nascido aos ",requerido.birthdate) + teste_virgula_duplo(", filho de ",requerido.nome_mae) +  teste_virgula_duplo(", residente e domiciliado na ",requerido.address.address) + teste_virgula_duplo(" ",requerido.address.unit) + teste_virgula_duplo(", ",requerido.address.city) + teste_virgula_duplo(", ",requerido.address.state) +  teste_virgula_duplo(", telefone: ",requerido.mobile_number) +";"
       requerido.qualificacao = qualificacao_texto
     for requerido in requeridos:
       requerido.name.first = requerido.name.first.upper()

@@ -29,7 +29,7 @@ code: |
       descricao_fatica_texto = fato.name.text
 
       # Criando o atributo local_fato
-      local_fato = try_var(fato.address) + try_var(fato.city) + try_var(fato.state)
+      local_fato = teste_virgula(fato.address) + teste_virgula(fato.city) + teste_virgula(fato.state)
       # Acrescenta descrição do imóvel
       if fato.em_imovel_rural == True and fato.imovel_rural_possui_car == True:
         local_fato = " no imóvel rural denominado " + fato.imovel_rural_nome + ", registrado no CAR sob o n. " + fato.imovel_rural_car + ", localizado na " + local_fato
@@ -130,6 +130,7 @@ include:
  - comum_minhas_configuracoes.yml
  - comum_dados_proc.yml
  - comum_dados_orgao.yml
+ - comum_formatacao.yml
  - comum_qualificacao_requerido.yml
  - comum_scripts.yml
 
