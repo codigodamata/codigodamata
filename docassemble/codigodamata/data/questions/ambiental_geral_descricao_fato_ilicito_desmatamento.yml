@@ -108,7 +108,7 @@ fields:
     choices:
       - sim: True
       - não: False
-
+      
   - Nome do Imóvel Rural: fatos[i].imovel_rural_nome
     required: False
     input type: text
@@ -124,7 +124,7 @@ fields:
       - não: False
     show if:
       variable: fatos[i].em_imovel_rural
-      is: True
+      is: True      
 
   - Car do Imóvel Rural: fatos[i].imovel_rural_car
     required: False
@@ -141,7 +141,7 @@ fields:
       - não: False
     show if:
       variable: fatos[i].em_imovel_rural
-      is: True
+      is: True      
 
   - Número da matrícula do Imóvel Rural: fatos[i].imovel_rural_matricula
     required: False
@@ -154,7 +154,7 @@ fields:
     datatype: radio
     required: False
     code: |
-      dic_promotorias[orgao_execucao]["cartorio_ri"]
+      dic_promotorias[orgao_execucao]["cartorio_ri"]  
     show if:
       variable: fatos[i].imovel_rural_possui_matricula
       is: True
@@ -274,8 +274,10 @@ subquestion: |
     ... [FIELD fatos[i].detalhamento_fatico] [FIELD fatos[i].quantificacao] [FIELD fatos[i].unidade_quantidade] e a qualidade é [FIELD fatos[i].qualidade_obj_material]
 fields:
   - Detalhamento fático: fatos[i].detalhamento_fatico
-    input type: text
-    default: ${my_dic_complementos[fatos[i].lista_detalhamento_preceito_primario]["detalhamento_fatico"]}
+    datatype: list
+    input type: dropdown
+    code: |
+      my_dic_complementos[fatos[i].lista_detalhamento_preceito_primario]["detalhamento_fatico"]
 
   - Quantificação: fatos[i].quantificacao
     hint: "quantidade (se houver)"
@@ -283,9 +285,11 @@ fields:
 
   - Unidade: fatos[i].unidade_quantidade
     hint: "É a unidade (ex: hectares), se houver"
-    input type: text
-    default: ${my_dic_complementos[fatos[i].lista_detalhamento_preceito_primario]["unidade_quantidade"]}
- 
+    datatype: list
+    input type: dropdown
+    code: |
+      my_dic_complementos[fatos[i].lista_detalhamento_preceito_primario]["unidade_quantidade"]
+
   - Qualidade: fatos[i].qualidade_obj_material
     hint: "É a qualidade, o tipo do objeto material sobre o qual recai o crime (se houver)"
     datatype: list
@@ -348,8 +352,8 @@ code: |
       "violencia_domestica": crime_obj.VIOLENCIA_DOMESTICA,
       "violencia_grave_ameaca": crime_obj.VIOLENCIA_GRAVE_AMEACA,
       "lei_crimes_hediondos": crime_obj.LEI_CRIMES_HEDIONDOS,
-      "classificacao_quanto_bem_juridico": crime_obj.CLASSIFICACAO_QUANTO_BEM_JURIDICO,      
-      "complemento_tipo": crime_obj.COMPLEMENTO_DESCRICAO_TIPO_PENAL}      
+      "classificacao_quanto_bem_juridico": crime_obj.CLASSIFICACAO_QUANTO_BEM_JURIDICO,
+      "complemento_tipo": crime_obj.COMPLEMENTO_DESCRICAO_TIPO_PENAL}
     crimes_dict[crime_obj.TIPIFICACAO] = crime
   object_type = str(type(crimes))
   object_length = str(len(crimes))
@@ -363,9 +367,9 @@ code: |
     for compl in complementos:
       myoptions_complementos.append(compl[1])
       complemento = {"detalhamento_fatico": compl[0][0],
-                     "unidade_quantidade": compl[0][1],
-                     "qualidade_obj_material": compl[0][2]
-                    }
+                             "unidade_quantidade": compl[0][1],
+                             "qualidade_obj_material": compl[0][2]
+                            }
       complemento_dic[compl[1]] = complemento
     object_type = str(type(complemento))
     object_length = str(len(complemento))
