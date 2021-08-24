@@ -1,7 +1,10 @@
 ---
+features:
+  javascript:
+    - https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js
+---
 objects:
   - requeridos: DAList.using(object_type=Individual)
-
 ---
 question: É necessário nomear um requerido (representado, réu, suspeito da ação ilícita).
 continue button field: requeridos.there_are_any
@@ -38,7 +41,7 @@ fields:
       - viúvo(a)
       - convivente em união estável
       - ignorado
-      
+
   - Ocupação: requeridos[i].ocupacao
     required: False
     hint: "Selecione uma ou escreva uma resposta"    
@@ -66,34 +69,6 @@ fields:
       dic_promotorias[orgao_execucao]["municipios_abrangencia"]
   - Estado: requeridos[i].address.state
     required: False
-    choices:
-      - Acre
-      - Alagoas
-      - Amapá
-      - Amazonas
-      - Bahia
-      - Ceará
-      - Distrito Federal
-      - Espírito Santo
-      - Goiás
-      - Maranhão
-      - Mato Grosso
-      - Mato Grosso do Sul
-      - Minas Gerais
-      - Pará
-      - Paraíba
-      - Paraná
-      - Pernambuco
-      - Piauí
-      - Rio de Janeiro
-      - Rio Grande do Norte
-      - Rio Grande do Sul
-      - Rondônia
-      - Roraima
-      - Santa Catarina
-      - São Paulo
-      - Sergipe
-      - Tocantins
     default: "Mato Grosso"
   - CEP: requeridos[i].address.postal_code
     required: False
@@ -105,6 +80,14 @@ fields:
   - CPF: requeridos[i].cpf
     required: False
   - Telefone celular: requeridos[i].mobile_number
+    minlength: 13
+    maxlength: 14
+    validation messages:
+      maxlength: |
+        Formato inválido!
+      minlength: |
+        Formato inválido!
+    hint: "(99)99999-9999"
     required: False
   - Nome da mãe: requeridos[i].nome_mae
     required: False
@@ -119,6 +102,15 @@ fields:
       code: |
         False
 back button: True
+script: |
+  <script type="text/javascript">
+    $(document).ready(function(){
+        $('#X2ZpZWxkXzEz').mask('000.000.000-00', {reverse: true});
+        $('#X2ZpZWxkXzEx').mask('99999-999');
+        $('#X2ZpZWxkXzEz').mask('(99)99999-9999');
+    });
+  </script>
+
 ---
 mandatory: True
 code: |

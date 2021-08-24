@@ -1,4 +1,8 @@
 ---
+features:
+  javascript:
+    - https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js
+---
 objects:
   - fatos: DAList.using(there_are_any=True, object_type=Thing, complete_attribute='complete')
   - imovel_rural: DAList.using(there_are_any=True, object_type=Thing, complete_attribute='complete')
@@ -265,7 +269,12 @@ fields:
     show if:
       code: |
         ato_processual_escolhido == "denúncia" or ato_processual_escolhido == 'denúncia com proposta de suspensão condicional do processo'
-
+script: |
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $('#ZmF0b3NbaV0uY2Vw').mask('99999-999');
+    });
+  </script>
 back button: True
 ---
 question: |
