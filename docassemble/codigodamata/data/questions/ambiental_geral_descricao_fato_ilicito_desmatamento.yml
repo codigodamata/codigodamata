@@ -172,6 +172,8 @@ fields:
 
   - Estado: fatos[i].state
     required: False
+    code: |
+      lista_estados()
     default: "Mato Grosso"
 
   - CEP: fatos[i].cep
@@ -336,6 +338,8 @@ fields:
     - não: False
 back button: True
 ---
+include:
+  comum_lista_estados.yml
 code: |
   myoptions = []
   crimes_dict = {}

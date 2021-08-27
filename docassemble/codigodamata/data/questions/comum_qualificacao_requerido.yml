@@ -69,7 +69,9 @@ fields:
       dic_promotorias[orgao_execucao]["municipios_abrangencia"]
   - Estado: requeridos[i].address.state
     required: False
-    default: "Mato Grosso"
+    code: |
+      lista_estados()
+    default: "Mato Grosso"  
   - CEP: requeridos[i].address.postal_code
     required: False
   - País: requeridos[i].address.country
@@ -111,6 +113,9 @@ script: |
     });
   </script>
 
+---
+include:
+  - comum_lista_estados.yml
 ---
 mandatory: True
 code: |

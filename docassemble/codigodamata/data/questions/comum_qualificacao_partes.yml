@@ -77,8 +77,10 @@ fields:
       variable: requeridos[i].existing_or_new
       is: New
   - Estado: requeridos[i].address.state
-    required: False
-    default: "Mato Grosso"  
+      required: False
+      code: |
+        lista_estados()
+      default: "Mato Grosso"
     show if:
       variable: requeridos[i].existing_or_new
       is: New 
@@ -110,6 +112,10 @@ fields:
     show if:
       variable: requeridos[i].existing_or_new
       is: New
+
+---
+include:
+  comum_lista_estados.yml
       
 ---
 code: |
