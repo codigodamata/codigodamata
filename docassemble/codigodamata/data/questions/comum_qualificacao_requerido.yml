@@ -84,6 +84,17 @@ fields:
     required: False
   - CPF: requeridos[i].cpf
     required: False
+  validation code: |
+  script: |
+    <script src="js/comum.validacao.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function(){
+      CPF_valido(requeridos[i].cpf);
+
+    });
+    </script>
+
+
   - Telefone celular: requeridos[i].mobile_number
     minlength: 13
     maxlength: 14
@@ -119,6 +130,7 @@ script: |
 ---
 include:
   - comum_lista_estados.yml
+  - comum_validacao_cpf.js
 ---
 mandatory: True
 code: |
