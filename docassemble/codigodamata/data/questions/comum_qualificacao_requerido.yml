@@ -71,10 +71,7 @@ fields:
     required: False
     code: |
       lista_estados()
-    default: "Mato Grosso"
-    show if:
-      variable: requeridos[i].existing_or_new
-      is: New
+    default: "Mato Grosso"  
   - CEP: requeridos[i].address.postal_code
     required: False
   - País: requeridos[i].address.country
