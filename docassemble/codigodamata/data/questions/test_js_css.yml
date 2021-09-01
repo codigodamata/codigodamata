@@ -1,0 +1,9 @@
+features:
+  javascript: my-functions.js
+  css: my-styles.css
+---
+mandatory: True
+question: |
+  A test of Javascript and CSS
+subquestion: |
+  <span class="groovy"></span>
