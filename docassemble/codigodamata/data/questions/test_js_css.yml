@@ -1,5 +1,6 @@
 features:
   javascript:
+    - https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js
     - test_function.js
     - comum_validacao_cpf.js
   css: test_style.css
@@ -13,10 +14,22 @@ fields:
   - Campo Teste: campo_teste
 script: |
   <script type="text/javascript">
+      $(document).ready(function(){
+          $('#Y2FtcG9fdGVzdGU').mask('000.000.000-00', {reverse: true});
+      });
     $("#Y2FtcG9fdGVzdGU").focusout(function() {
       var campo_teste = $("#Y2FtcG9fdGVzdGU").val();
-      console.log(campo_teste);
-      console.log(CPF_valido(campo_teste));
-
+      if (campo_teste){
+        var cpf_valido = CPF_valido(campo_teste)
+        if (!cpf_valido) {
+          console.log("CPF INVÁLIDO");
+          $("#Y2FtcG9fdGVzdGU").val("");
+          $('<span id="Y2FtcG9fdGVzdGU-error" class="da-has-error text-danger" style="">CPF Inválido</span>').insertAfter("#Y2FtcG9fdGVzdGU")
+        }
+        else {
+          console.log("CPF VÁLIDO");
+        }
+      }
     });
-  </script>
+
+    </script>
