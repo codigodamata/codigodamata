@@ -168,7 +168,7 @@ fields:
 
   - Cidade: fatos[i].city
     required: False
-    default: "Itiquira/MT"
+    default: "Itiquira"
 
   - Estado: fatos[i].state
     required: False

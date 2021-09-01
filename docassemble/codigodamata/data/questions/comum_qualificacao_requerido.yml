@@ -61,12 +61,11 @@ fields:
     required: False
   - Número: requeridos[i].address.unit
     required: False
+  - Bairro: requeridos[i].address.bairro
+    required: False
   - Cidade: requeridos[i].address.city
     required: False
-    datatype: combobox
     hint: "Selecione uma ou escreva uma resposta"
-    code: |
-      dic_promotorias[orgao_execucao]["municipios_abrangencia"]
   - Estado: requeridos[i].address.state
     required: False
     code: |
@@ -133,7 +132,7 @@ code: |
     todos_requeridos = ''
     for requerido in requeridos:
       todos_requeridos = '' + requerido.name.full().upper() + ', '
-      qualificacao_texto = "inscrito no CPF de número " + requerido.cpf + ", " + requerido.nacionalidade + ", "+ requerido.estadocivil + ", " + requerido.ocupacao + ", nascido aos " + requerido.birthdate + ", filho de " + requerido.nome_mae +  ", residente e domiciliado na " + requerido.address.address + " " + requerido.address.unit +  ", "+ requerido.address.city + ", " + requerido.address.state +  ", telefone: " + requerido.mobile_number +";"
+      qualificacao_texto = "inscrito no CPF de número " + requerido.cpf + ", " + requerido.nacionalidade + ", "+ requerido.estadocivil + ", " + requerido.ocupacao + ", nascido aos " + requerido.birthdate + ", filho de " + requerido.nome_mae +  ", residente e domiciliado na " + requerido.address.address + " " + requerido.address.unit +  ", " + requeridos.address.bairro + ", " + requerido.address.city + ", " + requerido.address.state +  ", telefone: " + requerido.mobile_number +";"
       requerido.qualificacao = qualificacao_texto
     for requerido in requeridos:
       requerido.name.first = requerido.name.first.upper()
