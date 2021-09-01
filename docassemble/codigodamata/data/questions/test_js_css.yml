@@ -10,4 +10,13 @@ question: |
 subquestion: |
   <span class="groovy"></span>
 fields:
-  - Campo Teste: s
+  - Campo Teste: campo_teste
+script: |
+  <script type="text/javascript">
+    $("#Y2FtcG9fdGVzdGU").focusout(function() {
+      var campo_teste = $("#Y2FtcG9fdGVzdGU").val();
+      console.log(campo_teste);
+      console.log(CPF_valido(campo_teste));
+
+    });
+  </script>

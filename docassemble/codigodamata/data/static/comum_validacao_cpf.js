@@ -33,6 +33,6 @@ function CPF_valido(cpf_requerido) {
   arrayOfDigits.push(dig2);
 
   var concate = `${dig1}${dig2}`;
-  if (concate == valid) return True; //alert('qualquer coisa ai');
-  else if (concate != valid) return False; //alert("errrou");
+  if (concate == valid) return true; //alert('qualquer coisa ai');
+  else if (concate != valid) return false; //alert("errrou");
 }
