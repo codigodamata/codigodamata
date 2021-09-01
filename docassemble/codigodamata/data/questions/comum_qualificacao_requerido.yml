@@ -105,20 +105,21 @@ fields:
 back button: True
 script: |
   <script type="text/javascript">
-    $(document).ready(function(){
-        $('#X2ZpZWxkXzEz').mask('000.000.000-00', {reverse: true});
-        $('#X2ZpZWxkXzEx').mask('99999-999');
-        $('#X2ZpZWxkXzEz').mask('(99)99999-9999');
-        $('#cmVxdWVyaWRvc1tpXS5hZGRyZXNzLnBvc3RhbF9jb2Rl').mask('00000-000'); });
-        $("#cmVxdWVyaWRvc1tpXS5hZGRyZXNzLnBvc3RhbF9jb2Rl").focusout(function(){ var cep = $("#cGFydFtpXS5hZGRyZXNzLnppcA").val();
-        cep = cep.replace ("-","");
-          if (cep != ""){ var urlStr = "https://viacep.com.br/ws/"+ cep +"/json/";
-          $.ajax({ url: urlStr, crossDomain: true, type: "get", dataType: "json", success: function(data){
-            $("#cmVxdWVyaWRvc1tpXS5hZGRyZXNzLmFkZHJlc3M").val(data.logradouro);
-            $("#cGFydFtpXS5hZGRyZXNzLm5laWdoYm9yaG9vZA").val(data.bairro);
-            $("#cGFydFtpXS5hZGRyZXNzLmNpdHk").val(data.localidade);
-            $("#cGFydFtpXS5hZGRyZXNzLnN0YXRl").val(data.uf); }, error: function(erro){ console.log(erro);
-    } }); } });
+      $(document).ready(function(){
+          $('#cmVxdWVyaWRvc1tpXS5jcGY').mask('000.000.000-00', {reverse: true});
+          $('#cmVxdWVyaWRvc1tpXS5tb2JpbGVfbnVtYmVy').mask('(99)99999-9999');
+          $('#cmVxdWVyaWRvc1tpXS5hZGRyZXNzLnBvc3RhbF9jb2Rl').mask('00000-000'); });
+          $("#cmVxdWVyaWRvc1tpXS5hZGRyZXNzLnBvc3RhbF9jb2Rl").focusout(function(){ var cep = $("#cmVxdWVyaWRvc1tpXS5hZGRyZXNzLnBvc3RhbF9jb2Rl").val();
+          cep = cep.replace ("-","");
+            {var urlStr = "https://viacep.com.br/ws/"+ cep +"/json/";
+            $.ajax({ url: urlStr, crossDomain: true, type: "get", dataType: "json", success: function(data){
+              $("#cmVxdWVyaWRvc1tpXS5hZGRyZXNzLmFkZHJlc3M").val(data.logradouro);
+              $("#cmVxdWVyaWRvc1tpXS5hZGRyZXNzLmJhaXJybw").val(data.bairro);
+              $("#cmVxdWVyaWRvc1tpXS5hZGRyZXNzLmNpdHk").val(data.localidade);
+              $("#cmVxdWVyaWRvc1tpXS5hZGRyZXNzLnN0YXRl").val(data.uf); }, error: function(erro){ console.log(erro);
+      } }); } });
+
+    </script>
 
   </script>
 
