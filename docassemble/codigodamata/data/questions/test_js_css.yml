@@ -1,6 +1,6 @@
 features:
-  javascript: my-functions.js
-  css: my-styles.css
+  javascript: test_function.js
+  css: test_style.css
 ---
 mandatory: True
 question: |
