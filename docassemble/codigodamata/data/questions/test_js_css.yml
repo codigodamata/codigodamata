@@ -1,5 +1,7 @@
 features:
-  javascript: test_function.js
+  javascript:
+    - test_function.js
+    - comum_validacao_cpf.js
   css: test_style.css
 ---
 mandatory: True
@@ -7,3 +9,5 @@ question: |
   A test of Javascript and CSS
 subquestion: |
   <span class="groovy"></span>
+fields:
+  - Campo Teste: s
