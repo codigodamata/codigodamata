@@ -6,8 +6,8 @@ code: |
     else:
       return ''
 
-  # teste_virgula_duplo para adicionar variáveis duplas (ou string + var, var + string)
-  def teste_virgula_duplo(x,y):
+  # teste_virgula_d para adicionar variáveis duplas (ou string + var, var + string)
+  def teste_virgula_d(x,y):
     if x != None:
       return x + y
     else:
