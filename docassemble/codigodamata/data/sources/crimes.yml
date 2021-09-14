@@ -24,14 +24,14 @@ items:
     AREA_DESTRUIDA: TRUE
     COORDENADAS: TRUE
     COMPLEMENTO_DESCRICAO_TIPO_PENAL: [
-                                      [["mediante o desflorestamento", "hectares", ["vegetação nativa do bioma Floresta Amazônica, patrimônio natural objeto de especial proteção (art. 225, § 4º, CF/1988)", "vegetação nativa do bioma Cerrado", "vegetação nativa do bioma Pantanal Mato-grossense, patrimônio natural objeto de especial proteção (art. 225, § 4º, CF/1988)"]], "destruição ou uso indevido de APP"],
-                                      ]    
+                                      [[["mediante o desflorestamento"], ["hectares"], ["vegetação nativa do bioma Floresta Amazônica, patrimônio natural objeto de especial proteção (art. 225, § 4º, CF/1988)", "vegetação nativa do bioma Cerrado", "vegetação nativa do bioma Pantanal Mato-grossense, patrimônio natural objeto de especial proteção (art. 225, § 4º, CF/1988)"]], "destruição ou uso indevido de APP"],
+                                      ]
 
   - TIPIFICACAO: "38, parágrafo único, da Lei n. 9.605/1998"
-    NOME_CRIME: 
+    NOME_CRIME:
     ARTIGO: 38
     CAPUT_OU_PARAGRAFO: ", parágrafo único,"
-    INCISO: 
+    INCISO:
     LEI: Lei n. 9.605/1998
     CLASSIFICACAO_QUANTO_BEM_JURIDICO: "Dos Crimes contra a Flora"
     PRECEITO_PRIMARIO: "agindo mediante negligência, imprudência ou imperícia, destruiu ou danificou culposamente floresta considerada de preservação permanente e utilizou-a com infringência das normas de proteção\n\n"
@@ -46,11 +46,11 @@ items:
     NECESSIDADE_REPARACAO_DANO: TRUE
     SUJEITO_REPRESENTACAO: FALSE
     MATERIALIDADE: TRUE
-    DOC_PROVA_MATERIALIDADE: Auto de infração n. 
+    DOC_PROVA_MATERIALIDADE: Auto de infração n.
     AREA_DESTRUIDA: TRUE
     COORDENADAS: TRUE
     COMPLEMENTO_DESCRICAO_TIPO_PENAL: [
-                                      [["corte de árvores em área de preservação permanente", "hectares", ["vegetação nativa do bioma Floresta Amazônica, patrimônio natural objeto de especial proteção (art. 225, § 4º, CF/1988)", "vegetação nativa do bioma Cerrado", "vegetação nativa do bioma Pantanal Mato-grossense, patrimônio natural objeto de especial proteção (art. 225, § 4º, CF/1988)"]], "destruição ou uso indevido de APP"],
+                                      [[["corte de árvores em área de preservação permanente"], ["hectares"], ["vegetação nativa do bioma Floresta Amazônica, patrimônio natural objeto de especial proteção (art. 225, § 4º, CF/1988)", "vegetação nativa do bioma Cerrado", "vegetação nativa do bioma Pantanal Mato-grossense, patrimônio natural objeto de especial proteção (art. 225, § 4º, CF/1988)"]], "destruição ou uso indevido de APP"],
                                       ]  
 
 
@@ -77,7 +77,7 @@ items:
     AREA_DESTRUIDA: TRUE
     COORDENADAS: TRUE
     COMPLEMENTO_DESCRICAO_TIPO_PENAL: [
-                                      [["corte de árvores em área de preservação permanente", "hectares", ["vegetação nativa do bioma Floresta Amazônica, patrimônio natural objeto de especial proteção (art. 225, § 4º, CF/1988)", "vegetação nativa do bioma Cerrado", "vegetação nativa do bioma Pantanal Mato-grossense, patrimônio natural objeto de especial proteção (art. 225, § 4º, CF/1988)"]], "corte de árvores em APP"],
+                                      [[["corte de árvores em área de preservação permanente"], ["hectares"], ["vegetação nativa do bioma Floresta Amazônica, patrimônio natural objeto de especial proteção (art. 225, § 4º, CF/1988)", "vegetação nativa do bioma Cerrado", "vegetação nativa do bioma Pantanal Mato-grossense, patrimônio natural objeto de especial proteção (art. 225, § 4º, CF/1988)"]], "corte de árvores em APP"],
                                       ]      
     
   - TIPIFICACAO: 41 da Lei n. 9.605/1998
@@ -103,7 +103,7 @@ items:
     AREA_DESTRUIDA: TRUE
     COORDENADAS: TRUE
     COMPLEMENTO_DESCRICAO_TIPO_PENAL: [
-                                      [["mediante uso de fogo", "hectares", ["vegetação nativa do bioma Floresta Amazônica, patrimônio natural objeto de especial proteção (art. 225, § 4º, CF/1988)", "vegetação nativa do bioma Cerrado", "vegetação nativa do bioma Pantanal Mato-grossense, patrimônio natural objeto de especial proteção (art. 225, § 4º, CF/1988)"]], "queimada dolosa de vegetação nativa"],
+                                      [[["mediante uso de fogo"], ["hectares"], ["vegetação nativa do bioma Floresta Amazônica, patrimônio natural objeto de especial proteção (art. 225, § 4º, CF/1988)", "vegetação nativa do bioma Cerrado", "vegetação nativa do bioma Pantanal Mato-grossense, patrimônio natural objeto de especial proteção (art. 225, § 4º, CF/1988)"]], "queimada dolosa de vegetação nativa"],
                                       ]     
     
   - TIPIFICACAO: "41, parágrafo único, da Lei n. 9.605/1998"
@@ -129,7 +129,7 @@ items:
     AREA_DESTRUIDA: TRUE
     COORDENADAS: TRUE
     COMPLEMENTO_DESCRICAO_TIPO_PENAL: [
-                                      [["mediante a prática descuidada de queima de resíduos sólidos", "hectares", ["vegetação nativa do bioma Floresta Amazônica, patrimônio natural objeto de especial proteção (art. 225, § 4º, CF/1988)", "vegetação nativa do bioma Cerrado", "vegetação nativa do bioma Pantanal Mato-grossense, patrimônio natural objeto de especial proteção (art. 225, § 4º, CF/1988)"]], "queimada culposa mediante queima da resíduo sólido"],
+                                      [[["mediante a prática descuidada de queima de resíduos sólidos"], ["hectares"], ["vegetação nativa do bioma Floresta Amazônica, patrimônio natural objeto de especial proteção (art. 225, § 4º, CF/1988)", "vegetação nativa do bioma Cerrado", "vegetação nativa do bioma Pantanal Mato-grossense, patrimônio natural objeto de especial proteção (art. 225, § 4º, CF/1988)"]], "queimada culposa mediante queima da resíduo sólido"],
                                       ] 
 
     
@@ -156,8 +156,8 @@ items:
     AREA_DESTRUIDA: TRUE
     COORDENADAS: TRUE
     COMPLEMENTO_DESCRICAO_TIPO_PENAL: [
-                                      [["consistente em transportar, sem autorização legal", "consistente em ter em depósito, sem autorização legal",[ "sacos", "carvão vegetal"]], "transporte ou depósito ilegal de carvão vegetal"],
-                                      [[["consistente em transportar, sem autorização legal", "consistente em ter em depósito, sem autorização legal"], "m3 (metros cúbicos)", ["madeira de diversas essências da flora brasileira"]], "transporte ou depósito ilegal de madeira"]                                     
+                                      [[["consistente em transportar, sem autorização legal", "consistente em ter em depósito, sem autorização legal"],[ "sacos"], ["carvão vegetal"]], "transporte ou depósito ilegal de carvão vegetal"],
+                                      [[["consistente em transportar, sem autorização legal", "consistente em ter em depósito, sem autorização legal"], ["m3 (metros cúbicos)"], ["madeira de diversas essências da flora brasileira"]], "transporte ou depósito ilegal de madeira"]
                                       ]        
     
   - TIPIFICACAO: 48 da Lei n. 9.605/1998
@@ -183,7 +183,7 @@ items:
     AREA_DESTRUIDA: TRUE
     COORDENADAS: TRUE
     COMPLEMENTO_DESCRICAO_TIPO_PENAL: [
-                                      [["mediante a compactação do solo causada pela manutenção de rebanho bovino em área embargada", "hectares", ["vegetação nativa do bioma Floresta Amazônica, patrimônio natural objeto de especial proteção (art. 225, § 4º, CF/1988)", "vegetação nativa do bioma Cerrado", "vegetação nativa do bioma Pantanal Mato-grossense, patrimônio natural objeto de especial proteção (art. 225, § 4º, CF/1988)"]], "manutenção de rebanho bovino em área embargada"],
+                                      [[["mediante a compactação do solo causada pela manutenção de rebanho bovino em área embargada"], ["hectares"], ["vegetação nativa do bioma Floresta Amazônica, patrimônio natural objeto de especial proteção (art. 225, § 4º, CF/1988)", "vegetação nativa do bioma Cerrado", "vegetação nativa do bioma Pantanal Mato-grossense, patrimônio natural objeto de especial proteção (art. 225, § 4º, CF/1988)"]], "manutenção de rebanho bovino em área embargada"],
                                       ]
     
   - TIPIFICACAO: "49, parágrafo único, da Lei n. 9.605/1998"
@@ -209,7 +209,7 @@ items:
     AREA_DESTRUIDA: TRUE
     COORDENADAS: TRUE
     COMPLEMENTO_DESCRICAO_TIPO_PENAL: [
-                                      [["mediante o corte de ", "indivíduo", "espécime arbórea ornamental em logradouro público"], "corte de árvore em logradouro público sem autorização"],
+                                      [[["mediante o corte de "], ["indivíduo"], ["espécime arbórea ornamental em logradouro público"]], "corte de árvore em logradouro público sem autorização"],
                                       ]
     
   - TIPIFICACAO: 49 da Lei n. 9.605/1998
@@ -235,7 +235,7 @@ items:
     AREA_DESTRUIDA: TRUE
     COORDENADAS: TRUE
     COMPLEMENTO_DESCRICAO_TIPO_PENAL: [
-                                      [["mediante o corte não autorizado de ", "árvore", ["ornamentais em logradouro público"]], "corte de árvore em logradouro público sem autorização"],
+                                      [[["mediante o corte não autorizado de "], ["árvore"], ["ornamentais em logradouro público"]], "corte de árvore em logradouro público sem autorização"],
                                       ]
 
   - TIPIFICACAO: 50 da Lei n. 9.605/1998
@@ -261,7 +261,7 @@ items:
     AREA_DESTRUIDA: TRUE
     COORDENADAS: TRUE
     COMPLEMENTO_DESCRICAO_TIPO_PENAL: [
-                                      [["consistente em destruir mediante corte raso ", "hectares", ["vegetação nativa do bioma Floresta Amazônica, patrimônio natural objeto de especial proteção (art. 225, § 4º, CF/1988)", "vegetação nativa do bioma Pantanal Mato-grossense, patrimônio natural objeto de especial proteção (art. 225, § 4º, CF/1988)"]], "desmatamento em terras particulares em biomas objeto de especial proteção (art. 225, § 4º, CF/1988)"],
+                                      [[["consistente em destruir mediante corte raso "], ["hectares"], ["vegetação nativa do bioma Floresta Amazônica, patrimônio natural objeto de especial proteção (art. 225, § 4º, CF/1988)", "vegetação nativa do bioma Pantanal Mato-grossense, patrimônio natural objeto de especial proteção (art. 225, § 4º, CF/1988)"]], "desmatamento em terras particulares em biomas objeto de especial proteção (art. 225, § 4º, CF/1988)"],
                                       ]
     
   - TIPIFICACAO: 50-A da Lei n. 9.605/1998
@@ -287,7 +287,7 @@ items:
     AREA_DESTRUIDA: TRUE
     COORDENADAS: TRUE
     COMPLEMENTO_DESCRICAO_TIPO_PENAL: [
-                                      [["consistente em destruir mediante corte raso ", "hectares", ["vegetação nativa do bioma Floresta Amazônica, patrimônio natural objeto de especial proteção (art. 225, § 4º, CF/1988)", "vegetação nativa do bioma Pantanal Mato-grossense, patrimônio natural objeto de especial proteção (art. 225, § 4º, CF/1988)"]], "desmatamento em terras particulares em biomas objeto de especial proteção (art. 225, § 4º, CF/1988)"],
+                                      [[["consistente em destruir mediante corte raso "], ["hectares"], ["vegetação nativa do bioma Floresta Amazônica, patrimônio natural objeto de especial proteção (art. 225, § 4º, CF/1988)", "vegetação nativa do bioma Pantanal Mato-grossense, patrimônio natural objeto de especial proteção (art. 225, § 4º, CF/1988)"]], "desmatamento em terras particulares em biomas objeto de especial proteção (art. 225, § 4º, CF/1988)"],
                                       ]
     
   - TIPIFICACAO: 60 da Lei n. 9.605/1998
@@ -313,8 +313,8 @@ items:
     AREA_DESTRUIDA: TRUE
     COORDENADAS: TRUE
     COMPLEMENTO_DESCRICAO_TIPO_PENAL: [
-                                      [["consistente em exercer atividade de pecuária, definida como de potencial poluidor no Decreto Estadual 138/2015", "hectares", ["área de uso antropizada não licenciada"]], "atividade pecuária sem autorização"],
-                                      [["consistente em realizar a incineração de resíduos, atividade classificada como de potencial poluidor/degradador alto conforme itens 6.1.12 do Decreto Estadual 138/2015", "hectares", ["resíduos sólidos enleirados"]], "queima de resíduos não autorizadas"],
-                                      [["consistente em desflorestar ", "hectares", ["vegetação nativa do bioma Cerrado"]], "desmatamento em área não especialmente protegida (ex: Cerrado)"]
+                                      [[["consistente em exercer atividade de pecuária, definida como de potencial poluidor no Decreto Estadual 138/2015"], ["hectares"], ["área de uso antropizada não licenciada"]], ["atividade pecuária sem autorização"]],
+                                      [[["consistente em realizar a incineração de resíduos, atividade classificada como de potencial poluidor/degradador alto conforme itens 6.1.12 do Decreto Estadual 138/2015"], ["hectares"], ["resíduos sólidos enleirados"]], "queima de resíduos não autorizadas"],
+                                      [[["consistente em desflorestar "], ["hectares"], ["vegetação nativa do bioma Cerrado"]], "desmatamento em área não especialmente protegida (ex: Cerrado)"]
                                       ]
                                   

@@ -1,4 +1,8 @@
 ---
+features:
+  javascript:
+    - https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js
+---
 objects:
   - fatos: DAList.using(there_are_any=True, object_type=Thing, complete_attribute='complete')
   - imovel_rural: DAList.using(there_are_any=True, object_type=Thing, complete_attribute='complete')
@@ -13,12 +17,12 @@ code: |
 question: Descrever o fato?
 yesno: fatos.there_are_any
 default: yes
-
+back button: True
 ---
 question: Adicionar mais um fato?
 yesno: fatos.there_is_another
 
-
+back button: True
 ---
 question: |
   Escolha o tipo penal do crime
@@ -37,7 +41,7 @@ fields:
       - não
     help: |
       Embora de ocorrência rara, em situações excepcionalíssimas um crime ambiental poderia ser praticado no contexto da violência doméstica contra a mulher. Ex: art. 49 da Lei 9.605/98 (destruição de plantas ornamentais em propriedade privada), como uma forma de violência patrimonial contra a mulher.
-
+back button: True
 ---
 question: |
  Complete a descrição fática
@@ -61,26 +65,19 @@ fields:
     choices:
       - sim
       - não
-      
+
   - Data do fato: fatos[i].data_fato_exata
-    datatype: date    
+    datatype: date
+    default:
+      ${ today(format='M/d/YYYY') }
     required: False
     show if:
       variable: fatos[i].data_e_exata
       is: sim
 
   - Data aproximada do fato: fatos[i].data_fato_aprox
-    default: "em data não especificada, mas sabendo ter o fato ocorrido "
-    input type: area
-    rows: 2
-    required: False
-    show if:
-      variable: fatos[i].data_e_exata
-      is: não
-
-  - Informe ao menos o ano do fato: fatos[i].ano_fato
-    input type: number
-    required: False
+    datatype: date
+    required: True
     show if:
       variable: fatos[i].data_e_exata
       is: não
@@ -89,8 +86,8 @@ fields:
     datatype: radio
     choices:
       - sim
-      - não      
-      
+      - não
+
   - Hora do fato: fatos[i].hora_fato_exata
     datatype: time
     required: False
@@ -100,7 +97,7 @@ fields:
 
   - Hora do fato: fatos[i].hora_fato_aprox
     datatype: combobox
-    required: False    
+    required: False
     choices:
       - em horário indeterminado
       - em horário indeterminado, sabendo-se ter ocorrido no período da manhã
@@ -175,6 +172,8 @@ fields:
 
   - Estado: fatos[i].state
     required: False
+    code: |
+      lista_estados()
     default: "Mato Grosso"
 
   - CEP: fatos[i].cep
@@ -225,10 +224,10 @@ fields:
     required: False
 
   - Tipo de documento que comprova a materialidade: fatos[i].doc_prova_materialidade
-    help: "Geralmente será um auto de infração e termo de embargo ou relatório técnico."    
+    help: "Geralmente será um auto de infração e termo de embargo ou relatório técnico."
     default: "Auto de Infração "
     datatype: combobox
-    required: False    
+    required: False
     choices:
       - Auto de Infração
       - Relatório Técnico
@@ -272,17 +271,24 @@ fields:
     show if:
       code: |
         ato_processual_escolhido == "denúncia" or ato_processual_escolhido == 'denúncia com proposta de suspensão condicional do processo'
-
-
+script: |
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $('#ZmF0b3NbaV0uY2Vw').mask('99999-999');
+    });
+  </script>
+back button: True
 ---
 question: |
   Complete a descrição fática do crime
 subquestion: |
-    ... [FIELD fatos[i].detalhamento_fatico] [FIELD fatos[i].quantificacao] [FIELD fatos[i].unidade_quantidade] e a qualidade é [FIELD fatos[i].qualidade_obj_material].
+    ... [FIELD fatos[i].detalhamento_fatico] [FIELD fatos[i].quantificacao] [FIELD fatos[i].unidade_quantidade] e a qualidade é [FIELD fatos[i].qualidade_obj_material]
 fields:
   - Detalhamento fático: fatos[i].detalhamento_fatico
-    input type: text
-    default: ${my_dic_complementos[fatos[i].lista_detalhamento_preceito_primario]["detalhamento_fatico"]}
+    datatype: list
+    input type: dropdown
+    code: |
+      my_dic_complementos[fatos[i].lista_detalhamento_preceito_primario]["detalhamento_fatico"]
 
   - Quantificação: fatos[i].quantificacao
     hint: "quantidade (se houver)"
@@ -290,16 +296,18 @@ fields:
 
   - Unidade: fatos[i].unidade_quantidade
     hint: "É a unidade (ex: hectares), se houver"
-    input type: text
-    default: ${my_dic_complementos[fatos[i].lista_detalhamento_preceito_primario]["unidade_quantidade"]}
- 
-  - Qualidade: fatos[i].qualidade_obj_material
-    hint: "É a qualidade, o tipo do objeto material sobre o qual recai o crime (se houver)"  
     datatype: list
     input type: dropdown
     code: |
-      my_dic_complementos[fatos[i].lista_detalhamento_preceito_primario]["qualidade_obj_material"]  
+      my_dic_complementos[fatos[i].lista_detalhamento_preceito_primario]["unidade_quantidade"]
 
+  - Qualidade: fatos[i].qualidade_obj_material
+    hint: "É a qualidade, o tipo do objeto material sobre o qual recai o crime (se houver)"
+    datatype: list
+    input type: dropdown
+    code: |
+      my_dic_complementos[fatos[i].lista_detalhamento_preceito_primario]["qualidade_obj_material"]
+back button: True
 ---
 question: |
  Reparação do dano
@@ -328,8 +336,10 @@ fields:
     choices:
     - sim: True
     - não: False
-
+back button: True
 ---
+include:
+  comum_lista_estados.yml
 code: |
   myoptions = []
   crimes_dict = {}
@@ -355,8 +365,8 @@ code: |
       "violencia_domestica": crime_obj.VIOLENCIA_DOMESTICA,
       "violencia_grave_ameaca": crime_obj.VIOLENCIA_GRAVE_AMEACA,
       "lei_crimes_hediondos": crime_obj.LEI_CRIMES_HEDIONDOS,
-      "classificacao_quanto_bem_juridico": crime_obj.CLASSIFICACAO_QUANTO_BEM_JURIDICO,      
-      "complemento_tipo": crime_obj.COMPLEMENTO_DESCRICAO_TIPO_PENAL}      
+      "classificacao_quanto_bem_juridico": crime_obj.CLASSIFICACAO_QUANTO_BEM_JURIDICO,
+      "complemento_tipo": crime_obj.COMPLEMENTO_DESCRICAO_TIPO_PENAL}
     crimes_dict[crime_obj.TIPIFICACAO] = crime
   object_type = str(type(crimes))
   object_length = str(len(crimes))
@@ -370,9 +380,9 @@ code: |
     for compl in complementos:
       myoptions_complementos.append(compl[1])
       complemento = {"detalhamento_fatico": compl[0][0],
-                     "unidade_quantidade": compl[0][1],
-                     "qualidade_obj_material": compl[0][2]
-                    }
+                             "unidade_quantidade": compl[0][1],
+                             "qualidade_obj_material": compl[0][2]
+                            }
       complemento_dic[compl[1]] = complemento
     object_type = str(type(complemento))
     object_length = str(len(complemento))

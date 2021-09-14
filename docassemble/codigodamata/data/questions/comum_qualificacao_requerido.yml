@@ -1,16 +1,19 @@
 ---
+features:
+  javascript:
+    - https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js
+---
 objects:
   - requeridos: DAList.using(object_type=Individual)
-
 ---
-question: Nomear o requerido? (representado, réu, suspeito da ação ilícita)
-yesno: requeridos.there_are_any
+question: É necessário nomear um requerido (representado, réu, suspeito da ação ilícita).
+continue button field: requeridos.there_are_any
 default: yes
-
+back button: True
 ---
 question: Adicionar mais um requerido?
 yesno: requeridos.there_is_another
-
+back button: True
 ---
 code: |
   pessoas = requeridos.complete_elements()
@@ -22,26 +25,11 @@ reconsider:
 question: |
   Quem é o ${ ordinal(i) } requerido?
 fields:
-  - Existing or New: requeridos[i].existing_or_new
-    datatype: radio
-    default: New
-    choices:
-      - Existing
-      - New
-  - Person: requeridos[i]
-    show if:
-      variable: requeridos[i].existing_or_new
-      is: Existing
-    datatype: object
-    choices: pessoas
   - Nome: requeridos[i].name.first
     help: "Se não for uma petição inicial ou denúncia, não é necessário qualificar o requerido por inteiro."
   - Nacionalidade: requeridos[i].nacionalidade
     default: "de nacionalidade brasileira"
     required: False
-    show if:
-      variable: requeridos[i].existing_or_new
-      is: New
   - Estado Civil: requeridos[i].estadocivil
     required: False
     default: ignorado
@@ -53,10 +41,7 @@ fields:
       - viúvo(a)
       - convivente em união estável
       - ignorado
-    show if:
-      variable: requeridos[i].existing_or_new
-      is: New
-      
+
   - Ocupação: requeridos[i].ocupacao
     required: False
     hint: "Selecione uma ou escreva uma resposta"    
@@ -68,85 +53,77 @@ fields:
       - serviços gerais
       - do lar
       - de ocupação ignorada
-    show if:
-      variable: requeridos[i].existing_or_new
-      is: New
 
   - Data de Nascimento: requeridos[i].birthdate
     required: False
     datatype: date
-    show if:
-      variable: requeridos[i].existing_or_new
-      is: New
   - Endereço: requeridos[i].address.address
     required: False
-    show if:
-      variable: requeridos[i].existing_or_new
-      is: New
   - Número: requeridos[i].address.unit
     required: False
-    show if:
-      variable: requeridos[i].existing_or_new
-      is: New   
   - Cidade: requeridos[i].address.city
     required: False
     datatype: combobox
     hint: "Selecione uma ou escreva uma resposta"
     code: |
       dic_promotorias[orgao_execucao]["municipios_abrangencia"]
-    show if:
-      variable: requeridos[i].existing_or_new
-      is: New
   - Estado: requeridos[i].address.state
     required: False
-    default: "Mato Grosso"  
-    show if:
-      variable: requeridos[i].existing_or_new
-      is: New 
+    code: |
+      lista_estados()
+    default: "Mato Grosso"
   - CEP: requeridos[i].address.postal_code
-    show if:
-      variable: requeridos[i].existing_or_new
-      is: New
     required: False
   - País: requeridos[i].address.country
     code: |
       countries_list()
     default: "Brazil"
     required: False
-    show if:
-      variable: requeridos[i].existing_or_new
-      is: New
-  - Telefone celular: requeridos[i].mobile_number
+  - CPF: requeridos[i].cpf
     required: False
-    show if:
-      variable: requeridos[i].existing_or_new
-      is: New
+  - Telefone celular: requeridos[i].mobile_number
+    minlength: 13
+    maxlength: 14
+    validation messages:
+      maxlength: |
+        Formato inválido!
+      minlength: |
+        Formato inválido!
+    hint: "(99)99999-9999"
+    required: False
   - Nome da mãe: requeridos[i].nome_mae
     required: False
     default: "de filiação ignorada"
-    show if:
-      variable: requeridos[i].existing_or_new
-      is: New      
   - Usa whatsapp: requeridos[i].uses_whatsapp
     required: False
     datatype: yesno
-    show if:
-      variable: requeridos[i].existing_or_new
-      is: New
   - qualificação em texto: requeridos[i].qualificacao
     required: False
     datatype: area
     show if:
       code: |
         False
+back button: True
+script: |
+  <script type="text/javascript">
+    $(document).ready(function(){
+        $('#X2ZpZWxkXzEz').mask('000.000.000-00', {reverse: true});
+        $('#X2ZpZWxkXzEx').mask('99999-999');
+        $('#X2ZpZWxkXzEz').mask('(99)99999-9999');
+    });
+  </script>
+
+---
+include:
+  - comum_lista_estados.yml
 ---
 mandatory: True
 code: |
   if requeridos.there_are_any:
     todos_requeridos = ''
     for requerido in requeridos:
-      todos_requeridos = '' + teste_virgula(requerido.name.full().upper())
-      qualificacao_texto = teste_virgula(requerido.nacionalidade) + teste_virgula(requerido.estadocivil) + teste_virgula(requerido.ocupacao) + teste_virgula_d(", nascido aos ",requerido.birthdate) + teste_virgula_d(", filho de ",requerido.nome_mae) +  teste_virgula_d(", residente e domiciliado na ",requerido.address.address) + teste_virgula_d(" ",requerido.address.unit) + teste_virgula_d(", ",requerido.address.city) + teste_virgula_d(", ",requerido.address.state) +  teste_virgula_d(", telefone: ",requerido.mobile_number) +";"
+      todos_requeridos = '' + requerido.name.full().upper() + ', '
+      qualificacao_texto = teste_virgula(requerido.nacionalidade) + teste_virgula(requerido.estadocivil) + teste_virgula(requerido.ocupacao) + teste_virgula_duplo(", nascido aos ",requerido.birthdate) + teste_virgula_duplo(", filho de ",requerido.nome_mae) +  teste_virgula_duplo(", residente e domiciliado na ",requerido.address.address) + teste_virgula_duplo(" ",requerido.address.unit) + teste_virgula_duplo(", ",requerido.address.city) + teste_virgula_duplo(", ",requerido.address.state) +  teste_virgula_duplo(", telefone: ",requerido.mobile_number) +";"
       requerido.qualificacao = qualificacao_texto
     for requerido in requeridos:
       requerido.name.first = requerido.name.first.upper()
