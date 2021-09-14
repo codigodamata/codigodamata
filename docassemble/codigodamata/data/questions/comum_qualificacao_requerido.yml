@@ -2,6 +2,7 @@
 features:
   javascript:
     - https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js
+    - comum_validacao_cpf.js
 ---
 objects:
   - requeridos: DAList.using(object_type=Individual)
@@ -44,7 +45,7 @@ fields:
 
   - Ocupação: requeridos[i].ocupacao
     required: False
-    hint: "Selecione uma ou escreva uma resposta"    
+    hint: "Selecione uma ou escreva uma resposta"
     datatype: combobox
     choices:
       - produtor rural
@@ -84,15 +85,7 @@ fields:
     required: False
   - CPF: requeridos[i].cpf
     required: False
-  validation code: |
-  script: |
-    <script src="js/comum.validacao.js"></script>
-    <script type="text/javascript">
-    $(document).ready(function(){
-      CPF_valido(requeridos[i].cpf);
 
-    });
-    </script>
 
 
   - Telefone celular: requeridos[i].mobile_number
@@ -121,16 +114,34 @@ back button: True
 script: |
   <script type="text/javascript">
     $(document).ready(function(){
-        $('#X2ZpZWxkXzEz').mask('000.000.000-00', {reverse: true});
-        $('#X2ZpZWxkXzEx').mask('99999-999');
-        $('#X2ZpZWxkXzEz').mask('(99)99999-9999');
+
+        $('#cmVxdWVyaWRvc1tpXS5hZGRyZXNzLnBvc3RhbF9jb2Rl').mask('99999-999');
+        $('#cmVxdWVyaWRvc1tpXS5tb2JpbGVfbnVtYmVy').mask('(99)99999-9999');
     });
-  </script>
+    $(document).ready(function(){
+          $('#cmVxdWVyaWRvc1tpXS5jcGY').mask('000.000.000-00', {reverse: true});
+      });
+      $("#cmVxdWVyaWRvc1tpXS5jcGY").focusout(function() {
+      var campo_teste = $("#cmVxdWVyaWRvc1tpXS5jcGY").val();
+      if (campo_teste){
+        var cpf_valido = CPF_valido(campo_teste)
+        if (!cpf_valido) {
+            console.log("CPF INVÁLIDO");
+
+          $("#cmVxdWVyaWRvc1tpXS5jcGY").val("");
+          $('<span id="cmVxdWVyaWRvc1tpXS5jcGY-error" class="da-has-error text-danger" style="">CPF Inválido</span>').insertAfter("#cmVxdWVyaWRvc1tpXS5jcGY");
+       }
+       else {
+        console.log("CPF VÁLIDO");
+       }
+     }
+     });
+   </script>
 
 ---
 include:
   - comum_lista_estados.yml
-  - comum_validacao_cpf.js
+
 ---
 mandatory: True
 code: |
@@ -142,4 +153,3 @@ code: |
       requerido.qualificacao = qualificacao_texto
     for requerido in requeridos:
       requerido.name.first = requerido.name.first.upper()
-      
