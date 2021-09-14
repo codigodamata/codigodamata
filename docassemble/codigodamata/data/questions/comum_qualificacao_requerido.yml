@@ -123,7 +123,7 @@ code: |
     todos_requeridos = ''
     for requerido in requeridos:
       todos_requeridos = '' + requerido.name.full().upper() + ', '
-      qualificacao_texto = teste_virgula_d("inscrito no CPF de número ", requerido.cpf) +  teste_virgula(requerido.nacionalidade) + teste_virgula(requerido.estadocivil) + teste_virgula(requerido.ocupacao) + teste_virgula_d(", nascido aos ",requerido.birthdate) + teste_virgula_d(", filho de ",requerido.nome_mae) +  teste_virgula_d(", residente e domiciliado na ",requerido.address.address) + teste_virgula_d(" ",requerido.address.unit) + teste_virgula_d(", ",requerido.address.city) + teste_virgula_d(", ",requerido.address.state) +  teste_virgula_d(", telefone: ",requerido.mobile_number) +";"
+      qualificacao_texto = teste_virgula_dz("inscrito no CPF de número ", requerido.cpf , ", ") +  teste_virgula(requerido.nacionalidade) + teste_virgula(requerido.estadocivil) + teste_virgula(requerido.ocupacao) + teste_virgula_dy(" nascido em ", requerido.birthdate) + teste_virgula_dy("filho de ",requerido.nome_mae) +  teste_virgula_dy(", residente e domiciliado na ",requerido.address.address) + teste_virgula_dy(" ",requerido.address.unit) + teste_virgula_dy(", ",requerido.address.city) + teste_virgula_dy(", ",requerido.address.state) +  teste_virgula_dy(", telefone: ",requerido.mobile_number) +";"
       requerido.qualificacao = qualificacao_texto
     for requerido in requeridos:
       requerido.name.first = requerido.name.first.upper()
