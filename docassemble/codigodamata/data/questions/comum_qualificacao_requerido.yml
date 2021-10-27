@@ -122,6 +122,7 @@ script: |
           $('#cmVxdWVyaWRvc1tpXS5jcGY').mask('000.000.000-00', {reverse: true});
       });
       $("#cmVxdWVyaWRvc1tpXS5jcGY").focusout(function() {
+      $('#cmVxdWVyaWRvc1tpXS5jcGY-error').remove()
       var campo_teste = $("#cmVxdWVyaWRvc1tpXS5jcGY").val();
       if (campo_teste){
         var cpf_valido = CPF_valido(campo_teste)
