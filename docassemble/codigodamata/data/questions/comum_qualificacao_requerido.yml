@@ -128,7 +128,7 @@ script: |
         if (!cpf_valido) {
             console.log("CPF INVÁLIDO");
 
-          $("#cmVxdWVyaWRvc1tpXS5jcGY").val("");
+
           $('<span id="cmVxdWVyaWRvc1tpXS5jcGY-error" class="da-has-error text-danger" style="">CPF Inválido</span>').insertAfter("#cmVxdWVyaWRvc1tpXS5jcGY");
        }
        else {
